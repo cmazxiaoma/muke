@@ -1,0 +1,309 @@
+<div class="f-header">
+	<div class="f-header-box clearfix">
+		<a href="${s.base}"  class="logo" title="在线网校学习平台"></a>
+		<nav class="header-nav">
+			<a href="${s.base}" class="header-nav-item">首 页</a>
+			<a href="${s.base}/course/list.html" class="header-nav-item">课 程</a>
+			<a href="${s.base}/user/home.html" class="header-nav-item">我的</a>
+			<a href="http://opt.ioswift.org" target="_blank" class="header-nav-item" style="width:100px;">运营CMS</a>
+			<a href="http://m.ioswift.org" target="_blank" class="header-nav-item" style="width:100px;">M站</a>
+		</nav>
+		
+		<nav class="header-nav" style="float:right">
+			<@shiro.guest>
+			<a href="#myModal" class="header-nav-item"  data-toggle="modal" onclick="login();"  style="margin-right:0px;font-size:14px;">登录</a>
+			<a href="#myModal" class="header-nav-item" data-toggle="modal" onclick="registe();"  style="margin-left:0px;font-size:14px;">注册</a>
+			</@shiro.guest>
+			
+			<@shiro.user>
+			<a href="${s.base}/user/home.html" class="header-nav-item"  style="margin-left:0px;width:40px;height:40px;" id="userdetail">
+	        	<img id="headerUserHeader" alt="" src='<@shiro.principal property="header"/>' style="width: 35px;height: 35px;border-radius:50%;">
+	        </a>
+	       </@shiro.user>
+		</nav>
+		
+		<@shiro.user>
+		<!-- 登录之后显示用户的基本信息-start -->
+		<div id="userdetailHtml" style="display: none;">
+			<div style="padding:10px;">
+				<div style="margin-top:10px;">
+					<span style="font-size: 16px;">用户名：<@shiro.principal property="username"/></span>
+				</div>
+				
+				<div style="margin-top:20px;">
+					<a id="curCourseA" class="link-a" target="_blank" href="">
+					<div id="curCourseSpan" class="ellipsis" style="font-size: 16px;width:220px;height:30px;overflow:hidden;font-weight:bold;" title="" ></div>
+					</a>
+				</div>
+				<div style="margin-top:5px;" >
+					<a id="curCourseSectionA"  class="link-a" target="_blank" href="">
+					<div id="curCourseSectionSpan" class="ellipsis"  style="font-size: 14px;width:220px;height:30px;overflow:hidden;" title=""></div>
+					</a>
+				</div>
+				
+				<div style="margin-top:20px;border-top:1px solid #eee;width:200px;padding-top:10px;">
+					<a class="link-a" href="${s.base}/auth/logout.html">
+					<span>退出</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- 登录之后显示用户的基本信息-end -->
+		</@shiro.user>
+	</div>
+</div>
+
+<@shiro.guest>
+<!-- 用户登录注册modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  style="position:fixed; top:30%;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size:18px;">×</span>
+                </button>
+                <h4 class="modal-title"  id="loginTitle"  style="float: left; color: #337Ab7;cursor: pointer; " onclick="login();">登 录</h4>
+                <h4 class="modal-title"  id="registeTitle"  style="float: left;margin-left: 20px;cursor: pointer;" onclick="registe();">注 册</h4>
+                <div class="clearfix"></div>
+            </div>
+            
+            <div class="modal-body">
+               	<form id="loginForm" class="form-horizontal" style="padding: 0px 20px;" method="POST" action="${s.base}/auth/ajaxlogin.html">
+                      <div class="form-group">
+                          <input id="usernameHeader1"  type="text" class="form-control"  name="username" placeholder="用户名">
+                      </div>
+                      <div class="form-group help">
+                          <input id="passwordHeader1"  type="password" class="form-control"  name="password"  placeholder="密　码">
+                      </div>
+                      <div class="form-group">
+						<input id="identiryCodeHeader1" class="form-control"  name="identiryCode" maxlength="6" class="input-text" type="text" style="width: 120px;float:left;" placeholder="请输入验证码"/>
+						<img  id="indeityImgHead1"  onclick="reloadIndityImg('indeityImgHead1');" src="${s.base}/tools/identiry/code.html" style="width:80px;height:33px;float:left;margin-left:10px;float:left;border-radius:5px;"/>
+					  	<span id="loginError" style="margin-left:10px;height:33px;line-height:33px;color:red;display:none;">错误信息</span>
+					  </div>
+                      <div class="form-group">
+                          <label>
+                           <input type="checkbox" value="1" id="checkbox1" name="rememberMe">
+                           <span class="text" style="color: #787D82;font-size: 14px;">下次自动登录</span>
+                          </label>
+                      </div>
+                      <a href="javascript:void(0)">
+                      	<div onclick="doAjaxLogin();" class="header-login-btn">登 录</div>
+                      </a>
+                  </form>
+                  
+                   <form id="registeForm" method="POST" action="${s.base}/auth/doRegister.html"  class="form-horizontal" style="padding: 0px 20px;display: none;">
+                       <div class="form-group">
+                           <input id="usernameHeader2"  name="username" type="text" class="form-control"   placeholder="用户名">
+                       </div>
+                       <div class="form-group help">
+                           <input id="passwordHeader2"  name="password"  type="password" class="form-control"  placeholder="密　码">
+                       </div>
+                       <div class="form-group">
+							<input id="identiryCodeHeader2" class="form-control"  name="identiryCode" maxlength="6" class="input-text" type="text" style="width: 120px;float:left;" placeholder="请输入验证码"/>
+							<img  onclick="reloadIndityImg('indeityImgHead2');" id="indeityImgHead2"  src="${s.base}/tools/identiry/code.html" style="width:80px;height:33px;float:left;margin-left:10px;float:left;border-radius:5px;"/>
+					  		<span id="registerError" style="margin-left:10px;height:33px;line-height:33px;color:red;display:none;">错误信息</span>
+					  </div>
+                       <a href="javascript:void(0)">
+                      	<div class="header-login-btn" onclick="doAjaxRegister()">注 册</div>
+                       </a>
+                   </form>
+            </div>
+        </div>
+    </div>
+</div>
+</@shiro.guest>
+
+<script type="text/javascript">
+	$(function(){
+		var headPhoto = $('#headerUserHeader').attr('src');
+		if(headPhoto == null || headPhoto == '' || headPhoto == 'null'){
+			var headPhoto = "${s.base}/res/i/header.jpg";
+			$('#headerUserHeader').attr('src',headPhoto);
+		}
+		//一级菜单&二级菜单 
+		$(".category").popover({
+            trigger:'manual',
+            placement : 'right',
+            html: 'true',
+            content : '',
+            animation: false
+        }).on("mouseenter", function () {
+            var cid = $(this).attr('c-id');
+            $('#' + cid).show();
+            $('#' + cid).hover(function(){
+            	$('#' + cid).show();
+            },function(){
+            	$('#' + cid).hide();
+			});
+        }).on("mouseleave", function () {
+            var cid = $(this).attr('c-id');
+            $('#' + cid).hide();
+        });
+		
+		if(SHIRO_LOGIN){
+			//获取当前用户学习进度
+			$.ajax({
+				url:CONTEXT_PATH + '/course/getCurLeanInfo.html',
+			    type:'POST',
+			    dataType:'json',
+			    success:function(resp){
+			    	if(resp.errcode == 0 && resp.data){
+		    			var learnUrl = CONTEXT_PATH+"/course/learn/"+resp.data.curCourse.id+".html";
+			    		var learnTitle = resp.data.curCourse.name;
+			    		$('#curCourseA').attr('href',learnUrl)
+			    		$('#curCourseSpan').attr('title',learnTitle).html(learnTitle);
+			    		
+			    		var videoUrl = CONTEXT_PATH+"/course/video/"+resp.data.curCourseSection.id+".html";
+			    		var videoTitle = resp.data.curCourseSection.name;
+			    		$('#curCourseSectionA').attr('href',videoUrl)
+			    		$('#curCourseSectionSpan').attr('title',videoTitle).html(videoTitle);
+			    	}
+			    } 
+			});
+			
+			$("#userdetail").popover({
+	            trigger:'manual',
+	            placement : 'bottom',
+	            html: true,
+	            content : '<div id="userdetailContent" style="width:300px;height:200px;"></div>',
+	            animation: false
+	        }).on("mouseenter", function () {
+	            var _this = this;
+	            $(this).popover("show");
+	            var userdetailHtml = $('#userdetailHtml').html();
+	            $('#userdetailContent').html(userdetailHtml);
+	            $(this).siblings(".popover").on("mouseleave", function () {
+	                $(_this).popover('hide');
+	            });
+	        }).on("mouseleave", function () {
+	            var _this = this;
+	            setTimeout(function () {
+	                if (!$(".popover:hover").length) {
+	                    $(_this).popover("hide")
+	                }
+	            }, 500);
+	        });
+		}
+	});
+	
+	<@shiro.guest>
+	//登录注册实现 
+	function login(){
+		$('#loginTitle').css('color','#337Ab7');
+		$('#loginForm').show();
+		$('#registeTitle').css('color','#000');
+		$('#registeForm').hide();
+	}
+	function registe(){
+		$('#loginTitle').css('color','#000');
+		$('#loginForm').hide();
+		$('#registeTitle').css('color','#337Ab7');
+		$('#registeForm').show();
+	}
+	
+	function reloadIndityImg(eleId){
+		document.getElementById(eleId).src = CONTEXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
+	}
+	
+	function doAjaxLogin(){
+		var username = $('#usernameHeader1').val();
+		var password = $('#passwordHeader1').val();
+		
+		//验证用户名 
+		if(!oc.enNumValid(username)){
+			$('#loginError').show();
+			$('#loginError').html("用户名只能为英文或数字");
+			return;
+		}
+		
+		//验证密码
+		if(oc.isEmpty(password) || password.length < 6){
+			$('#loginError').show();
+			$('#loginError').html("密码至少6位");
+			return;
+		}
+		
+		//验证码不能为空
+		var code = $('#identiryCodeHeader1').val();
+		if(oc.isEmpty(code)){
+			$('#loginError').show();
+			$('#loginError').html("请输入验证码");
+			return;
+		}
+		
+		//登录
+		$('#loginForm').ajaxSubmit({
+			datatype : 'json',
+			success : function(respText) {
+				var resp = $.parseJSON(respText);
+				if (resp.errcode == 0) {
+					window.location.reload();
+				} else if(resp.errcode == 1) {
+					$('#loginError').show();
+					$('#loginError').html("用户名密码错");
+				}else if(resp.errcode == 2){
+					$('#loginError').show();
+					$('#loginError').html("验证码输入错误！");
+					reloadIndityImg('indeityImgHead1');
+				}
+			},
+			error : function(xhr) {
+			}
+		});
+	}
+	
+	//ajax注册
+	function doAjaxRegister(){
+		var username = $('#usernameHeader2').val();
+		var password = $('#passwordHeader2').val();
+		
+		//验证用户名 
+		if(!oc.enNumValid(username)){
+			$('#registerError').show();
+			$('#registerError').html("用户名只能为英文或数字");
+			return;
+		}
+		
+		//验证密码
+		if(oc.isEmpty(password) || password.length < 6){
+			$('#registerError').show();
+			$('#registerError').html("密码至少6位");
+			return;
+		}
+		
+		//验证码不能为空
+		var code = $('#identiryCodeHeader2').val();
+		if(oc.isEmpty(code)){
+			$('#registerError').show();
+			$('#registerError').html("请输入验证码");
+			return;
+		}
+		
+		//注册
+		$('#registeForm').ajaxSubmit({
+			datatype : 'json',
+			success : function(respText) {
+				var resp = $.parseJSON(respText);
+				if (resp.errcode == 0) {
+					window.location.href="${s.base}/auth/login.html";
+				} else if(resp.errcode == 1) {
+					$('#registerError').show();
+					$('#registerError').html("用户名已被注册，请更换！");
+				}else if(resp.errcode == 2){
+					alert(1);
+					$('#registerError').show();
+					$('#registerError').html("验证码输入错误！");
+					reloadIndityImg('indeityImgHeader2');
+				}
+			},
+			error : function(xhr) {
+			}
+		});
+	}
+	</@shiro.guest>
+</script>
+
+
+
+
