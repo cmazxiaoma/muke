@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.consts.dao.ConstsCollegeDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.consts.domain.ConstsCollege" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name"  jdbcType="VARCHAR" />
+        <result column="code" property="code"  jdbcType="VARCHAR" />
+        <result column="picture" property="picture"  jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+    </resultMap> 
+
+
+    <sql id="All_Columns">
+        name, code, picture, create_time, create_user, update_time, 
+        update_user, del, id 
+    </sql>
+
+    <select id="queryAll" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" resultType="com.online.college.service.core.consts.domain.ConstsCollege">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_consts_college ORDER BY id
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_consts_college
+        WHERE del = 0 
+        <if test="name != null">
+        AND name like CONCAT('%',#{name},'%' ) 
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="com.online.college.service.core.consts.domain.ConstsCollege">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_consts_college
+        WHERE del = 0 
+        
+        <if test="param1.name != null">
+        AND name like CONCAT('%',#{param1.name},'%' ) 
+        </if>
+        
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.online.college.service.core.consts.domain.ConstsCollege">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_consts_college
+        WHERE id = #{id, jdbcType=INTEGER}
+        AND del = 0 
+    </select>
+    
+    <select id="getByCode" parameterType="java.lang.String" resultType="com.online.college.service.core.consts.domain.ConstsCollege">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_consts_college
+        WHERE code = #{code, jdbcType=VARCHAR}
+        AND del = 0
+    </select>
+
+    <insert id="create" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_consts_college
+        ( name, code, picture, create_time, create_user, update_time, 
+        update_user, del, id ) 
+        VALUES 
+        ( #{name, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{picture, jdbcType=VARCHAR}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, 
+        #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
+    </insert>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_consts_college
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+            name,
+            </if>
+            <if test="code != null ">
+            code,
+            </if>
+            <if test="picture != null ">
+            picture,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+            #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="code != null ">
+            #{code, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+            #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" flushCache="true">
+        UPDATE t_consts_college SET 
+        name = #{name, jdbcType=VARCHAR},
+        code = #{code, jdbcType=VARCHAR},
+        picture = #{picture, jdbcType=VARCHAR},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" flushCache="true">
+        UPDATE t_consts_college
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+            name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="code != null ">
+            code = #{code, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+            picture = #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" >
+        DELETE FROM t_consts_college
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.consts.domain.ConstsCollege" flushCache="true">
+        UPDATE t_consts_college
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

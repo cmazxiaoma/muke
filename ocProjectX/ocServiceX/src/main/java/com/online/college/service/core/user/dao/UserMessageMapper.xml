@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.user.dao.UserMessageDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.user.domain.UserMessage" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId"  jdbcType="VARCHAR" />
+        <result column="send_user_id" property="sendUserId"  jdbcType="VARCHAR" />
+        <result column="send_user_name" property="sendUserName"  jdbcType="VARCHAR" />
+        <result column="ref_id" property="refId"  jdbcType="VARCHAR" />
+        <result column="ref_content" property="refContent"  jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="status" property="status"  jdbcType="INTEGER" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+    </resultMap> 
+
+
+    <sql id="All_Columns">
+        user_id, send_user_id, send_user_name, ref_id, ref_content, type, 
+        status, create_time, create_user, update_time, update_user, del, 
+        id 
+    </sql>
+
+    <select id="queryAll" parameterType="com.online.college.service.core.user.domain.UserMessage" resultType="com.online.college.service.core.user.domain.UserMessage">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_user_message ORDER BY id
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.user.domain.UserMessage" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_user_message
+        WHERE del = 0 
+    </select>
+
+    <select id="queryPage" resultType="com.online.college.service.core.user.domain.UserMessage">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_user_message
+        WHERE del = 0 
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.online.college.service.core.user.domain.UserMessage">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_user_message
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+
+    <insert id="create" parameterType="com.online.college.service.core.user.domain.UserMessage" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_user_message
+        ( user_id, send_user_id, send_user_name, ref_id, ref_content, type, 
+        status, create_time, create_user, update_time, update_user, del, 
+        id ) 
+        VALUES 
+        ( #{userId, jdbcType=VARCHAR}, #{sendUserId, jdbcType=VARCHAR}, #{sendUserName, jdbcType=VARCHAR}, #{refId, jdbcType=VARCHAR}, #{refContent, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, 
+        #{status, jdbcType=INTEGER}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, 
+        #{id, jdbcType=VARCHAR} ) 
+    </insert>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.user.domain.UserMessage" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_user_message
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+            user_id,
+            </if>
+            <if test="sendUserId != null ">
+            send_user_id,
+            </if>
+            <if test="sendUserName != null ">
+            send_user_name,
+            </if>
+            <if test="refId != null ">
+            ref_id,
+            </if>
+            <if test="refContent != null ">
+            ref_content,
+            </if>
+            <if test="type != null ">
+            type,
+            </if>
+            <if test="status != null ">
+            status,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+            #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="sendUserId != null ">
+            #{sendUserId, jdbcType=INTEGER},
+            </if>
+            <if test="sendUserName != null ">
+            #{sendUserName, jdbcType=VARCHAR},
+            </if>
+            <if test="refId != null ">
+            #{refId, jdbcType=VARCHAR},
+            </if>
+            <if test="refContent != null ">
+            #{refContent, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            #{type, jdbcType=INTEGER},
+            </if>
+            <if test="status != null ">
+            #{status, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.user.domain.UserMessage" flushCache="true">
+        UPDATE t_user_message SET 
+        user_id = #{userId, jdbcType=VARCHAR},
+        send_user_id = #{sendUserId, jdbcType=VARCHAR},
+        send_user_name = #{sendUserName, jdbcType=VARCHAR},
+        ref_id = #{refId, jdbcType=VARCHAR},
+        ref_content = #{refContent, jdbcType=VARCHAR},
+        type = #{type, jdbcType=INTEGER},
+        status = #{status, jdbcType=INTEGER},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.user.domain.UserMessage" flushCache="true">
+        UPDATE t_user_message
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="userId != null ">
+            user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="sendUserId != null ">
+            send_user_id = #{sendUserId, jdbcType=VARCHAR},
+            </if>
+            <if test="sendUserName != null ">
+            send_user_name = #{sendUserName, jdbcType=VARCHAR},
+            </if>
+            <if test="refId != null ">
+            ref_id = #{refId, jdbcType=VARCHAR},
+            </if>
+            <if test="refContent != null ">
+            ref_content = #{refContent, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            type = #{type, jdbcType=INTEGER},
+            </if>
+            <if test="status != null ">
+            status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="com.online.college.service.core.user.domain.UserMessage" >
+        DELETE FROM t_user_message
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.user.domain.UserMessage" flushCache="true">
+        UPDATE t_user_message
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

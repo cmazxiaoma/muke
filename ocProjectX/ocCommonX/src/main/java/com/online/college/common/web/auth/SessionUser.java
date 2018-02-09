@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public interface SessionUser {
 
-    String getUserName();
+    String getUsername();
 
     Long getUserId();
 

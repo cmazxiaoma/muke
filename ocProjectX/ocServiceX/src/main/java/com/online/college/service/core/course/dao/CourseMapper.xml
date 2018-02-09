@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.course.dao.CourseDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.course.domain.Course" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name"  jdbcType="VARCHAR" />
+        <result column="type" property="type"  jdbcType="VARCHAR" />
+        <result column="classify" property="classify"  jdbcType="VARCHAR" />
+        <result column="classify_name" property="classifyName"  jdbcType="VARCHAR" />
+        <result column="sub_classify" property="subClassify"  jdbcType="VARCHAR" />
+        <result column="sub_classify_name" property="subClassifyName"  jdbcType="VARCHAR" />
+        <result column="direction" property="direction"  jdbcType="VARCHAR" />
+        <result column="username" property="username"  jdbcType="VARCHAR" />
+        <result column="level" property="level"  jdbcType="INTEGER" />
+        <result column="free" property="free"  jdbcType="INTEGER" />
+        <result column="price" property="price"  jdbcType="DECIMAL" />
+        <result column="time" property="time"  jdbcType="VARCHAR" />
+        <result column="onsale" property="onsale"  jdbcType="INTEGER" />
+        <result column="picture" property="picture"  jdbcType="VARCHAR" />
+        <result column="brief" property="brief"  jdbcType="VARCHAR" />
+        <result column="recommend" property="recommend"  jdbcType="INTEGER" />
+        <result column="weight" property="weight"  jdbcType="INTEGER" />
+        <result column="study_count" property="studyCount"  jdbcType="INTEGER" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+    </resultMap> 
+
+
+    <sql id="All_Columns">
+        name, type, classify, classify_name, sub_classify, sub_classify_name, direction, username, 
+        level, free, price, time, onsale, brief, picture,
+        recommend, weight, study_count, create_time, create_user, update_time, 
+        update_user, del, id 
+    </sql>
+
+    <select id="queryList"  parameterType="com.online.college.service.core.course.domain.CourseQueryDto"  resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_course 
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="direction != null">
+                AND direction = #{direction, jdbcType=INTEGER}
+            </if>
+            <if test="username != null">
+                AND username = #{username, jdbcType=INTEGER}
+            </if>
+            <if test="free != null">
+                AND free = #{free, jdbcType=INTEGER}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale, jdbcType=INTEGER}
+            </if>
+        </trim>
+        <if test="sortField != null">
+        ORDER BY ${sortField}  ${sortDirection}
+        </if>
+        <if test="start != null and end != null">
+        LIMIT #{start, jdbcType=INTEGER} , #{end, jdbcType=INTEGER}
+        </if>
+    </select>
+    
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.course.domain.CourseQueryDto" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_course
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            AND del = 0
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+            <if test="subClassify != null">
+                AND sub_classify = #{subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="onsale != null">
+                AND onsale = #{onsale, jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                AND name like CONCAT('%',#{name},'%' ) 
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryPage" resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_course
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            AND del = 0
+            <if test="param1.type != null">
+                AND type = #{param1.type, jdbcType=INTEGER}
+            </if>
+            <if test="param1.classify != null">
+                AND classify = #{param1.classify, jdbcType=INTEGER}
+            </if>
+            <if test="param1.subClassify != null">
+                AND sub_classify = #{param1.subClassify, jdbcType=INTEGER}
+            </if>
+            <if test="param1.onsale != null">
+                AND onsale = #{param1.onsale, jdbcType=INTEGER}
+            </if>
+            <if test="param1.name != null">
+                AND name like CONCAT('%',#{param1.name},'%' ) 
+            </if>
+        </trim>
+        <if test="param2.sortField != null and param2.sortField != ''">
+        ORDER BY ${param2.sortField}  ${param2.sortDirection}
+        </if>
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getById" parameterType="java.lang.Long" resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_course
+        WHERE id = #{id, jdbcType=INTEGER}
+        AND del = 0
+    </select>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.course.domain.Course" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_course
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+            name,
+            </if>
+            <if test="type != null ">
+            type,
+            </if>
+            <if test="classify != null ">
+            classify,
+            </if>
+            <if test="classifyName != null ">
+            classify_name,
+            </if>
+            <if test="subClassify != null ">
+            sub_classify,
+            </if>
+            <if test="subClassifyName != null ">
+            sub_classify_name,
+            </if>
+            <if test="direction != null ">
+            direction,
+            </if>
+            <if test="username != null ">
+            username,
+            </if>
+            <if test="level != null ">
+            level,
+            </if>
+            <if test="free != null ">
+            free,
+            </if>
+            <if test="price != null ">
+            price,
+            </if>
+            <if test="time != null ">
+            time,
+            </if>
+            <if test="onsale != null ">
+            onsale,
+            </if>
+            <if test="brief != null ">
+            brief,
+            </if>
+            <if test="picture != null ">
+            picture,
+            </if>
+            <if test="recommend != null ">
+            recommend,
+            </if>
+            <if test="weight != null ">
+            weight,
+            </if>
+            <if test="studyCount != null ">
+            study_count,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="name != null ">
+            #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            #{type, jdbcType=VARCHAR},
+            </if>
+            <if test="classify != null ">
+            #{classify, jdbcType=VARCHAR},
+            </if>
+            <if test="classifyName != null ">
+            #{classifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassify != null ">
+            #{subClassify, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassifyName != null ">
+            #{subClassifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null ">
+            #{direction, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+            #{username, jdbcType=INTEGER},
+            </if>
+            <if test="level != null ">
+            #{level, jdbcType=INTEGER},
+            </if>
+            <if test="free != null ">
+            #{free, jdbcType=INTEGER},
+            </if>
+            <if test="price != null ">
+            #{price, jdbcType=DECIMAL},
+            </if>
+            <if test="time != null ">
+            #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+            #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="brief != null ">
+            #{brief, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+            #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="recommend != null ">
+            #{recommend, jdbcType=INTEGER},
+            </if>
+            <if test="weight != null ">
+            #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="studyCount != null ">
+            #{studyCount, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.course.domain.Course" flushCache="true">
+        UPDATE t_course
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="name != null ">
+            name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            type = #{type, jdbcType=VARCHAR},
+            </if>
+            <if test="classify != null ">
+            classify = #{classify, jdbcType=VARCHAR},
+            </if>
+            <if test="classifyName != null ">
+            classify_name = #{classifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassify != null ">
+            sub_classify = #{subClassify, jdbcType=VARCHAR},
+            </if>
+            <if test="subClassifyName != null ">
+            sub_classify_name = #{subClassifyName, jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null ">
+            direction = #{direction, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+            username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="level != null ">
+            level = #{level, jdbcType=INTEGER},
+            </if>
+            <if test="free != null ">
+            free = #{free, jdbcType=INTEGER},
+            </if>
+            <if test="price != null ">
+            price = #{price, jdbcType=VARCHAR},
+            </if>
+            <if test="time != null ">
+            time = #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="onsale != null ">
+            onsale = #{onsale, jdbcType=INTEGER},
+            </if>
+            <if test="brief != null ">
+            brief = #{brief, jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null ">
+            picture = #{picture, jdbcType=VARCHAR},
+            </if>
+            <if test="recommend != null ">
+            recommend = #{recommend, jdbcType=INTEGER},
+            </if>
+            <if test="weight != null ">
+            weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="studyCount != null ">
+            study_count = #{studyCount, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
+
+    <insert id="create" parameterType="com.online.college.service.core.course.domain.Course" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_course
+        ( name, type, classify, classify_name, sub_classify, sub_classify_name, direction, username, 
+        level, free, price, time, onsale, brief, picture,
+        recommend, weight, study_count, create_time, create_user, update_time, 
+        update_user, del, id ) 
+        VALUES 
+        ( #{name, jdbcType=VARCHAR}, #{type, jdbcType=VARCHAR}, #{classify, jdbcType=VARCHAR},  #{classifyName, jdbcType=VARCHAR}, #{subClassify, jdbcType=VARCHAR}, #{subClassifyName, jdbcType=VARCHAR}, #{direction, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, 
+        #{level, jdbcType=INTEGER}, #{free, jdbcType=INTEGER}, #{price, jdbcType=VARCHAR}, #{time, jdbcType=VARCHAR}, #{onsale, jdbcType=INTEGER}, #{brief, jdbcType=VARCHAR}, #{picture, jdbcType=VARCHAR}, 
+        #{recommend, jdbcType=INTEGER}, #{weight, jdbcType=INTEGER}, #{studyCount, jdbcType=INTEGER}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, 
+        #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.course.domain.Course" flushCache="true">
+        UPDATE t_course SET 
+        name = #{name, jdbcType=VARCHAR},
+        type = #{type, jdbcType=VARCHAR},
+        classify = #{classify, jdbcType=VARCHAR},
+        classify_name = #{classifyName, jdbcType=VARCHAR},
+        sub_classify = #{subClassify, jdbcType=VARCHAR},
+        sub_classify_name = #{subClassifyName, jdbcType=VARCHAR},
+        direction = #{direction, jdbcType=VARCHAR},
+        USERNAME = #{username, jdbcType=VARCHAR},
+        level = #{level, jdbcType=INTEGER},
+        free = #{free, jdbcType=INTEGER},
+        price = #{price, jdbcType=VARCHAR},
+        time = #{time, jdbcType=VARCHAR},
+        onsale = #{onsale, jdbcType=INTEGER},
+        brief = #{brief, jdbcType=VARCHAR},
+        picture = #{picture, jdbcType=VARCHAR},
+        recommend = #{recommend, jdbcType=INTEGER},
+        weight = #{weight, jdbcType=INTEGER},
+        study_count = #{studyCount, jdbcType=INTEGER},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+    
+    <delete id="delete" parameterType="com.online.college.service.core.course.domain.Course" >
+        DELETE 
+        FROM t_course
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.course.domain.Course" flushCache="true">
+        UPDATE t_course
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

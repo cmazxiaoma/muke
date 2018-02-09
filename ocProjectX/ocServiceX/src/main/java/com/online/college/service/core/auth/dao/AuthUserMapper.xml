@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.auth.dao.AuthUserDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.auth.domain.AuthUser" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="realname" property="realname"  jdbcType="VARCHAR" />
+        <result column="username" property="username"  jdbcType="VARCHAR" />
+        <result column="password" property="password"  jdbcType="VARCHAR" />
+        <result column="gender" property="gender"  jdbcType="INTEGER" />
+        <result column="header" property="header"  jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile"  jdbcType="VARCHAR" />
+        <result column="status" property="status"  jdbcType="INTEGER" />
+        <result column="birthday" property="birthday"  jdbcType="DATE" />
+        <result column="education" property="education"  jdbcType="VARCHAR" />
+        <result column="college_code" property="collegeCode"  jdbcType="VARCHAR" />
+        <result column="college_name" property="collegeName"  jdbcType="VARCHAR" />
+        <result column="cert_no" property="certNo"  jdbcType="VARCHAR" />
+        <result column="title" property="title"  jdbcType="VARCHAR" />
+        <result column="sign" property="sign"  jdbcType="VARCHAR" />
+        <result column="open_id" property="openId"  jdbcType="VARCHAR" />
+        <result column="wechat_id" property="wechatId"  jdbcType="VARCHAR" />
+        <result column="qq" property="qq"  jdbcType="VARCHAR" />
+        <result column="login_time" property="loginTime"  jdbcType="DATE" />
+        <result column="ip" property="ip"  jdbcType="VARCHAR" />
+        <result column="province" property="province"  jdbcType="VARCHAR" />
+        <result column="city" property="city"  jdbcType="VARCHAR" />
+        <result column="district" property="district"  jdbcType="VARCHAR" />
+        <result column="weight" property="weight"  jdbcType="INTEGER" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+    </resultMap> 
+
+    <sql id="All_Columns">
+        realname, username, password, gender, header, mobile, 
+        status, birthday, education, college_code, college_name, cert_no, title, sign, 
+        open_id, wechat_id, qq, login_time, ip, province, 
+        city, district, weight, create_time, create_user, update_time, update_user, 
+        del, id 
+    </sql>
+    
+    <select id="getByUsername" parameterType="java.lang.String"  resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_auth_user
+        WHERE username = #{username, jdbcType=VARCHAR}
+        AND DEL = 0
+    </select>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.auth.domain.AuthUser" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_auth_user
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="realname != null ">
+            realname,
+            </if>
+            <if test="username != null ">
+            username,
+            </if>
+            <if test="password != null ">
+            password,
+            </if>
+            <if test="gender != null ">
+            gender,
+            </if>
+            <if test="header != null ">
+            header,
+            </if>
+            <if test="mobile != null ">
+            mobile,
+            </if>
+            <if test="status != null ">
+            status,
+            </if>
+            <if test="birthday != null ">
+            birthday,
+            </if>
+            <if test="education != null ">
+            education,
+            </if>
+            <if test="collegeCode != null ">
+            college_code,
+            </if>
+            <if test="collegeName != null ">
+            college_name,
+            </if>
+            <if test="certNo != null ">
+            cert_no,
+            </if>
+            <if test="title != null ">
+            title,
+            </if>
+            <if test="sign != null ">
+            sign,
+            </if>
+            <if test="openId != null ">
+            open_id,
+            </if>
+            <if test="wechatId != null ">
+            wechat_id,
+            </if>
+            <if test="qq != null ">
+            qq,
+            </if>
+            <if test="loginTime != null ">
+            login_time,
+            </if>
+            <if test="ip != null ">
+            ip,
+            </if>
+            <if test="province != null ">
+            province,
+            </if>
+            <if test="city != null ">
+            CITY,
+            </if>
+            <if test="district != null ">
+            district,
+            </if>
+            <if test="weight != null ">
+            weight,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="realname != null ">
+            #{realname, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+            #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null ">
+            #{password, jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null ">
+            #{gender, jdbcType=INTEGER},
+            </if>
+            <if test="header != null ">
+            #{header, jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null ">
+            #{mobile, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null ">
+            #{status, jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null ">
+            #{birthday, jdbcType=DATE},
+            </if>
+            <if test="education != null ">
+            #{education, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeCode != null ">
+            #{collegeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null ">
+            #{collegeName, jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null ">
+            #{certNo, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null ">
+            #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null ">
+            #{sign, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null ">
+            #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null ">
+            #{wechatId, jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null ">
+            #{qq, jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null ">
+            #{loginTime, jdbcType=DATE},
+            </if>
+            <if test="ip != null ">
+            #{ip, jdbcType=VARCHAR},
+            </if>
+            <if test="province != null ">
+            #{province, jdbcType=VARCHAR},
+            </if>
+            <if test="city != null ">
+            #{city, jdbcType=VARCHAR},
+            </if>
+            <if test="district != null ">
+            #{district, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+            #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="queryRecomd" parameterType="com.online.college.service.core.auth.domain.AuthUser" resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_auth_user 
+        ORDER BY weight DESC 
+        LIMIT 5
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.auth.domain.AuthUser" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_auth_user
+        WHERE del = 0 
+        <if test="username != null">
+        AND username like CONCAT('%',#{username},'%' ) 
+        </if>
+        <if test="status != null">
+        AND status = #{status }
+        </if>
+    </select>
+    
+    <select id="queryPage" resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_auth_user
+        WHERE del = 0 
+        <if test="param1.username != null">
+        AND username like CONCAT('%',#{param1.username},'%' ) 
+        </if>
+        <if test="param1.status != null">
+        AND status = #{param1.status }
+        </if>
+        ORDER BY id
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long"  resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_auth_user
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+    
+    
+    
+    <select id="getByUsernameAndPassword" parameterType="com.online.college.service.core.auth.domain.AuthUser"  resultMap="BeanResultMap">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_auth_user
+        WHERE username = #{username, jdbcType=VARCHAR}
+        AND  password = #{password, jdbcType=VARCHAR}
+    </select>
+
+    
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.auth.domain.AuthUser" flushCache="true">
+        UPDATE t_auth_user
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="realname != null ">
+            realname = #{realname, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null ">
+            username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null ">
+            password = #{password, jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null ">
+            gender = #{gender, jdbcType=INTEGER},
+            </if>
+            <if test="header != null ">
+            header = #{header, jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null ">
+            mobile = #{mobile, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null ">
+            status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null ">
+            birthday = #{birthday, jdbcType=DATE},
+            </if>
+            <if test="education != null ">
+            education = #{education, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeCode != null ">
+            college_code = #{collegeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="collegeName != null ">
+            college_name = #{collegeName, jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null ">
+            cert_no = #{certNo, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null ">
+            title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null ">
+            sign = #{sign, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null ">
+            open_id = #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null ">
+            wechat_id = #{wechatId, jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null ">
+            qq = #{qq, jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null ">
+            login_time = #{loginTime, jdbcType=DATE},
+            </if>
+            <if test="ip != null ">
+            ip = #{ip, jdbcType=VARCHAR},
+            </if>
+            <if test="province != null ">
+            province = #{province, jdbcType=VARCHAR},
+            </if>
+            <if test="city != null ">
+            city = #{city, jdbcType=VARCHAR},
+            </if>
+            <if test="district != null ">
+            district = #{district, jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null ">
+            weight = #{weight, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
+    
+    <insert id="create" parameterType="com.online.college.service.core.auth.domain.AuthUser" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_auth_user
+        ( realname, username, password, gender, header, mobile, 
+        status, birthday, education, college_code, college_name, cert_no, title, sign, 
+        open_id, wechat_id, qq, login_time, ip, province, 
+        city, district, weight, create_time, create_user, update_time, update_user, 
+        del, id ) 
+        VALUES 
+        ( #{realname, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{gender, jdbcType=INTEGER}, #{header, jdbcType=VARCHAR}, #{mobile, jdbcType=VARCHAR}, 
+        #{status, jdbcType=INTEGER}, #{birthday, jdbcType=DATE}, #{education, jdbcType=VARCHAR}, #{collegeCode, jdbcType=VARCHAR}, #{collegeName, jdbcType=VARCHAR}, #{certNo, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{sign, jdbcType=VARCHAR}, 
+        #{openId, jdbcType=VARCHAR}, #{wechatId, jdbcType=VARCHAR}, #{qq, jdbcType=VARCHAR}, #{loginTime, jdbcType=DATE}, #{ip, jdbcType=VARCHAR}, #{province, jdbcType=VARCHAR}, 
+        #{city, jdbcType=VARCHAR}, #{district, jdbcType=VARCHAR} , #{weight, jdbcType=INTEGER}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, #{updateUser, jdbcType=VARCHAR}, 
+        #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.auth.domain.AuthUser" flushCache="true">
+        UPDATE t_auth_user SET 
+        realname = #{realname, jdbcType=VARCHAR},
+        username = #{username, jdbcType=VARCHAR},
+        password = #{password, jdbcType=VARCHAR},
+        gender = #{gender, jdbcType=INTEGER},
+        header = #{header, jdbcType=VARCHAR},
+        mobile = #{mobile, jdbcType=VARCHAR},
+        status = #{status, jdbcType=INTEGER},
+        birthday = #{birthday, jdbcType=DATE},
+        education = #{education, jdbcType=VARCHAR},
+        college_code = #{collegeCode, jdbcType=VARCHAR},
+        college_name = #{collegeName, jdbcType=VARCHAR},
+        cert_no = #{certNo, jdbcType=VARCHAR},
+        title = #{title, jdbcType=VARCHAR},
+        sign = #{sign, jdbcType=VARCHAR},
+        open_id = #{openId, jdbcType=VARCHAR},
+        wechat_id = #{wechatId, jdbcType=VARCHAR},
+        qq = #{qq, jdbcType=VARCHAR},
+        login_time = #{loginTime, jdbcType=DATE},
+        ip = #{ip, jdbcType=VARCHAR},
+        province = #{province, jdbcType=VARCHAR},
+        city = #{city, jdbcType=VARCHAR},
+        district = #{district, jdbcType=VARCHAR},
+        weight = #{weight, jdbcType=INTEGER},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+
+    <delete id="delete" parameterType="com.online.college.service.core.auth.domain.AuthUser" >
+        DELETE 
+        FROM t_auth_user
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.auth.domain.AuthUser" flushCache="true">
+        UPDATE t_auth_user
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

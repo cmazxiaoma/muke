@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.course.dao.CourseCommentDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.course.domain.CourseComment" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username"  jdbcType="VARCHAR" />
+        <result column="to_username" property="toUsername"  jdbcType="VARCHAR" />
+        <result column="course_id" property="courseId"  jdbcType="INTEGER" />
+        <result column="section_id" property="sectionId"  jdbcType="INTEGER" />
+        <result column="section_title" property="sectionTitle"  jdbcType="VARCHAR" />
+        <result column="content" property="content"  jdbcType="VARCHAR" />
+        <result column="ref_id" property="refId"  jdbcType="INTEGER" />
+        <result column="ref_content" property="refContent"  jdbcType="VARCHAR" />
+        <result column="type" property="type"  jdbcType="INTEGER" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+        
+        <result column="header" property="header"  jdbcType="VARCHAR" />
+        <result column="course_name" property="courseName"  jdbcType="VARCHAR" />
+    </resultMap> 
+
+
+    <sql id="All_Columns">
+        username, to_username, course_id, section_id, section_title, content, 
+        ref_id, ref_content, type, create_time, create_user, update_time, 
+        update_user, del, id 
+    </sql>
+
+    <select id="queryAll" parameterType="com.online.college.service.core.course.domain.CourseComment" resultType="com.online.college.service.core.course.domain.CourseComment">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_course_comment ORDER BY id
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.course.domain.CourseComment" resultType="java.lang.Integer">
+        SELECT COUNT(*) 
+        FROM t_course_comment
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            <if test="type != null">
+                AND type = #{type, jdbcType=INTEGER}
+            </if>
+            <if test="courseId != null">
+                AND course_id = #{courseId, jdbcType=INTEGER}
+            </if>
+            <if test="sectionId != null">
+                AND section_id = #{sectionId, jdbcType=INTEGER}
+            </if>
+            AND del = 0
+        </trim> 
+    </select>
+
+    <select id="queryPage" resultMap="BeanResultMap">
+        SELECT 
+        c.username, c.to_username, c.course_id, c.section_id, c.section_title, c.content, 
+        c.ref_id, c.ref_content, c.type, c.create_time, c.create_user, c.update_time, 
+        c.update_user, c.del, c.id, u.header
+        
+        FROM t_course_comment c
+        LEFT JOIN t_auth_user u 
+        ON c.username = u.username
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            <if test="param1.type != null">
+                AND c.type = #{param1.type, jdbcType=INTEGER}
+            </if>
+            <if test="param1.courseId != null">
+                AND c.course_id = #{param1.courseId, jdbcType=INTEGER}
+            </if>
+            <if test="param1.sectionId != null">
+                AND c.section_id = #{param1.sectionId, jdbcType=INTEGER}
+            </if>
+            AND c.del = 0
+        </trim> 
+        ORDER BY c.id DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+    
+    
+    <select id="getMyQAItemsCount" parameterType="com.online.college.service.core.course.domain.CourseComment" resultType="java.lang.Integer">
+        SELECT COUNT(tc.id) 
+        FROM t_course t , t_course_comment tc 
+        WHERE t.id = tc.course_id
+        AND t.username = #{username}
+        AND tc.del = 0
+    </select>
+    
+    <select id="queryMyQAItemsPage" resultMap="BeanResultMap">
+        SELECT tc.id, tc.username, tc.course_id, tc.content, tc.section_title,
+        tc.section_id , tc.create_time, tc.ref_content, t.name as course_name
+        FROM t_course t , t_course_comment tc 
+        WHERE t.id = tc.course_id
+        AND t.username = #{param1.username}
+        AND tc.del = 0
+        ORDER BY tc.id DESC
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.online.college.service.core.course.domain.CourseComment">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_course_comment
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+
+    <insert id="create" parameterType="com.online.college.service.core.course.domain.CourseComment" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_course_comment
+        ( username, to_username, course_id, section_id, SECTION_TITLE, content, 
+        ref_id, ref_content, type, create_time, create_user, update_time, 
+        update_user, del, id ) 
+        VALUES 
+        ( #{username, jdbcType=VARCHAR}, #{toUsername, jdbcType=VARCHAR}, #{courseId, jdbcType=VARCHAR}, #{sectionId, jdbcType=VARCHAR}, #{sectionTitle, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, 
+        #{refId, jdbcType=VARCHAR}, #{refContent, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, 
+        #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
+    </insert>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.course.domain.CourseComment" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_course_comment
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="username != null ">
+            username,
+            </if>
+            <if test="toUsername != null ">
+            to_username,
+            </if>
+            <if test="courseId != null ">
+            course_id,
+            </if>
+            <if test="sectionId != null ">
+            section_id,
+            </if>
+            <if test="sectionTitle != null ">
+            SECTION_TITLE,
+            </if>
+            <if test="content != null ">
+            content,
+            </if>
+            <if test="refId != null ">
+            ref_id,
+            </if>
+            <if test="refContent != null ">
+            ref_content,
+            </if>
+            <if test="type != null ">
+            type,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="username != null ">
+            #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="toUsername != null ">
+            #{toUsername, jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null ">
+            #{courseId, jdbcType=INTEGER},
+            </if>
+            <if test="sectionId != null ">
+            #{sectionId, jdbcType=INTEGER},
+            </if>
+            <if test="sectionTitle != null ">
+            #{sectionTitle, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null ">
+            #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="refId != null ">
+            #{refId, jdbcType=INTEGER},
+            </if>
+            <if test="refContent != null ">
+            #{refContent, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            #{type, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.course.domain.CourseComment" flushCache="true">
+        UPDATE t_course_comment SET 
+        username = #{username, jdbcType=VARCHAR},
+        to_username = #{toUsername, jdbcType=VARCHAR},
+        course_id = #{courseId, jdbcType=VARCHAR},
+        section_id = #{sectionId, jdbcType=VARCHAR},
+        SECTION_TITLE = #{sectionTitle, jdbcType=VARCHAR},
+        content = #{content, jdbcType=VARCHAR},
+        ref_id = #{refId, jdbcType=VARCHAR},
+        ref_content = #{refContent, jdbcType=VARCHAR},
+        type = #{type, jdbcType=INTEGER},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.course.domain.CourseComment" flushCache="true">
+        UPDATE t_course_comment
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="username != null ">
+            username = #{username, jdbcType=VARCHAR},
+            </if>
+            <if test="toUsername != null ">
+            to_username = #{toUsername, jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null ">
+            course_id = #{courseId, jdbcType=VARCHAR},
+            </if>
+            <if test="sectionId != null ">
+            section_id = #{sectionId, jdbcType=VARCHAR},
+            </if>
+            <if test="sectionTitle != null ">
+            section_title = #{sectionTitle, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null ">
+            content = #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="refId != null ">
+            ref_id = #{refId, jdbcType=VARCHAR},
+            </if>
+            <if test="refContent != null ">
+            ref_content = #{refContent, jdbcType=VARCHAR},
+            </if>
+            <if test="type != null ">
+            type = #{type, jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="com.online.college.service.core.course.domain.CourseComment" >
+        DELETE FROM t_course_comment
+        WHERE id = #{id, jdbcType=INTEGER}
+        OR ref_id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.course.domain.CourseComment" flushCache="true">
+        UPDATE t_course_comment
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+        OR ref_id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

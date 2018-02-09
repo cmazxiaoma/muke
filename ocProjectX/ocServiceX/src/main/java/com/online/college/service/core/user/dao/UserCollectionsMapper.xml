@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://10.20.91.130/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.online.college.service.core.user.dao.UserCollectionsDao">
+
+    <resultMap id="BeanResultMap" type="com.online.college.service.core.user.domain.UserCollections" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId"  jdbcType="INTEGER" />
+        <result column="classify" property="classify"  jdbcType="INTEGER" />
+        <result column="object_id" property="objectId"  jdbcType="INTEGER" />
+        <result column="tips" property="tips"  jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime"  jdbcType="DATE" />
+        <result column="create_user" property="createUser"  jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime"  jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser"  jdbcType="VARCHAR" />
+        <result column="del" property="del"  jdbcType="TINYINT" />
+    </resultMap> 
+
+
+    <sql id="All_Columns">
+        user_id, classify,object_id, tips, create_time, create_user, update_time, 
+        update_user, del, id 
+    </sql>
+
+    <select id="queryAll" parameterType="com.online.college.service.core.user.domain.UserCollections" resultType="com.online.college.service.core.user.domain.UserCollections">
+        SELECT 
+        <include refid="All_Columns" />
+        FROM t_user_collections 
+        <trim prefix="WHERE " prefixOverrides="AND |OR "> 
+            <if test="userId != null">
+                AND user_id = #{userId, jdbcType=INTEGER}
+            </if>
+            <if test="objectId != null">
+                AND object_id = #{objectId, jdbcType=INTEGER}
+            </if>
+            <if test="classify != null">
+                AND classify = #{classify, jdbcType=INTEGER}
+            </if>
+        </trim>
+        ORDER BY id
+    </select>
+
+    <select id="getTotalItemsCount" parameterType="com.online.college.service.core.user.domain.UserCollections" resultType="java.lang.Integer">
+        SELECT COUNT(*) 
+        FROM t_user_collections
+        WHERE del = 0 
+        AND user_id = #{userId, jdbcType=INTEGER}
+    </select>
+    
+    <select id="queryPage" resultType="com.online.college.service.core.user.domain.UserCollections">
+        SELECT uc.object_id, uc.id, c.name, uc.create_time, uc.classify, uc.create_time
+        FROM t_user_collections uc , t_course c
+        WHERE uc.object_id = c.id
+        AND uc.classify = 1
+        ORDER BY id DESC 
+        LIMIT #{param2.startIndex, jdbcType=INTEGER} , #{param2.pageSize, jdbcType=INTEGER} 
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.online.college.service.core.user.domain.UserCollections">
+        SELECT 
+        <include refid="All_Columns"  />
+        FROM t_user_collections
+        WHERE id = #{id, jdbcType=INTEGER}
+    </select>
+
+    <insert id="create" parameterType="com.online.college.service.core.user.domain.UserCollections" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_user_collections
+        ( user_id, classify, object_id, tips, create_time, create_user, update_time, 
+        update_user, del, id ) 
+        VALUES 
+        ( #{userId, jdbcType=INTEGER}, #{classify, jdbcType=INTEGER},#{objectId, jdbcType=INTEGER},#{tips, jdbcType=VARCHAR}, #{createTime, jdbcType=DATE}, #{createUser, jdbcType=VARCHAR}, #{updateTime, jdbcType=TIMESTAMP}, 
+        #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
+    </insert>
+    
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.user.domain.UserCollections" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+        INSERT INTO t_user_collections
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+            user_id,
+            </if>
+            <if test="classify != null ">
+            classify,
+            </if>
+            <if test="objectId != null ">
+            object_id,
+            </if>
+            <if test="tips != null ">
+            tips,
+            </if>
+            <if test="createTime != null ">
+            create_time,
+            </if>
+            <if test="createUser != null ">
+            create_user,
+            </if>
+            <if test="updateTime != null ">
+            update_time,
+            </if>
+            <if test="updateUser != null ">
+            update_user,
+            </if>
+            <if test="del != null ">
+            del,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")"  suffixOverrides="," >
+            <if test="userId != null ">
+            #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="classify != null ">
+            #{classify, jdbcType=INTEGER},
+            </if>
+            <if test="objectId != null ">
+            #{objectId, jdbcType=INTEGER},
+            </if>
+            <if test="tips != null ">
+            #{tips, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null ">
+            #{createTime, jdbcType=DATE},
+            </if>
+            <if test="createUser != null ">
+            #{createUser, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.online.college.service.core.user.domain.UserCollections" flushCache="true">
+        UPDATE t_user_collections SET 
+        user_id = #{userId, jdbcType=INTEGER},
+        classify = #{classify, jdbcType=INTEGER},
+        object_id = #{objectId, jdbcType=INTEGER},
+        tips = #{tips, jdbcType=VARCHAR},
+        update_time = #{updateTime, jdbcType=TIMESTAMP},
+        update_user = #{updateUser, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER} 
+    </update>
+
+    <update id="updateSelectivity" parameterType="com.online.college.service.core.user.domain.UserCollections" flushCache="true">
+        UPDATE t_user_collections
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="userId != null ">
+            user_id = #{userId, jdbcType=INTEGER},
+            </if>
+            <if test="classify != null ">
+            classify = #{classify, jdbcType=INTEGER},
+            </if>
+            <if test="objectId != null ">
+            object_id = #{objectId, jdbcType=INTEGER},
+            </if>
+            <if test="tips != null ">
+            tips = #{tips, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+            update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null ">
+            update_user = #{updateUser, jdbcType=VARCHAR},
+            </if>
+            <if test="del != null ">
+            del = #{del, jdbcType=TINYINT},
+            </if>
+        </trim>
+        WHERE id = #{id, jdbcType = INTEGER}
+
+    </update>
+
+    <delete id="delete" parameterType="com.online.college.service.core.user.domain.UserCollections" >
+        DELETE FROM t_user_collections
+        WHERE id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogic" parameterType="com.online.college.service.core.user.domain.UserCollections" flushCache="true">
+        UPDATE t_user_collections
+        SET del = 1
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+</mapper>

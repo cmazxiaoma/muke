@@ -41,7 +41,6 @@
 				</props>
 			</property>
 		</bean>  
-		
 	    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 	    	<property name="prefix" value="/WEB-INF/pages/" />
 			<property name="suffix" value=".html" />

@@ -19,7 +19,6 @@
         <property name="httpOnly" value="true"/>  
         <property name="maxAge" value="2592000"/><!-- 30天 -->  
     </bean>
-    
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
 	    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>  
      	<property name="cookie" ref="rememberMeCookie"/>  
@@ -33,7 +32,6 @@
 		<property name="realm" ref="authRealm" />
 		<property name="rememberMeManager" ref="rememberMeManager"/>  
 	</bean>
-	
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
 	
 	<!-- 自定义 filter -->
