@@ -17,8 +17,8 @@ public class CourseSection extends BaseEntity {
      * 归属课程id
      */
     private Long courseId;
-
     /**
+
      * 父章节id, 只有2级
      */
     private Long parentId;

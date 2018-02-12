@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <title>后台管理</title>
+        <meta charset="utf-8">
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <!-- 引入资源文件 -->
+        <#include "../../common/res.html" />
+   </head>
+   
+   <body class=""> 
+  	<!-- top 导航 -->
+    <#include "../../common/header.html" />
+	
+	<!-- 菜单导航 -->
+    <#include "../cms-nav.html" />
+
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="block span6">
+				 <a class="block-heading f-14" data-toggle="collapse">轮播配置</a>
+				<div class="block-body collapse in p-tb-20">
+					<form role="form" method="post" action="${s.base}/carousel/doMerge.html" enctype="multipart/form-data">
+						<input type="hidden" name="id" value="${(entity.id)!}">
+						<div class="form-group">
+							<label for="name">图片 <span id="imgErrSpan" style="color:red;font-weight:normal;"></span> </label> 
+							<div>
+								<input type="file" id="pictureImg" name="pictureImg" style="display: none;" onchange="photoImgChange();">
+								<div class="ui-avatar-box">
+								<#if (entity.picture)?? && entity.picture != ''>
+								<img id="carousel-picture" src="${(entity.picture)!}" style="max-width: 250px;">
+								<#else>
+								<img id="carousel-picture" src="" style="display: none;max-width: 250px;">
+								</#if>
+								<a href="javascript:void(0);" onclick="doUpload();" style="text-decoration: underline;">选择图片</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-group w-600">
+							<label for="name">名称</label> 
+							<input type="text" class="form-control" id="name" name="name" value="${(entity.name)!}" placeholder="请输入名称">
+						</div>
+						<div class="form-group  w-600">
+							<label for="name">链接</label> 
+							<input type="text" class="form-control" name="url" id="url" value="${(entity.url)!}" placeholder="请输入链接">
+						</div>
+						<div class="form-group w-200">
+							<label for="name">权重</label> 
+							<input type="text" class="form-control" name="weight" id="weight" value="${(entity.weight)!}" placeholder="请输入权重">
+						</div>
+						<div class="form-group w-200">
+							<label for="name">是否可用</label> 
+							<select name="enable" id="enable" class="form-control"  type="select">
+								<option value="1" <#if (entity.enable)?? && (entity.enable == 1)>selected="selected"</#if>>可用</option>
+								<option value="0" <#if (entity.enable)?? && (entity.enable == 0)>selected="selected"</#if>>禁用</option>
+							</select>
+						</div>
+						
+						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="button" class="btn btn-default" onclick="window.history.go(-1)">取消</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function doUpload(){
+			$('#pictureImg').click();
+		}
+		function photoImgChange(){
+			var img = $('#pictureImg').val();
+			if(oc.photoValid(img)){
+				oc.previewUploadImg('pictureImg','carousel-picture');
+				$('#carousel-picture').show();
+				$('#imgErrSpan').html('');
+				return;
+			}else{
+				$('#imgErrSpan').html('&nbsp;请选择png,jpeg,jpg格式图片');
+				$('#pictureImg').val('');
+			}
+		}
+	</script>
+	
+</body>
+</html>

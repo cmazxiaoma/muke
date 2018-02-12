@@ -47,3 +47,4 @@ ocProjectX/ocCommonX/.project
 ocProjectX/ocCommonX/.settings/org.eclipse.core.resources.prefs
 ocProjectX/ocCommonX/.settings/org.eclipse.jdt.core.prefs
 ocProjectX/ocCommonX/.settings/org.eclipse.m2e.core.prefs
+*.launch

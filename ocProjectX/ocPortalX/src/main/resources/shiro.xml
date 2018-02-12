@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 	xmlns="http://www.springframework.org/schema/beans" 
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans 
-							http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+<beans     xmlns="http://www.springframework.org/schema/beans" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
     <!-- 会话Cookie模板 -->  
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
         <constructor-arg value="sid"/>  
@@ -19,53 +19,61 @@
         <property name="httpOnly" value="true"/>  
         <property name="maxAge" value="2592000"/><!-- 30天 -->  
     </bean>
+    
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
-	    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>  
-     	<property name="cookie" ref="rememberMeCookie"/>  
-	</bean>
-	
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>  
+         <property name="cookie" ref="rememberMeCookie"/>  
+    </bean>
+    
     <!-- 自定义Realm -->  
-    <bean id="authRealm" class="com.online.college.web.auth.AuthRealm"></bean>
+    <bean id="authRealm" class="com.online.college.service.web.auth.AuthRealm"></bean>
     
     <!-- 保存在内存 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="authRealm" />
-		<property name="rememberMeManager" ref="rememberMeManager"/>  
-	</bean>
+        <property name="realm" ref="authRealm" />
+        <property name="rememberMeManager" ref="rememberMeManager"/>  
+    </bean>
+    
+    <!-- 保证实现了shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
-	
-	<!-- 自定义 filter -->
-	<bean id="authFilter" class="com.online.college.web.auth.AuthFilter" />
-	
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-		<property name="unauthorizedUrl" value="/error/403.html" />
-		<property name="successUrl" value="/" />
-		<property name="loginUrl" value="/auth/login.html" />
-		<property name="filters">
-			<map>
-				<entry key="authc" value-ref="authFilter" />
-			</map>
-		</property>
-		<property name="filterChainDefinitions">
-			<value>
-				/error/** = anon
-				/res/** = anon
-				/tools/** = anon
-				/index.html* = anon
-				/auth/** = anon
-				/auth/logout.html = logout 
-				
-				/course/list.html* = anon
-				/course/learn/*.html = anon
-				/course/video/*.html = authc
-				
-				/courseComment/segment.html* = anon
-				
-				/** = authc
-			</value>
-		</property>
-	</bean>
-	
+    
+    <!-- 自定义 filter -->
+    <bean id="authFilter" class="com.online.college.service.web.auth.AuthFilter" />
+    
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 这个属性必须注入, 相当于shiro的主要入口 -->
+        <property name="securityManager" ref="securityManager" />
+        <!-- 没有验证跳转的地址 -->
+        <property name="unauthorizedUrl" value="/error/403.html" />
+        <property name="successUrl" value="/" />
+        <property name="loginUrl" value="/auth/login.html" />
+        
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="authFilter" />
+            </map>
+        </property>
+        
+        <!-- 需要验证的地址的列表, 常用包括anon, authc, perms, roles, user -->
+        <property name="filterChainDefinitions">
+            <value>
+                /error/** = anon
+                /res/** = anon
+                /tools/** = anon
+                /index.html* = anon
+                /auth/** = anon
+                /auth/logout.html = logout 
+                
+                /course/list.html* = anon
+                /course/learn/*.html = anon
+                /course/video/*.html = authc
+                
+                /courseComment/segment.html* = anon
+                
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    
 </beans>
 

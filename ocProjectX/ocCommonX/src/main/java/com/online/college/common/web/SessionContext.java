@@ -35,9 +35,9 @@ public class SessionContext {
      * 获取当前用户的userName
      * @return
      */
-    public static String getUserName() {
+    public static String getUsername() {
         if (getAuthUser() != null) {
-            return getAuthUser().getUserName();
+            return getAuthUser().getUsername();
         }
         return null;
     }
@@ -59,9 +59,9 @@ public class SessionContext {
      * @param request
      * @return
      */
-    public static String getWxUserName(HttpServletRequest request) {
+    public static String getWxUsername(HttpServletRequest request) {
         if (getWxAuthUser(request) != null) {
-            return getWxAuthUser(request).getUserName();
+            return getWxAuthUser(request).getUsername();
         }
         return null;
     }

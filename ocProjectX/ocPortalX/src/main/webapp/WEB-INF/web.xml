@@ -4,13 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	
-	<display-name>ocPortal</display-name>
+	<display-name>ocPortalX</display-name>
 	
 	<!-- spring begin    -->
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.XmlWebApplicationContext</param-value>
 	</context-param>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
@@ -73,6 +74,8 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 	<!-- ShiroFilter end -->
 	

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>在线网校学习平台</title>
+		
+		<link href="../res/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="../res/css/reset.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="../res/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="../res/js/bootstrap.min.js"></script>
+		
+		<!--[if lt IE 9]>
+		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		
+		<link rel="icon" type="image/png" href="../res/i/ico.png" sizes="16x16">
+		<script type="text/javascript">
+		CONETXT_PATH = '';
+		</script>
+	</head>
+
+	<body>
+		<!-- 头部-start -->
+		<div class="f-header">
+			<div class="f-header-box clearfix">
+				<a href=".."  class="logo" title="网校在线学习平台"></a>
+				<nav class="header-nav">
+					<a href=".." class="header-nav-item">首 页</a>
+					<a href="../course/list.html" class="header-nav-item">课 程</a>
+					<a href="../user/home.html" class="header-nav-item">我的</a>
+					<a href="../opt/index.html"  style="width:100px;" target="_blank" class="header-nav-item">运营CMS</a>
+				</nav>
+				
+				<nav class="header-nav" style="float:right">
+					<a href="#myModal" class="header-nav-item"  data-toggle="modal" onclick="login();"  style="margin-right:0px;font-size:14px;">登录</a>
+					<a href="../auth/register.html" class="header-nav-item"   style="margin-left:0px;font-size:14px;">注册</a>
+			        <a href="#" class="header-nav-item"  style="margin-left:0px;font-size:14px;" id="userdetail">头像</a>
+				</nav>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function login(){
+				$('#loginTitle').css('color','#337Ab7');
+				$('#loginForm').show();
+				$('#registeTitle').css('color','#000');
+				$('#registeForm').hide();
+			}
+			function registe(){
+				$('#loginTitle').css('color','#000');
+				$('#loginForm').hide();
+				$('#registeTitle').css('color','#337Ab7');
+				$('#registeForm').show();
+			}
+			$(function(){
+				$("#userdetail").popover({
+		            trigger:'manual',
+		            placement : 'bottom',
+		            html: 'true',
+		            content : '<div style="width:300px;height:300px;"></div>',
+		            animation: false
+		        }).on("mouseenter", function () {
+		            var _this = this;
+		            $(this).popover("show");
+		            $(this).siblings(".popover").on("mouseleave", function () {
+		                $(_this).popover('hide');
+		            });
+		        }).on("mouseleave", function () {
+		            var _this = this;
+		            setTimeout(function () {
+		                if (!$(".popover:hover").length) {
+		                    $(_this).popover("hide")
+		                }
+		            }, 0);
+		        });
+				//课程分类展示 
+				$(".category").popover({
+		            trigger:'manual',
+		            placement : 'right',
+		            html: 'true',
+		            content : '',
+		            animation: false
+		        }).on("mouseenter", function () {
+		            var cid = $(this).attr('c-id');
+		            $('#' + cid).show();
+		            $('#' + cid).hover(function(){
+		            	$('#' + cid).show();
+		            },function(){
+		            	$('#' + cid).hide();
+					});
+		        }).on("mouseleave", function () {
+		            var cid = $(this).attr('c-id');
+		            $('#' + cid).hide();
+		        });
+			});
+		</script>
+		<!-- 头部-end -->
+		
+		<!-- 登录注册-start -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  style="position:fixed; top:30%;">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		        
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true" style="font-size:18px;">×</span>
+		                </button>
+		                <h4 class="modal-title"  id="loginTitle"  style="float: left; color: #337Ab7;cursor: pointer; " onclick="login();">登 录</h4>
+		                <h4 class="modal-title"  id="registeTitle"  style="float: left;margin-left: 20px;cursor: pointer;" onclick="registe();">注 册</h4>
+		                <div class="clearfix"></div>
+		            </div>
+		            
+		            <div class="modal-body">
+		               	<form id="loginForm" class="form-horizontal" style="padding: 0px 20px;">
+		                      <div class="form-group">
+		                          <input type="email" class="form-control"  id="username"  placeholder="用户名">
+		                      </div>
+		                      <div class="form-group help">
+		                          <input type="password" class="form-control"  id="password"  placeholder="密　码">
+		                      </div>
+		                      <div class="form-group">
+		                          <label>
+		                           <input type="checkbox" value="None" id="checkbox1" name="check">
+		                           <span class="text" style="color: #787D82;font-size: 14px;">下次自动登录</span>
+		                          </label>
+		                      </div>
+		                      
+		                      <a href="javascript:void(0)">
+		                      	<div class="header-login-btn">登 录</div>
+		                      </a>
+		                  </form>
+		                  
+		                   <form id="registeForm" class="form-horizontal" style="padding: 0px 20px;display: none;">
+		                       <div class="form-group">
+		                           <input type="email" class="form-control"  id="username"  placeholder="用户名">
+		                       </div>
+		                       <div class="form-group help">
+		                           <input type="password" class="form-control"  id="password"  placeholder="密　码">
+		                       </div>
+		                       <a href="javascript:void(0)">
+		                      	<div class="header-login-btn">注 册</div>
+		                       </a>
+		                   </form>
+		                  
+		            </div>
+					
+		        </div>
+		    </div>
+		</div>
+		<!-- 登录注册-end -->
+		
+		<div class="f-main clearfix">
+			<!-- 基本信息 -->
+			<div class="main-course-left">
+					<div class="course-info">
+						<div class="course-title">带您完成神秘的涟漪按钮效果-入门篇</div>
+						
+						<div class="course-meta">
+							<a href="${s.base}/course/video.html" class="learn-btn" >继续学习</a>
+							
+							<div class="static-item"  >
+								<div class="meta">上次学到</div>
+								<div class="meta-value">1-1 感受神秘的涟漪效果之美感受神秘的涟漪效果之美</div>
+							</div>
+							<div class="static-item"  >
+								<div class="meta">学习人数</div>
+								<div class="meta-value">1452</div>
+							</div>
+							<div class="static-item">
+								<div class="meta">难度级别</div>
+								<div class="meta-value">中级</div>
+							</div>
+							<div class="static-item" style="border:none;">
+								<div class="meta">课程时长</div>
+								<div class="meta-value">1小时25分</div>
+							</div>
+							<a onclick="doFollow(this,${(course.id)!})" href="javascript:void(0)" class="following" style="float: right;margin-top:5px;" title="收藏">
+							</a>
+						</div>
+						
+						<div class="course-brief">
+								简介：安卓声音录制与播放功能实现，包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放，还包括录制到字节流，从字节流播放，可以实现视频直播/实时对讲功能中的声音录制和播放。 Android大牛齐聚之地，这里总有人为你答疑解惑！慕课网Android讨论群 556384357
+						</div>
+						
+						<div class="course-menu">
+							<a  href=""><span class="menu-item cur">章节</span></a>
+							<a  href="./comment.html"><span class="menu-item">评论</span></a>
+						</div>
+				</div>
+				<!-- 基本信息-end -->
+				
+				<!-- 课程章节 - start -->		
+				<div>
+						<div class="chapter">
+							<a href="javascript:void(0);" class="js-open">
+								<h3>
+									<strong><div class="icon-chapter">=</div> 第1章 课程介绍</strong>
+									<span class="drop-down">▼</span> 
+								</h3>
+							</a>
+							<ul class="chapter-sub">
+								<a href="${s.base}/course/video.html" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 1-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)
+										<div class="preview-btn">继续学习</div>
+									</li>
+								</a>
+								
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 1-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)
+									</li>
+								</a>
+							</ul>
+						</div>
+						
+						<div class="chapter">
+							<a href="javascript:void(0);" class="js-open">
+								<h3>
+									<strong><div class="icon-chapter">=</div> 第2章 课程介绍</strong>
+									<span class="drop-down">▼</span> 
+								</h3>
+							</a>
+							<ul class="chapter-sub">
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 2-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)
+									</li>
+								</a>
+								
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 2-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)
+									</li>
+								</a>
+							</ul>
+						</div>
+						
+						<div class="chapter">
+							<a href="javascript:void(0);" class="js-open">
+								<h3>
+									<strong><div class="icon-chapter">=</div> 第3章 课程介绍</strong>
+									<span class="drop-down">▼</span> 
+								</h3>
+							</a>
+							
+							<ul class="chapter-sub">
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 3-1 使用RecyclerView优雅实现复杂布局-课程介绍 (06:46)
+									</li>
+								</a>
+								
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 3-2 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)
+									</li>
+								</a>
+								
+								<a href="/video/13038" > 
+									<li class="chapter-sub-li">
+										<i class="icon-video">▶</i> 3-3 包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放 (06:46)
+									</li>
+								</a>
+								
+							</ul>
+						</div>
+						
+					</div>
+				<!-- 课程章节 - end -->		
+			</div>
+			
+			<!-- 教师信息&推荐课程 - start -->		
+			<div class="main-course-right"  >
+				
+				<div class="lecturer-item" style="width: 100%;">
+					<img class="lecturer-uimg" src="../res/i/header.jpg">
+					<span class="lecturer-name">王阳明</span>
+					<span class="lecturer-title">中华大学</span>
+					<span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
+					<a href="javascript:void(0)" ><span class="follow-btn">关注+</span></a>
+				</div>
+				
+				<h4 class="mt-50">推荐课程</h4>
+				<a href="" class="mb-5"><li class="ellipsis oc-color-hover">组件化开发完整AndroidApp 开发同时封装出通用</li></a>
+				<a href="" class="mb-5"><li class="ellipsis oc-color-hover">组件化开发完整AndroidApp 开发同时封装出通用</li></a>
+				<a href="" class="mb-5"><li class="ellipsis oc-color-hover">组件化开发完整AndroidApp 开发同时封装出通用</li></a>
+			</div>
+			<!-- 教师信息&推荐课程 - end -->		
+			
+		</div>
+		
+		<!-- 页脚-start -->
+		<div class="f-footer">
+			<div class="f-footer-box clearfix">
+				<div class="footer-link">
+					<a href="javascript:void(0);"  target="_blank" title="企业合作">企业合作</a> 
+					<a href="javascript:void(0);" target="_blank" title="联系我们">联系我们</a> 
+					<a href="javascript:void(0);" target="_blank" title="常见问题">常见问题</a> 
+					<a href="javascript:void(0);" target="_blank" title="意见反馈">意见反馈</a>
+					<a href="javascript:void(0);" target="_blank" title="友情链接">友情链接</a>
+				</div>
+				<div class="footer-copyright">
+					<span>©&nbsp;2017&nbsp; 备案 </span>
+				</div>
+			</div>
+		</div>
+		<!-- 页脚-end-->
+		
+		<script type="text/javascript">
+			$(function(){
+				$('.chapter li').hover(function(){
+					$(this).find('.icon-video').css('color','#FFF');
+				},function(){
+					$(this).find('.icon-video').css('color','#777');
+				});
+				
+				$('.js-open').click(function(){
+					var display = $(this).parent().find('ul').css('display');
+					if(display == 'none'){
+						$(this).parent().find('ul').css('display','block');
+						$(this).find('.drop-down').html('▼');
+					}else{
+						$(this).parent().find('ul').css('display','none');
+						$(this).find('.drop-down').html('▲');
+					}
+				});
+			});	
+		</script>
+		
+	</body>
+	
+</html>

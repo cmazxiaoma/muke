@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>网校在线学习平台</title>
+		<#include "../common/res.html">
+	</head>
+
+	<body>
+		<#include "../common/header.html">
+		<div class="f-main">
+			<div class="types-block clearfix" style="text-align: center;">
+				<h3 class="types-title">登录</h3>
+				<form class="oc-form" id="infoForm" method="POST" style="text-align: center;border: 1px solid #CCC;width: 600px;margin:0 auto;padding:20px;" method="post" action="${s.base}/auth/doLogin.html">
+						<li>请用：cmazxiaoma/123456 登录</li>
+						<li><label>用户名</label> 
+							<input name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
+						</li>
+						<li><label>密码</label> 
+							<input id="password" name="password" type="password" class="input-text" placeholder="请输入密码" autocomplete="off" />
+						</li>
+						<li><label>验证码</label> 
+						<input id="identiryCode" name="identiryCode" maxlength="6" class="input-text" type="text" style="width: 150px;" placeholder="请输入验证码"/>
+						<a class="vali-base"><img  onclick="reloadIndityImg();" id="indeityImg"  src="${s.base}/tools/identiry/code.html" style="width:80px;height:40px;float:left;margin-left:10px;"/></a>
+						</li>
+						<li>
+							<label style="background-color:#EEEEEE"></label> 
+                           	<input type="checkbox" value="1" id="checkbox1" name="rememberMe" style="float: left;vertical-align:middle;">
+                           	<span class="text"  style="float: left;margin-left:5px;margin-top:-10px;">下次自动登录</span>
+                      	</li>
+						
+						<#if errcode ?? && errcode == 1>
+						<li style="text-align: left;">
+							<span style="color:red;">请输入正确的验证码</span>
+						</li>
+						</#if>
+						<#if errcode ?? && errcode == 2>
+						<li style="text-align: left;">
+							<span style="color:red;">用户名密码错</span>
+						</li>
+						</#if>
+						<li class="clearfix" style="margin-top: 20px;">
+							<input type="submit" value="登录"  style="margin-right:20px;width:100px;">
+						</li>
+					</form>
+			</div>
+		</div>
+		<#include "../common/footer.html">
+	</body>
+	<script type="text/javascript">
+	//注册重新获取验证码
+		function reloadIndityImg(){
+			document.getElementById("indeityImg").src = CONETXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
+		}
+	</script>
+</html>

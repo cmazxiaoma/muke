@@ -1,6 +1,6 @@
 package com.online.college.common.orm;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class BaseEntity extends LongModel {
 
@@ -10,7 +10,7 @@ public class BaseEntity extends LongModel {
 
     private String createUser;
 
-    private String updateTime;
+    private Date updateTime;
 
     private String updateUser;
 
@@ -32,14 +32,6 @@ public class BaseEntity extends LongModel {
         this.createUser = createUser;
     }
 
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public String getUpdateUser() {
         return updateUser;
     }
@@ -55,4 +47,13 @@ public class BaseEntity extends LongModel {
     public void setDel(Integer del) {
         this.del = del;
     }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
 }

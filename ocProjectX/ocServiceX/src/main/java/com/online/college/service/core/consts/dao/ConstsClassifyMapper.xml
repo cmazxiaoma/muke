@@ -83,7 +83,7 @@
         #{updateUser, jdbcType=VARCHAR}, #{del, jdbcType=TINYINT}, #{id, jdbcType=VARCHAR} ) 
     </insert>
     
-    <insert id="createSelectivity" parameterType="com.online.college.servie.core.consts.domain.ConstsClassify" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
+    <insert id="createSelectivity" parameterType="com.online.college.service.core.consts.domain.ConstsClassify" flushCache="true"  useGeneratedKeys="true" keyProperty="id"  >
         INSERT INTO t_consts_classify
         <trim prefix="(" suffix=")"  suffixOverrides="," >
             <if test="name != null ">

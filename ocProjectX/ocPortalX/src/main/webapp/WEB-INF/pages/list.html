@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>在线网校学习平台</title>
+		<#include "./common/res.html">
+	</head>
+
+	<body>
+		<#include "./common/header.html">
+
+		<div class="f-main clearfix">
+			
+			<div class="course-nav-row clearfix">
+				<span class="hd">方向：</span>
+				<ul class="course-nav">
+					<li class="course-nav-item <#if curCode?? && curCode=='-1'>cur-course-nav</#if> ">
+						<a href="javascript:void(0)" onClick="_queryPage(1,'-1')">全部</a>
+					</li>
+					<#if classifys??>
+					<#list classifys as item>
+					<li class="course-nav-item <#if curCode?? && curCode == item.code>cur-course-nav</#if>">
+						<a href="javascript:void(0)" onClick="_queryPage(1,'${item.code!}')">${item.name!}</a>
+					</li>
+					</#list>
+					</#if>
+				</ul>
+			</div>
+			
+			<div class="course-nav-row clearfix">
+				<span class="hd">分类：</span>
+				<ul class="course-nav">
+					<li class="course-nav-item <#if curSubCode?? && curSubCode=='-2'>cur-course-nav</#if>">
+						<a href="javascript:void(0)" onClick="_queryPage(1,'-2')">全部</a>
+					</li>
+					<#if subClassifys??>
+					<#list subClassifys as item>
+					<li class="course-nav-item <#if curSubCode?? && curSubCode == item.code>cur-course-nav</#if>">
+						<a href="javascript:void(0)" onClick="_queryPage(1,'${item.code!}')">${item.name!}</a>
+					</li>
+					</#list>
+					</#if>
+				</ul>
+			</div>
+						
+			<div class="types-block clearfix" style="padding:0px;">
+				<h3 style="margin-bottom: 20px;">	
+					<span class="types-title" style="margin-right:40px;">课程列表</span>
+					<a href="javascript:void(0)" style="display: inline-block;margin-right:20px;" onclick="_queryPage(1,undefined,'last')">
+					<span <#if sort?? && sort=='last'>class="color-oc"</#if> >最新</span>
+					</a>
+					<a href="javascript:void(0)" style="display: inline-block;" onclick="_queryPage(1,undefined,'pop')">
+					<span <#if sort?? && sort=='pop'>class="color-oc"</#if> >最热</span>
+					</a>
+				</h3>
+				<div class="types-content clearfix" style="margin-bottom: 20px;">
+					<#if (page.items)??>
+					<div>
+					<#list page.items as item>
+					<#assign n = item_index + 1 />
+					<a href="${s.base}/course/learn/${item.id}.html" target="_black">
+						<div class="course-card-container"  <#if n %5 == 0>style="margin-right: 0px;" </#if> >
+							<#if n %5 == 0>
+							<div class="course-card-top green-bg">
+							<#elseif n %4 == 0>
+							<div class="course-card-top pink-bg">
+							<#elseif n %3 == 0>
+							<div class="course-card-top purple-bg">
+							<#elseif n %2 == 0>
+							<div class="course-card-top gray-bg">
+							<#else>
+							<div class="course-card-top brown-bg">
+							</#if>
+								<span>${item.subClassifyName!}</span>
+							</div>
+
+							<div class="course-card-content">
+								<h3 class="course-card-name" title="${item.name!}">${item.name!}</h3>
+								<p  class="course-card-brief" title="${item.brief!}">${item.brief!}</p>
+								<div class="course-card-bottom">
+									<#if item.free == 1>
+									<div class="course-card-info">
+									<#if item.level == 1>
+									初级
+									<#elseif item.level == 2>
+									中级
+									<#else>
+									高级
+									</#if>
+									<span>·</span>${item.studyCount!}人在学
+									</div>
+									<#else>
+									<div class="course-card-info">${item.studyCount!}人在学</div>
+									<div class="course-card-price">￥${item.price!}</div>
+									</#if>
+								</div>
+							</div>
+						</div>
+					</a>
+					</#list>
+					</div>
+					<#include "./common/tailPage.html">
+					</#if>
+				</div>
+			</div>
+		</div>
+		
+		<#include "./common/footer.html">
+		
+		<script type="text/javascript">
+			var _code = '${curCode}';
+			var _subCode = '${curSubCode}';
+			var _sort = '${sort!}';
+			
+			function _queryPage(pageNum,code,sort){
+				var params = '?pageNum='+pageNum;
+				//分类，参数没有就用页面缓存 
+				if(code == undefined){//来自于分页按钮
+					code = _code;
+					if(_subCode != '-2'){
+						code = _subCode; //优先使用 subCode 
+					}
+				}
+				if(code == '-2'){//点击分类的全部
+					code = _code;
+				}
+				if(code != '-1' && code != ''){
+					params += '&c='+code;
+				}
+				
+				//排序，函数参数没有就用页面缓存 
+				if(sort == undefined && _sort != ''){
+					sort = _sort;
+				}
+				if(sort != undefined){
+					params += '&sort='+sort;
+				}
+				window.location.href='${s.base}/course/list.html'+params;
+			}
+		</script>
+		
+	</body>
+	
+</html>

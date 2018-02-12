@@ -23,7 +23,7 @@ import com.online.college.service.core.course.service.ICourseService;
 * @version V1.0
  */
 @Service
-public class CourseServiceImpl implements ICourseService{
+public class CourseServiceImpl implements ICourseService {
 
     @Autowired
     private CourseDao entityDao;
