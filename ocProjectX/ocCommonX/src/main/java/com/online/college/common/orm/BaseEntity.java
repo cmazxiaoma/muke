@@ -2,7 +2,7 @@ package com.online.college.common.orm;
 
 import java.util.Date;
 
-public class BaseEntity extends LongModel {
+public class BaseEntity extends BaseLongModel {
 
     private static final long serialVersionUID = 2227850114499003693L;
 
