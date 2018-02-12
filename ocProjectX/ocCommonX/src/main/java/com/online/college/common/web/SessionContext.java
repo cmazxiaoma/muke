@@ -130,7 +130,7 @@ public class SessionContext {
      * @param key
      * @param value
      */
-    public static void setAttribute(HttpServletRequest request, String key, String value) {
+    public static void setAttribute(HttpServletRequest request, String key, Object value) {
         request.getSession().setAttribute(key, value);
     }
 

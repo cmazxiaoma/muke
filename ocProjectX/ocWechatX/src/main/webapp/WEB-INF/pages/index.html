@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "./common/res.html">
+</head>
+<body>
+	
+	<#include "./common/header.html">
+	
+	<section class="course-list">
+		
+		<ul type="none">
+			<#if (page.items)??>
+			<#list page.items as item>
+			<li class="bg-white relative">
+				<div class="list-box">
+					<div class="list-left">
+						<a href="${s.base}/course/read.html?id=${item.id}" class="course-img">
+						<#if (item.picture)?? && item.picture != ''>
+						<img src="${item.picture!}" >
+						<#else>
+						<img src="${s.base}/res/i/course.png"  >
+						</#if>
+						</a>
+					</div>
+					<div class="list-right">
+						<div class="name-box relative">
+							<div class="course-title ">${(item.name)!}</div>
+						</div>
+						<div class="course-info">
+							<span class="course-info-info1">
+								<#if item.free == 1>免费<#else>
+								<span style="color:red">￥${item.price!}</span>
+								</#if>
+							</span>
+							<span class="course-info-info2">${item.classifyName!} · ${item.subClassifyName!}</span>
+							<span class="course-info-info1">${item.time!}</span>
+							<a href="${s.base}/course/read.html?id=${item.id}">
+							<span class="course-info-info2" style="color:#0089D2">查看详情</span>
+							</a>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="line"></div>
+			</li>
+			</#list>
+			</#if>
+		</ul>
+	</section>
+	
+</body>
+</html>

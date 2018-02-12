@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans     xmlns="http://www.springframework.org/schema/beans" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        <!-- memcache客户端xmemcache配置 -->
+        <bean name="memcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+            <property name="servers" value="${memcached.servers}" />
+            <property name="weights" value="${memcached.weights}" />
+            <property name="connectionPoolSize" value="${memcached.connectionPoolSize}" />
+            <property name="failureMode" value="${memcached.failureMode}" />
+            <property name="commandFactory">
+                <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
+            </property>
+            <property name="sessionLocator">
+                <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+            </property>
+            <property name="transcoder">
+                <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+            </property>
+        </bean>
+            
+</beans>

@@ -1,0 +1,14 @@
+<#if (page.items)??>
+<#list page.items as item>
+<div class="comment clearfix">
+	<div class="comment-main">
+		<div class="user-name">${item.username!}</div>
+		<div class="comment-content">${item.content!}</div>
+		<#if item.createTime??>
+		<div class="comment-footer">时间：${item.createTime?string('yyyy-MM-dd')}</div>
+		</#if>
+	</div>
+</div>
+</#list>	
+<#include "./common/tailPage.html">
+</#if>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "./common/res.html">
+</head>
+<body>
+	
+	<#include "./common/header.html">
+	
+	<section class="course-list">
+		<!-- 用户基本信息 -->
+		<ul type="none">
+			<li class="bg-white relative">
+				<div class="list-box">
+					<div class="list-left">
+						<a class="user-header" >
+						<#if (curUser.header)?? && curUser.header != ''>
+						<img src="${(curUser.header)!}" >
+						<#else>
+						<img src="${s.base}/res/i/header.jpg"  >
+						</#if>
+						</a>
+					</div>
+					<div class="list-right">
+						<div class="name-box relative">
+							<span class="course-title ellipsis">${(curUser.username)!}</span>
+						</div>
+						<div class="course-info">
+							<span class="course-info-info1">${(curUser.nickname)!}</span>
+							<span class="course-info-info2">${(curUser.realName)!}</span>
+							<span class="course-info-info1">
+								<#if (curUser.gender)?? && curUser.gender == 0>
+								女
+								<#else>
+								男
+								</#if> 
+							</span>
+							<span class="course-info-info2">${(curUser.province)!}-${(curUser.city)!}</span>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</li>
+		</ul>
+		
+		<!-- 学习记录 -->
+		<div class="chapter">
+			<h3>
+				<strong>学习记录</strong>
+			</h3>
+			<#if (page.items)??>
+				<#list page.items as item>
+				<div class="study-record  clearfix">
+					<a href="${s.base}/course/read.html?id=${item.courseId!}">
+						<div class="course-name">
+						${item.courseName!}
+						</div>
+					</a>
+					<div class="section-name">
+						<a href="${s.base}/course/video.html?id=${(item.sectionId)!}">${item.sectionName!}</a>
+					</div>
+					<div class="study-footer">时间：
+					<#if item.createTime??>
+					${item.createTime?string('yyyy-MM-dd')}
+					</#if>
+					</div>
+				</div>
+				</#list>
+				<#include "./common/tailPage.html">
+			</#if>
+		</div>
+	</section>
+</body>
+</html>

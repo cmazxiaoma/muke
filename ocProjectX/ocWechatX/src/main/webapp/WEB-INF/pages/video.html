@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "./common/res.html">
+</head>
+<body>
+	
+	<#include "./common/header.html">
+	
+	<section class="course-list">
+		
+		<div class="video-box">
+			<div class="course-title ellipsis" style="width:300px;margin-bottom:5px;">${(courseSection.name)!}</div>
+			<div class="course-video">
+				<video src="${s.base}/res/demo.mp4" width="100%" height="100%" controls preload></video>
+			</div>
+		</div>
+		
+		<!-- 加载评论 -->
+		<div id="commentQA" class="chapter">
+		</div>
+		
+	</section>
+	
+	<script type="text/javascript">
+		$(function(){
+			//默认加载评论
+			_queryPage(1);
+		});	
+		
+		function _queryPage(pageNum){
+			if(pageNum == undefined)
+				pageNum = 1;
+			var courseId = ${(courseSection.courseId)!};//课程id
+			var url = '${s.base}/course/comment.html';
+			$("#commentQA").load(
+						url,
+						{
+							'courseId':courseId,
+							'pageNum':pageNum
+						},
+						function(){}
+					);
+		};
+	</script>
+	
+</body>
+</html>

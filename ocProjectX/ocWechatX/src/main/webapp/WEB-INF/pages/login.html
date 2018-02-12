@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "./common/res.html">
+</head>
+<body>
+	
+	<#include "./common/header.html">
+	
+	<section class="course-list">
+		<h3 class="types-title">登录</h3>
+		<form class="oc-form" id="infoForm" action="${s.base}/auth/doLogin.html" method="POST" style="text-align: center;border: 1px solid #CCC;margin:0 auto;padding:20px;" >
+			<li><label>用户名</label> 
+				<input name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
+			</li>
+			<li><label>密码</label> 
+				<input id="password" name="password" type="password" class="input-text" placeholder="请输入密码" autocomplete="off" />
+			</li>
+			<#if errcode ?? && errcode == 2>
+			<li style="text-align: left;">
+				<span style="color:red;">用户名密码错</span>
+			</li>
+			</#if>
+			<li class="clearfix" style="margin-top:20px;">
+				<input type="submit" value="登录"  style="width:100px;">
+			</li>
+		</form>
+		
+	</section>
+	
+</body>
+</html>
+

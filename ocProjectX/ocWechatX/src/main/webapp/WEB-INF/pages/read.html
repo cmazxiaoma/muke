@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "./common/res.html">
+</head>
+<body>
+	
+	<#include "./common/header.html">
+	
+	<section class="course-list">
+		
+		<!-- 课程基本信息-start -->
+		<ul type="none">
+			<li class="bg-white relative">
+				<div class="list-box">
+					<div class="list-left">
+						<a class="course-img">
+						<#if (course.picture)?? && course.picture != ''>
+						<img src="${course.picture!}" >
+						<#else>
+						<img src="${s.base}/res/i/course.png"  >
+						</#if>
+						</a>
+					</div>
+					<div class="list-right">
+						<div class="name-box relative">
+							<span class="course-title ellipsis">${course.name!}</span>
+						</div>
+						<div class="course-info">
+							<span class="course-info-info1">
+								<#if course.free?? && course.free == 0>
+								<span style="color:red">￥${course.price!}</span>
+								<#else>
+								免费
+								</#if>
+							</span>
+							<span class="course-info-info2">
+								${course.classifyName!} · ${course.subClassifyName!}
+							</span>
+							<span class="course-info-info1">${course.time!}</span>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</li>
+		</ul>
+		<!-- 课程基本信息-end -->
+		
+		<!-- 课程章节信息-start -->
+		<div class="chapter">
+			<#if chaptSections??>
+			<#list chaptSections as item>
+			<h3>
+				<strong><div class="icon-chapter">=</div>${item.name!}(${item.time!})</strong>
+			</h3>
+			
+			<!-- 课程节信息-start -->
+			<#if item.sections??>
+			<ul class="chapter-sub" style="border:none;">
+				<#list item.sections as section>
+				<a href="${s.base}/course/video.html?id=${section.id!}" > 
+					<li class="chapter-sub-li">
+						<span class="title">
+							<span style="margin-right:2px;">▶</span>
+							${section.name!} (${section.time!})
+						</span>
+					</li>
+				</a>
+				</#list>
+			</ul>
+			</#if>
+			<!-- 课程节信息-end -->
+			
+			</#list>
+			</#if>
+		</div>
+		<!-- 课程章节信息-end -->
+		
+	</section>
+	
+</body>
+</html>

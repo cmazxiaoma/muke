@@ -1,0 +1,15 @@
+<#if (page.pageTotalCount)?? && page.pageTotalCount gt 1>
+<div class="page-box clearfix">
+	<div class="page clearfix">
+		<div style="float:left;">
+			<#if !page.firstPage>
+				<a class="page-next" href="javascript:void(0);" onclick="_queryPage(${page.pageNum-1})">上一页</a>
+			</#if>
+			
+			<#if !page.lastPage>
+			<a class="page-next" href="javascript:void(0);"  onclick="_queryPage(${page.pageNum+1})">下一页</a> 
+			</#if> 
+		</div>
+	</div>
+</div>
+</#if>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>在线网校</title>
+    <#include "../common/res.html">
+</head>
+<body>
+	
+	<#include "../common/header.html">
+	
+	<section class="course-list">
+		
+		<ul type="none">
+			<li class="bg-white relative">
+				<div class="list-box">
+					<div class="list-left">
+						<a class="user-header" >
+						<#if (curUser.headimgurl)?? && curUser.headimgurl != ''>
+						<img src="${(curUser.headimgurl)!}" >
+						</#if>
+						</a>
+					</div>
+					<div class="list-right">
+						<div class="name-box relative">
+							昵称：${(curUser.nicknameStr)!}
+						</div>
+						<div class="name-box relative">
+							openId：${(curUser.openId)!}
+						</div>
+						<div class="name-box relative" style="margin-top:10px;">
+							性别：
+							<#if (curUser.gender)?? && curUser.gender == 0>
+							女
+							<#else>
+							男
+							</#if> 
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</li>
+		</ul>
+	</section>
+</body>
+</html>
