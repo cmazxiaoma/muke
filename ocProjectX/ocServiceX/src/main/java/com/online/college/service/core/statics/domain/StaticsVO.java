@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  *
-* @Description: 报表分析VO
-* @author cmazxiaoma
-* @date 2018-02-08 16:10
-* @version V1.0
+ * @Description: 报表分析VO
+ * @author cmazxiaoma
+ * @date 2018-02-08 16:10
+ * @version V1.0
  */
 public class StaticsVO {
 

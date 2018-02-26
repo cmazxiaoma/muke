@@ -7,10 +7,10 @@ import java.util.Date;
 
 /**
  *
-* @Description: 日期工具类
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: 日期工具类
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class DateUtil {
 
@@ -50,6 +50,7 @@ public class DateUtil {
 
     /**
      * 字符串获取日期
+     *
      * @throws ParseException
      */
     public Date getTextDate(String text) throws ParseException {
@@ -65,6 +66,7 @@ public class DateUtil {
 
     /**
      * 字符串获取日期
+     *
      * @throws ParseException
      */
     public static Date getTextDate(String dateText, String format) throws ParseException {
@@ -73,6 +75,7 @@ public class DateUtil {
 
     /**
      * 根据日期，返回其星期数，周一为1，周日为7
+     *
      * @param date
      * @return
      */
@@ -105,7 +108,7 @@ public class DateUtil {
         int dayOfMonthBirth = calendar.get(Calendar.DAY_OF_MONTH);
         int age = yearNow - yearBirth;
 
-        if (monthNow < monthBirth ||(monthNow == monthBirth && dayOfMonthNow < dayOfMonthBirth)) {
+        if (monthNow < monthBirth || (monthNow == monthBirth && dayOfMonthNow < dayOfMonthBirth)) {
             age--;
         }
         return age;

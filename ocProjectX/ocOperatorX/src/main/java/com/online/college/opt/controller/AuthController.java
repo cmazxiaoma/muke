@@ -20,10 +20,10 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-11 20:41
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-11 20:41
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/auth")
@@ -34,6 +34,7 @@ public class AuthController {
 
     /**
      * 登录界面
+     *
      * @return
      */
     @RequestMapping(value = "/login")
@@ -46,6 +47,7 @@ public class AuthController {
 
     /**
      * 实现登录
+     *
      * @param user
      * @param identiryCode
      * @param request
@@ -57,20 +59,21 @@ public class AuthController {
             return new ModelAndView("redirect:/index.html");
         }
 
-        //验证码判断
-        if (identiryCode!=null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
+        // 验证码判断
+        if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             ModelAndView mv = new ModelAndView("auth/login");
             mv.addObject("errcode", 1);
             return mv;
         }
 
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),EncryptUtil.encodedByMD5(user.getPassword()));
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),
+                EncryptUtil.encodedByMD5(user.getPassword()));
 
         try {
             Subject currentUser = SecurityUtils.getSubject();
-            currentUser.login(token);//shiro实现登录
+            currentUser.login(token);// shiro实现登录
             return new ModelAndView("redirect:/index.html");
-        } catch (AuthenticationException e) { //登录失败
+        } catch (AuthenticationException e) { // 登录失败
             ModelAndView mv = new ModelAndView("auth/login");
             mv.addObject("errcode", 2);
             return mv;
@@ -81,7 +84,7 @@ public class AuthController {
      * 注册页面
      */
     @RequestMapping(value = "/register")
-    public  ModelAndView register(){
+    public ModelAndView register() {
         if (SessionContext.isLogin()) {
             return new ModelAndView("redirect:/index.html");
         }
@@ -94,7 +97,7 @@ public class AuthController {
     @RequestMapping(value = "/doRegister")
     @ResponseBody
     public String doRegister(AuthUser authUser, String identiryCode, HttpServletRequest request) {
-        //验证码判断
+        // 验证码判断
         if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             return JsonView.render(2);
         }

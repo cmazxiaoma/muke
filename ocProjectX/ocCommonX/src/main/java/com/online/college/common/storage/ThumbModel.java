@@ -17,7 +17,6 @@ public enum ThumbModel {
     THUMB_256("imageView2/2/w/256/h/256"),
     THUMB_512("imageView2/2/w/512/h/512");
 
-
     private String value;
 
     private ThumbModel(String value) {

@@ -2,10 +2,10 @@ package com.online.college.common.web.shiro.freemarker;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-07 19:51
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-07 19:51
+ * @version V1.0
  */
 public class HasRoleTag extends RoleTag {
 

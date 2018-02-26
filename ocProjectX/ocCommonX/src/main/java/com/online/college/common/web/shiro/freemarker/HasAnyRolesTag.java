@@ -4,10 +4,10 @@ import org.apache.shiro.subject.Subject;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-07 19:55
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-07 19:55
+ * @version V1.0
  */
 public class HasAnyRolesTag extends RoleTag {
 

@@ -8,10 +8,10 @@ import com.online.college.common.web.SessionContext;
 
 /**
  *
-* @Description: 内容管理首页
-* @author cmazxiaoma
-* @date 2018-02-11 21:12
-* @version V1.0
+ * @Description: 内容管理首页
+ * @author cmazxiaoma
+ * @date 2018-02-11 21:12
+ * @version V1.0
  */
 @Controller
 @RequestMapping()
@@ -19,6 +19,7 @@ public class CmsController {
 
     /**
      * 首页
+     *
      * @return
      */
     @RequestMapping("/index")

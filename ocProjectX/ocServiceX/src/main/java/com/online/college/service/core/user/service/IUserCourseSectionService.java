@@ -8,10 +8,10 @@ import com.online.college.service.core.user.domain.UserCourseSectionDto;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 18:23
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 18:23
+ * @version V1.0
  */
 public interface IUserCourseSectionService {
 
@@ -21,8 +21,7 @@ public interface IUserCourseSectionService {
 
     public UserCourseSection queryLatest(UserCourseSection queryEntity);
 
-    public TailPage<UserCourseSectionDto> queryPage(UserCourseSection queryEntity,
-            TailPage<UserCourseSectionDto> page);
+    public TailPage<UserCourseSectionDto> queryPage(UserCourseSection queryEntity, TailPage<UserCourseSectionDto> page);
 
     public void createSelectivity(UserCourseSection entity);
 

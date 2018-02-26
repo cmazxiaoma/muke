@@ -14,10 +14,10 @@ import com.online.college.service.core.statics.service.IStaticsService;
 
 /**
  *
-* @Description: 统计分析
-* @author cmazxiaoma
-* @date 2018-02-08 16:25
-* @version V1.0
+ * @Description: 统计分析
+ * @author cmazxiaoma
+ * @date 2018-02-08 16:25
+ * @version V1.0
  */
 @Service
 public class StaticsServiceImpl implements IStaticsService {

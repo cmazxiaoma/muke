@@ -16,10 +16,10 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 
 /**
  *
-* @Description: 用户关注
-* @author cmazxiaoma
-* @date 2018-02-11 09:37
-* @version V1.0
+ * @Description: 用户关注
+ * @author cmazxiaoma
+ * @date 2018-02-11 09:37
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/follow")
@@ -31,7 +31,7 @@ public class FollowerController {
     @RequestMapping(value = "/doFollow")
     @ResponseBody
     public String doFollow(Long followId) {
-        //获取当前用户
+        // 获取当前用户
         Long curUserId = SessionContext.getUserId();
         UserFollows userFollows = new UserFollows();
         userFollows.setUserId(curUserId);
@@ -57,7 +57,7 @@ public class FollowerController {
     @RequestMapping(value = "/isFollow")
     @ResponseBody
     public String isFollow(Long followId) {
-        //获取当前用户
+        // 获取当前用户
         Long curUserId = SessionContext.getUserId();
         UserFollows userFollows = new UserFollows();
         userFollows.setUserId(curUserId);
@@ -65,7 +65,7 @@ public class FollowerController {
 
         List<UserFollows> list = userFollowsService.queryAll(userFollows);
 
-        //是否已经关注
+        // 是否已经关注
         if (CollectionUtils.isNotEmpty(list)) {
             return new JsonView(1).toString();
         } else {

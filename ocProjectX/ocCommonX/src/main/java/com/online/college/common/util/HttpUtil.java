@@ -9,15 +9,16 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  *
-* @Description: Http工具类
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: Http工具类
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 获得网站域名, 比如cmazxiaoma.com
+     *
      * @param request
      * @return
      */
@@ -25,9 +26,9 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
         return request.getServerName();
     }
 
-
     /**
      * 获取协议+域名, 比如http://cmazxiaoma.com
+     *
      * @param request
      * @return
      */
@@ -37,16 +38,18 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 获得类似 http://cmazxiaoma.com:8080/ocPortal的url
+     *
      * @param request
      * @return
      */
     public static String getContextHttpUri(HttpServletRequest request) {
-        return request.getScheme() + "://" + request.getServerName() + ":"
-                + request.getServerPort() + request.getContextPath();
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                + request.getContextPath();
     }
 
     /**
      * 获取应用的绝对路径
+     *
      * @param request
      * @return
      */
@@ -56,6 +59,7 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 获取带根路径的完整url
+     *
      * @param request
      * @return
      */
@@ -65,12 +69,13 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
         if (request.getServerPort() != 80) {
             port = ":" + request.getServerPort();
         }
-        return request.getScheme() + "://" + request.getServerName() +
-                port + request.getContextPath() + request.getServletPath();
+        return request.getScheme() + "://" + request.getServerName() + port + request.getContextPath()
+                + request.getServletPath();
     }
 
     /**
      * 获取不带根路径的完整url
+     *
      * @param request
      * @return
      */
@@ -80,12 +85,12 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
         if (request.getServerPort() != 80) {
             port = ":" + request.getServerPort();
         }
-        return request.getScheme() + "://" + request.getServerName() +
-                port + request.getServletPath();
+        return request.getScheme() + "://" + request.getServerName() + port + request.getServletPath();
     }
 
     /**
      * 判断该请求是否为Ajax请求
+     *
      * @param request
      * @return
      */
@@ -96,11 +101,13 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 重定向本项目的url
+     *
      * @param httpServletRequest
      * @param httpServletResponse
      * @param url
      */
-    public static void redirectUrl(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,String url){
+    public static void redirectUrl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+            String url) {
         try {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + url);
         } catch (IOException e) {
@@ -110,11 +117,13 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 重定向到http://的url
+     *
      * @param httpServletRequest
      * @param httpServletResponse
      * @param url
      */
-    public static void redirectHttpUrl(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,String url){
+    public static void redirectHttpUrl(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+            String url) {
         try {
             httpServletResponse.sendRedirect(url);
         } catch (IOException e) {
@@ -124,13 +133,16 @@ public class HttpUtil extends org.springframework.web.util.WebUtils {
 
     /**
      * 获得ip地址
+     *
      * @param request
      * @return
      */
     public static String getIpAddr(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
-            if(ip.indexOf("::ffff:")!=-1) ip = ip.replace("::ffff:", "");
+            if (ip.indexOf("::ffff:") != -1) {
+                ip = ip.replace("::ffff:", "");
+            }
             int index = ip.indexOf(",");
             if (index != -1) {
                 return ip.substring(0, index);

@@ -2,6 +2,13 @@ package com.online.college.common.orm;
 
 import java.util.Date;
 
+/**
+ *
+* @Description: TODO
+* @author cmazxiaoma
+* @date 2018-02-26 13:40
+* @version V1.0
+ */
 public class BaseEntity extends BaseLongModel {
 
     private static final long serialVersionUID = 2227850114499003693L;

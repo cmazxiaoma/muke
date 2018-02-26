@@ -9,18 +9,18 @@ package com.online.college.wechat.wxapi.process;
  */
 public enum OAuthScope {
 
-	Base("snsapi_base"),//用户openid
-	Userinfo("userinfo");//用户信息
+    Base("snsapi_base"),//用户openid
+    Userinfo("snsapi_userinfo");//用户信息
 
-	private String name;
+    private String name;
 
-	private OAuthScope(String name) {
-	     this.name = name;
-	}
+    private OAuthScope(String name) {
+         this.name = name;
+    }
 
-	@Override
-	public String toString(){
-		return this.name;
-	}
+    @Override
+    public String toString(){
+        return this.name;
+    }
 
 }

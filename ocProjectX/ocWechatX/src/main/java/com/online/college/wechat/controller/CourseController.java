@@ -23,96 +23,103 @@ import com.online.college.service.core.user.service.IUserCourseSectionService;
 import com.online.college.wechat.business.IPortalBusiness;
 import com.online.college.wechat.vo.CourseSectionVO;
 
-
+/**
+ *
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-24 10:22
+ * @version V1.0
+ */
 @Controller
 @RequestMapping("/course")
 public class CourseController {
 
-	@Autowired
-	private ICourseService courseService;
+    @Autowired
+    private ICourseService courseService;
 
-	@Autowired
-	private IPortalBusiness portalBusiness;
+    @Autowired
+    private IPortalBusiness portalBusiness;
 
-	@Autowired
-	private ICourseCommentService courseCommentService;
+    @Autowired
+    private ICourseCommentService courseCommentService;
 
-	@Autowired
-	private ICourseSectionService courseSectionService;
+    @Autowired
+    private ICourseSectionService courseSectionService;
 
-	@Autowired
-	private IUserCourseSectionService userCourseSectionService;
+    @Autowired
+    private IUserCourseSectionService userCourseSectionService;
 
-	/**
-	 * 课程详情
-	 */
-	@RequestMapping("/read")
-	public ModelAndView read(Long id){
-		ModelAndView mv = new ModelAndView("read");
+    /**
+     * 课程详情
+     */
+    @RequestMapping("/read")
+    public ModelAndView read(Long id) {
+        ModelAndView mv = new ModelAndView("read");
 
-		//课程基本信息
-		Course course = courseService.getById(id);
-		if(null == course){
-			return new ModelAndView("error/404");
-		}
-		mv.addObject("course", course);
+        // 课程基本信息
+        Course course = courseService.getById(id);
+        if (null == course) {
+            return new ModelAndView("error/404");
+        }
+        mv.addObject("course", course);
 
-		//课程章节
-		List<CourseSectionVO> chaptSections = this.portalBusiness.queryCourseSection(id);
-		mv.addObject("chaptSections", chaptSections);
+        // 课程章节
+        List<CourseSectionVO> chaptSections = this.portalBusiness.queryCourseSection(id);
+        mv.addObject("chaptSections", chaptSections);
 
-		return mv;
-	}
+        return mv;
+    }
 
-	/**
-	 * 课程视频学习
-	 */
-	@RequestMapping("/video")
-	public ModelAndView video(HttpServletRequest request, Long id){
-		ModelAndView mv = new ModelAndView("video");
+    /**
+     * 课程视频学习
+     */
+    @RequestMapping("/video")
+    public ModelAndView video(HttpServletRequest request, Long id) {
+        ModelAndView mv = new ModelAndView("video");
 
-		//课程基本信息
-		CourseSection courseSection = courseSectionService.getById(id);
-		if(null == courseSection)
-			return new ModelAndView("error/404");
-		mv.addObject("courseSection", courseSection);
+        // 课程基本信息
+        CourseSection courseSection = courseSectionService.getById(id);
+        if (null == courseSection) {
+            return new ModelAndView("error/404");
+        }
 
-		//学习记录
-		Long userId = SessionContext.getWxUserId(request);//当前登录用户id
-		if(null != userId){
-			//获取的学习记录
-			UserCourseSection userCourseSection = new UserCourseSection();
-			userCourseSection.setUserId(userId);
-			userCourseSection.setCourseId(courseSection.getCourseId());
-			userCourseSection.setSectionId(courseSection.getId());
-			UserCourseSection result = userCourseSectionService.queryLatest(userCourseSection);
+        mv.addObject("courseSection", courseSection);
 
-			//如果没有学习过这节课，添加学习记录
-			if(null == result){
-				userCourseSection.setCreateTime(new Date());
-				userCourseSection.setCreateUser(SessionContext.getWxUsername(request));
-				userCourseSection.setUpdateTime(new Date());
-				userCourseSection.setUpdateUser(SessionContext.getWxUsername(request));
+        // 学习记录
+        Long userId = SessionContext.getWxUserId(request);// 当前登录用户id
+        if (null != userId) {
+            // 获取的学习记录
+            UserCourseSection userCourseSection = new UserCourseSection();
+            userCourseSection.setUserId(userId);
+            userCourseSection.setCourseId(courseSection.getCourseId());
+            userCourseSection.setSectionId(courseSection.getId());
+            UserCourseSection result = userCourseSectionService.queryLatest(userCourseSection);
 
-				userCourseSectionService.createSelectivity(userCourseSection);
-			}else{
-				result.setUpdateTime(new Date());
-				userCourseSectionService.update(result);
-			}
-		}
-		return mv;
-	}
+            // 如果没有学习过这节课，添加学习记录
+            if (null == result) {
+                userCourseSection.setCreateTime(new Date());
+                userCourseSection.setCreateUser(SessionContext.getWxUsername(request));
+                userCourseSection.setUpdateTime(new Date());
+                userCourseSection.setUpdateUser(SessionContext.getWxUsername(request));
 
-	/**
-	 * 课程评论分页
-	 */
-	@RequestMapping("/comment")
-	public ModelAndView comment(CourseComment queryEntity , TailPage<CourseComment> page){
-		ModelAndView mv = new ModelAndView("comment");
-		TailPage<CourseComment> commentPage = this.courseCommentService.queryPage(queryEntity, page);
-		mv.addObject("page", commentPage);
-		return mv;
-	}
+                userCourseSectionService.createSelectivity(userCourseSection);
+            } else {
+                result.setUpdateTime(new Date());
+                userCourseSectionService.update(result);
+            }
+        }
+        return mv;
+    }
+
+    /**
+     * 课程评论分页
+     */
+    @RequestMapping("/comment")
+    public ModelAndView comment(CourseComment queryEntity, TailPage<CourseComment> page) {
+        ModelAndView mv = new ModelAndView("comment");
+        TailPage<CourseComment> commentPage = this.courseCommentService.queryPage(queryEntity, page);
+        mv.addObject("page", commentPage);
+        return mv;
+    }
 
 }
-

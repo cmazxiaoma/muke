@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-12 13:21
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-12 13:21
+ * @version V1.0
  */
 public class BaseLongModel implements Identifier<Long>, Serializable {
 

@@ -24,10 +24,10 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-11 19:33
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-11 19:33
+ * @version V1.0
  */
 @Service
 public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
@@ -35,15 +35,16 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
     @Autowired
     private ICourseSectionService courseSectionService;
 
+    private static Pattern pattern =  Pattern.compile("^([0-5][0-9]):([0-5][0-9])$");
+
     /**
      * 批量添加
      */
     @Override
     public void batchAdd(List<CourseSectionVO> courseSections) {
         if (CollectionUtils.isNotEmpty(courseSections)) {
-            //先获取最大的排序id
-            Integer maxSort = courseSectionService.getMaxSort(
-                    courseSections.get(0).getCourseId());
+            // 先获取最大的排序id
+            Integer maxSort = courseSectionService.getMaxSort(courseSections.get(0).getCourseId());
 
             for (int i = 0; i < courseSections.size(); i++) {
                 CourseSectionVO tmpVO = courseSections.get(i);
@@ -56,7 +57,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                 CourseSection courseSection = new CourseSection();
                 courseSection.setCourseId(tmpVO.getCourseId());
                 courseSection.setName(tmpVO.getName());
-                //大章的parentId默认为0
+                // 大章的parentId默认为0
                 courseSection.setParentId(0L);
                 courseSection.setSort(maxSort);
                 courseSection.setOnsale(CourseEnum.ONSALE.value());
@@ -65,7 +66,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                 courseSection.setCreateUser(SessionContext.getUsername());
                 courseSection.setUpdateUser(SessionContext.getUsername());
 
-                //创建大章
+                // 创建大章
                 courseSectionService.createSelectivity(courseSection);
 
                 List<CourseSection> subCourseSections = tmpVO.getSections();
@@ -85,10 +86,8 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                         courseSectionTmp.setUpdateUser(SessionContext.getUsername());
                         courseSectionTmp.setOnsale(CourseEnum.ONSALE.value());
 
-                        Pattern p = Pattern.compile("^([0-5][0-9]):([0-5][0-9])$");
-
-                        //正则表达式匹配不成功
-                        if (!p.matcher(courseSectionTmp.getTime()).find()) {
+                        // 正则表达式匹配不成功
+                        if (!pattern.matcher(courseSectionTmp.getTime()).find()) {
                             courseSectionTmp.setTime("00:00");
                         }
 
@@ -96,13 +95,13 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                             courseSectionTmp.setVideoUrl("");
                         }
 
-                        //计算上传 一个大章下所有的小节 总时间
+                        // 计算上传 一个大章下所有的小节 总时间
                         totalTime = appendCourseSectionTime(totalTime, courseSectionTmp.getTime());
                     }
-                    //创建小节
+                    // 创建小节
                     courseSectionService.createList(subCourseSections);
 
-                    //更新大章的时间
+                    // 更新大章的时间
                     courseSection.setTime(totalTime);
                     courseSectionService.updateSelectivity(courseSection);
                 }
@@ -114,10 +113,8 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
         String[] time1Arr = time1.split(":");
         String[] time2Arr = time2.split(":");
 
-        Integer second1 = Integer.parseInt(time1Arr[0]) * 60
-                + Integer.parseInt(time1Arr[1]);
-        Integer second2 = Integer.parseInt(time2Arr[0]) * 60
-                + Integer.parseInt(time2Arr[1]);
+        Integer second1 = Integer.parseInt(time1Arr[0]) * 60 + Integer.parseInt(time1Arr[1]);
+        Integer second2 = Integer.parseInt(time2Arr[0]) * 60 + Integer.parseInt(time2Arr[1]);
 
         Integer secondTotal = second1 + second2;
 
@@ -145,45 +142,45 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
         // TODO Auto-generated method stub
         try {
             Workbook wb = WorkbookFactory.create(is);
-            //得到总行数
+            // 得到总行数
             Sheet sheet = wb.getSheetAt(0);
-            //第一行(title移除掉)
+            // 第一行(title移除掉)
             sheet.removeRow(sheet.getRow(0));
 
             List<CourseSectionVO> courseSections = new ArrayList<CourseSectionVO>();
-            //遍历行
+            // 遍历行
             for (Row row : sheet) {
-                //章标题
+                // 章标题
                 Cell title = row.getCell(0, Row.CREATE_NULL_AS_BLANK);
 
-                //节标题
+                // 节标题
                 Cell subTitle = row.getCell(1, Row.CREATE_NULL_AS_BLANK);
 
-                //节视频url
+                // 节视频url
                 Cell url = row.getCell(2, Row.CREATE_NULL_AS_BLANK);
 
-                //节时长
+                // 节时长
                 Cell time = row.getCell(3, Row.CREATE_NULL_AS_BLANK);
 
-                //如果有数据, 新建一章
+                // 如果有数据, 新建一章
                 if (title.getCellType() == Cell.CELL_TYPE_STRING) {
 
                     if ("end".equals(title.getStringCellValue())) {
                         break;
                     }
-                    //大章
+                    // 大章
                     CourseSectionVO courseSectionVO = new CourseSectionVO();
                     courseSectionVO.setCourseId(courseId);
                     courseSectionVO.setName(title.getStringCellValue().trim());
 
-                    //小节
+                    // 小节
                     CourseSectionVO subCourseSectionVO = new CourseSectionVO();
                     subCourseSectionVO.setCourseId(courseId);
                     subCourseSectionVO.setName(subTitle.getStringCellValue().trim());
                     subCourseSectionVO.setVideoUrl(url.getStringCellValue().trim());
                     subCourseSectionVO.setTime(time.getStringCellValue().trim());
 
-                    //大章添加小节
+                    // 大章添加小节
                     courseSectionVO.getSections().add(subCourseSectionVO);
                     courseSections.add(courseSectionVO);
 
@@ -202,7 +199,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                 }
             }
 
-            //批量插入
+            // 批量插入
             if (courseSections.size() > 0) {
                 this.batchAdd(courseSections);
             }

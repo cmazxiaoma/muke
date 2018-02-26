@@ -7,10 +7,10 @@ import com.online.college.service.core.consts.domain.ConstsSiteCarousel;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 14:48
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 14:48
+ * @version V1.0
  */
 public interface ConstsSiteCarouselDao {
 

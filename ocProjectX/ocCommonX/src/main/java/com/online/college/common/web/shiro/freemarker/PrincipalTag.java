@@ -14,10 +14,10 @@ import freemarker.template.TemplateModelException;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-07 19:02
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-07 19:02
+ * @version V1.0
  */
 public class PrincipalTag extends SecureTag {
 
@@ -59,8 +59,7 @@ public class PrincipalTag extends SecureTag {
             try {
                 env.getOut().write(result);
             } catch (IOException ex) {
-                throw new TemplateException("Error writing [" + result + "] to Freemarker.",
-                        ex, env);
+                throw new TemplateException("Error writing [" + result + "] to Freemarker.", ex, env);
             }
         }
     }
@@ -82,26 +81,25 @@ public class PrincipalTag extends SecureTag {
 
     public String getPrincipalProperty(Object principal, String property) throws TemplateModelException {
         try {
-            //获取Bean对象的BeanInfo
+            // 获取Bean对象的BeanInfo
             BeanInfo beanInfo = Introspector.getBeanInfo(principal.getClass());
 
-            //通过BeanInfo来获取属性的描述器
+            // 通过BeanInfo来获取属性的描述器
             for (PropertyDescriptor propertyDescriptor : beanInfo.getPropertyDescriptors()) {
                 if (propertyDescriptor.getName().equals(property)) {
-                    //读出该属性中的值，类似getXX()方法
+                    // 读出该属性中的值，类似getXX()方法
                     Object value = propertyDescriptor.getReadMethod().invoke(principal, (Object[]) null);
 
                     return String.valueOf(value);
                 }
             }
 
-            throw new TemplateModelException("Property [" + property + "]" + "not found in principal of type"
-                    + "[" + principal.getClass().getName() + "]");
+            throw new TemplateModelException("Property [" + property + "]" + "not found in principal of type" + "["
+                    + principal.getClass().getName() + "]");
 
         } catch (Exception ex) {
-            throw new TemplateModelException("Error reading property [" + property + "]"
-                    + "from principal of type [ " + principal.getClass().getName() + "]",
-                    ex);
+            throw new TemplateModelException("Error reading property [" + property + "]" + "from principal of type [ "
+                    + principal.getClass().getName() + "]", ex);
         }
     }
 }

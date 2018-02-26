@@ -10,10 +10,10 @@ import freemarker.template.TemplateException;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-07 19:42
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-07 19:42
+ * @version V1.0
  */
 public class NotAuthenticatedTag extends SecureTag {
 
@@ -22,11 +22,9 @@ public class NotAuthenticatedTag extends SecureTag {
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
         if (getSubject() == null || !getSubject().isAuthenticated()) {
-            log.debug("Subject does not exist or is not authenticated."
-                    + "Tag body will be evaluated.");
+            log.debug("Subject does not exist or is not authenticated." + "Tag body will be evaluated.");
         } else {
-            log.debug("Subject exists and is authenticated."
-                    + " Tag body will not be evaluated.");
+            log.debug("Subject exists and is authenticated." + " Tag body will not be evaluated.");
         }
     }
 }

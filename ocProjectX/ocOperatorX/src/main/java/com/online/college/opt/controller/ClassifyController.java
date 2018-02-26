@@ -19,10 +19,10 @@ import com.online.college.service.core.consts.service.IConstsClassifyService;
 
 /**
  *
-* @Description: 课程分类管理
-* @author cmazxiaoma
-* @date 2018-02-11 20:59
-* @version V1.0
+ * @Description: 课程分类管理
+ * @author cmazxiaoma
+ * @date 2018-02-11 20:59
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/classify")
@@ -46,7 +46,7 @@ public class ClassifyController {
         mv.addObject("curNav", "classify");
         Map<String, ConstsClassifyVO> classifyMap = portalBusiness.queryAllClassifyMap();
 
-        //所有一级分类
+        // 所有一级分类
         List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
 
         for (ConstsClassifyVO vo : classifyMap.values()) {
@@ -59,7 +59,7 @@ public class ClassifyController {
         for (ConstsClassifyVO vo : classifyMap.values()) {
             subClassifys.addAll(vo.getSubClassifyList());
         }
-        //所有二级分类
+        // 所有二级分类
         mv.addObject("subClassifys", subClassifys);
 
         return mv;

@@ -4,10 +4,10 @@ import java.lang.reflect.Field;
 
 /**
  *
-* @Description: BeanField对应着数据表列名，model类字段属性
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: BeanField对应着数据表列名，model类字段属性
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class BeanField {
 

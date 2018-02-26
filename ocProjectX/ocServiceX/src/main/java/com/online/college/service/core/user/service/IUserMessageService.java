@@ -7,10 +7,10 @@ import com.online.college.service.core.user.domain.UserMessage;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 18:23
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 18:23
+ * @version V1.0
  */
 public interface IUserMessageService {
 

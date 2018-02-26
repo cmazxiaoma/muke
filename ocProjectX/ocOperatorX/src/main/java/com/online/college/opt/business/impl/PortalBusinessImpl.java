@@ -25,10 +25,10 @@ import com.online.college.service.core.course.service.ICourseService;
 
 /**
  *
-* @Description: 首页业务层
-* @author cmazxiaoma
-* @date 2018-02-11 20:21
-* @version V1.0
+ * @Description: 首页业务层
+ * @author cmazxiaoma
+ * @date 2018-02-11 20:21
+ * @version V1.0
  */
 @Service
 public class PortalBusinessImpl implements IPortalBusiness {
@@ -72,7 +72,7 @@ public class PortalBusinessImpl implements IPortalBusiness {
                 resultMap.put(constsClassifyVO.getCode(), constsClassifyVO);
             } else {
                 if (null != resultMap.get(c.getParentCode())) {
-                    //添加到大分类旗下的小分类里面
+                    // 添加到大分类旗下的小分类里面
                     resultMap.get(c.getParentCode()).getSubClassifyList().add(c);
                 }
             }
@@ -102,7 +102,7 @@ public class PortalBusinessImpl implements IPortalBusiness {
                 BeanUtils.copyProperties(item, vo);
                 tmpMap.put(vo.getId(), vo);
             } else {
-                //把小节添加到大章里
+                // 把小节添加到大章里
                 tmpMap.get(item.getParentId()).getSections().add(item);
             }
         }

@@ -13,10 +13,10 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-09 10:01
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-09 10:01
+ * @version V1.0
  */
 @Service
 public class UserFollowsServiceImpl implements IUserFollowsService {

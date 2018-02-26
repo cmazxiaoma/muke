@@ -10,10 +10,10 @@ import freemarker.template.TemplateException;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-07 18:52
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-07 18:52
+ * @version V1.0
  */
 public class UserTag extends SecureTag {
 
@@ -22,8 +22,7 @@ public class UserTag extends SecureTag {
     @Override
     public void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException {
         if (getSubject() != null && getSubject().getPrincipal() != null) {
-            log.debug("Subject has know identity aka 'principal'. "
-                    + "Tag body will be evaluated.");
+            log.debug("Subject has know identity aka 'principal'. " + "Tag body will be evaluated.");
             renderBody(env, body);
         } else {
             log.debug("Subject does not exist or have a known identity (aka 'principal'). "

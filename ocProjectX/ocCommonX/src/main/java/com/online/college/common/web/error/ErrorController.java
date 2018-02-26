@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
-* @Description: ErrorController
-* @author cmazxiaoma
-* @date 2018-02-07 17:00
-* @version V1.0
+ * @Description: ErrorController
+ * @author cmazxiaoma
+ * @date 2018-02-07 17:00
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/error")
@@ -17,6 +17,7 @@ public class ErrorController {
 
     /**
      * Switching Protocols
+     *
      * @return
      */
     @RequestMapping("/101")
@@ -26,6 +27,7 @@ public class ErrorController {
 
     /**
      * Forbidden
+     *
      * @return
      */
     @RequestMapping("/403")
@@ -35,6 +37,7 @@ public class ErrorController {
 
     /**
      * Not Found
+     *
      * @return
      */
     @RequestMapping("/404")
@@ -44,6 +47,7 @@ public class ErrorController {
 
     /**
      * Internal Server Error
+     *
      * @return
      */
     @RequestMapping("/500")
@@ -53,6 +57,7 @@ public class ErrorController {
 
     /**
      * Method Not Allowed
+     *
      * @return
      */
     @RequestMapping("/405")

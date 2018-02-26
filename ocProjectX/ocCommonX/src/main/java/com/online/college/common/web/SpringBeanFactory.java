@@ -5,10 +5,10 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  *
-* @Description: SpringBeanFactory
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: SpringBeanFactory
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class SpringBeanFactory {
 
@@ -22,7 +22,7 @@ public class SpringBeanFactory {
     }
 
     public static Object getBean(String name) {
-        String[] paths = {"applicationContext.xml"};
+        String[] paths = { "applicationContext.xml" };
         return getBean(paths, name);
     }
 }

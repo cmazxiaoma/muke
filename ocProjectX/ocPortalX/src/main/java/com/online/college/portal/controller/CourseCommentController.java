@@ -22,10 +22,10 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 
 /**
  *
-* @Description: 课程评论管理
-* @author cmazxiaoma
-* @date 2018-02-09 16:15
-* @version V1.0
+ * @Description: 课程评论管理
+ * @author cmazxiaoma
+ * @date 2018-02-09 16:15
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/courseComment")
@@ -39,8 +39,11 @@ public class CourseCommentController {
 
     /**
      * 加载评论&答疑
-     * @param queryEntity 章节id
-     * @param page 课程id
+     *
+     * @param queryEntity
+     *            章节id
+     * @param page
+     *            课程id
      * @return
      */
     @RequestMapping("/segment")
@@ -63,6 +66,7 @@ public class CourseCommentController {
 
     /**
      * 发表评论
+     *
      * @param request
      * @param entity
      * @param indeityCode
@@ -71,19 +75,19 @@ public class CourseCommentController {
     @RequestMapping(value = "/doComment")
     @ResponseBody
     public String doComment(HttpServletRequest request, CourseComment entity, String indeityCode) {
-        //验证码判断
-        if (null == indeityCode ||
-                (indeityCode != null && !indeityCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request)))) {
-            //验证码错误
+        // 验证码判断
+        if (null == indeityCode
+                || (indeityCode != null && !indeityCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request)))) {
+            // 验证码错误
             return new JsonView(2).toString();
         }
 
-        //文字太长或者为空
+        // 文字太长或者为空
         if (entity.getContent().trim().length() > 200 || entity.getContent().trim().length() == 0) {
             return new JsonView(3).toString();
         }
 
-        //来自于个人中心评论
+        // 来自于个人中心评论
         if (null != entity.getRefId()) {
             CourseComment refComment = this.courseCommentService.getById(entity.getRefId());
 
@@ -97,7 +101,7 @@ public class CourseCommentController {
                     entity.setSectionId(refComment.getSectionId());
                     entity.setSectionTitle(courseSection.getName());
 
-                    //引用评论的username
+                    // 引用评论的username
                     entity.setToUsername(refComment.getUsername());
                     entity.setUsername(SessionContext.getUsername());
                     entity.setCreateTime(new Date());

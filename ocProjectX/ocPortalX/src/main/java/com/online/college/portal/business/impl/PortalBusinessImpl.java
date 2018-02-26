@@ -21,10 +21,10 @@ import com.online.college.service.core.course.service.ICourseService;
 
 /**
  *
-* @Description: 首页业务层
-* @author cmazxiaoma
-* @date 2018-02-09 14:34
-* @version V1.0
+ * @Description: 首页业务层
+ * @author cmazxiaoma
+ * @date 2018-02-09 14:34
+ * @version V1.0
  */
 @Service
 public class PortalBusinessImpl implements IPortalBusiness {
@@ -60,17 +60,15 @@ public class PortalBusinessImpl implements IPortalBusiness {
         while (it.hasNext()) {
             ConstsClassify constsClassify = it.next();
 
-            //一级分类
+            // 一级分类
             if ("0".equals(constsClassify.getParentCode())) {
                 ConstsClassifyVO vo = new ConstsClassifyVO();
                 BeanUtils.copyProperties(constsClassify, vo);
                 resultMap.put(vo.getCode(), vo);
             } else {
-                //二级分类
+                // 二级分类
                 if (null != resultMap.get(constsClassify.getParentCode())) {
-                    resultMap.get(constsClassify.getParentCode())
-                        .getSubClassifyList()
-                        .add(constsClassify);
+                    resultMap.get(constsClassify.getParentCode()).getSubClassifyList().add(constsClassify);
                 }
             }
         }
@@ -87,7 +85,7 @@ public class PortalBusinessImpl implements IPortalBusiness {
                 CourseQueryDto courseQueryDto = new CourseQueryDto();
                 courseQueryDto.setCount(5);
                 courseQueryDto.descSortField("weight");
-                //分类code
+                // 分类code
                 courseQueryDto.setClassify(item.getCode());
 
                 List<Course> tmpList = this.courseService.queryList(courseQueryDto);

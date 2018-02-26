@@ -8,10 +8,10 @@ import com.online.college.service.core.course.domain.Course;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-09 14:05
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-09 14:05
+ * @version V1.0
  */
 public class ConstsClassifyVO extends ConstsClassify {
 

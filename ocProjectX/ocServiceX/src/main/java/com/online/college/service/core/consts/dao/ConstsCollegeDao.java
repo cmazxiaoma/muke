@@ -7,10 +7,10 @@ import com.online.college.service.core.consts.domain.ConstsCollege;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 14:47
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 14:47
+ * @version V1.0
  */
 public interface ConstsCollegeDao {
 

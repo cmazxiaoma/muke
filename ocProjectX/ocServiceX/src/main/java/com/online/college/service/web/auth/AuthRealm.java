@@ -21,10 +21,10 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 
 /**
  *
-* @Description: shiro实现用户登录，各个模块表不一样，各自处理
-* @author cmazxiaoma
-* @date 2018-02-08 10:54
-* @version V1.0
+ * @Description: shiro实现用户登录，各个模块表不一样，各自处理
+ * @author cmazxiaoma
+ * @date 2018-02-08 10:54
+ * @version V1.0
  */
 public class AuthRealm extends AuthorizingRealm {
 
@@ -39,15 +39,15 @@ public class AuthRealm extends AuthorizingRealm {
         if (principals == null) {
             throw new AuthenticationException("PrincipalCollection method argument cannot be null");
         }
-        //获取当前登录用户
+        // 获取当前登录用户
         SessionUser user = SessionContext.getAuthUser();
 
         if (user == null) {
             return null;
         }
-        //设置权限
+        // 设置权限
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        //获取用户权限并且设置权限，供shiro框架使用
+        // 获取用户权限并且设置权限，供shiro框架使用
         info.setStringPermissions(user.getPermissions());
         return info;
     }
@@ -77,8 +77,7 @@ public class AuthRealm extends AuthorizingRealm {
                 authUser.setStatus(tmpAuthUser.getStatus());
 
                 if (!StringUtils.isBlank(tmpAuthUser.getHeader())) {
-                    authUser.setHeader(QiniuStorage.getUrl(tmpAuthUser.getHeader(),
-                            ThumbModel.THUMB_256));
+                    authUser.setHeader(QiniuStorage.getUrl(tmpAuthUser.getHeader(), ThumbModel.THUMB_256));
                 }
             } else {
                 throw new AuthenticationException("## user password is no correct!");
@@ -87,7 +86,7 @@ public class AuthRealm extends AuthorizingRealm {
             throw new AuthenticationException("## user password is no correct!");
         }
 
-        //创建授权用户
+        // 创建授权用户
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(authUser, password, getName());
         return info;
     }

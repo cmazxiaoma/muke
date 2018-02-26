@@ -6,10 +6,10 @@ import org.springframework.util.Assert;
 
 /**
  *
-* @Description: FileType工具类
-* @author cmazxiaoma
-* @date 2018-02-07 14:49
-* @version V1.0
+ * @Description: FileType工具类
+ * @author cmazxiaoma
+ * @date 2018-02-07 14:49
+ * @version V1.0
  */
 public class FileTypeHelper {
 
@@ -29,6 +29,7 @@ public class FileTypeHelper {
 
     /**
      * 判断是否为图片
+     *
      * @param buff
      * @return
      */
@@ -37,7 +38,6 @@ public class FileTypeHelper {
 
         return FileType.JPEG.equals(type) || FileType.PNG.equals(type);
     }
-
 
     private static String bytesToHex(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder();

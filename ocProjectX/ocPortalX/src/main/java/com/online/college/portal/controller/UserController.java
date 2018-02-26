@@ -30,10 +30,10 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 
 /**
  *
-* @Description: 个人中心
-* @author cmazxiaoma
-* @date 2018-02-11 10:05
-* @version V1.0
+ * @Description: 个人中心
+ * @author cmazxiaoma
+ * @date 2018-02-11 10:05
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/user")
@@ -56,6 +56,7 @@ public class UserController {
 
     /**
      * 首页
+     *
      * @param page
      * @return
      */
@@ -64,12 +65,12 @@ public class UserController {
         ModelAndView mv = new ModelAndView("user/home");
         mv.addObject("curNav", "home");
 
-        //加载关注用户的动态
+        // 加载关注用户的动态
         UserFollowStudyRecord queryEntity = new UserFollowStudyRecord();
         queryEntity.setUserId(SessionContext.getUserId());
         page = userFollowsService.queryUserFollowStudyRecordPage(queryEntity, page);
 
-        //处理用户头像
+        // 处理用户头像
         for (UserFollowStudyRecord item : page.getItems()) {
             if (StringUtils.isNotEmpty(item.getHeader())) {
                 item.setHeader(QiniuStorage.getUrl(item.getHeader()));
@@ -114,6 +115,7 @@ public class UserController {
 
     /**
      * 信息
+     *
      * @return
      */
     @RequestMapping("/info")
@@ -132,6 +134,7 @@ public class UserController {
 
     /**
      * 保存信息
+     *
      * @param authUser
      * @param pictureImg
      * @return
@@ -155,6 +158,7 @@ public class UserController {
 
     /**
      * 修改密码
+     *
      * @return
      */
     @RequestMapping("/passwd")
@@ -167,6 +171,7 @@ public class UserController {
 
     /**
      * 保存修改后的密码
+     *
      * @param oldPassword
      * @param password
      * @param rePassword
@@ -201,6 +206,7 @@ public class UserController {
 
     /**
      * 问答
+     *
      * @param page
      * @return
      */

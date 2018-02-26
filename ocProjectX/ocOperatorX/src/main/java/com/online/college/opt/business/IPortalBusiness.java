@@ -8,15 +8,16 @@ import com.online.college.opt.vo.CourseSectionVO;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-11 19:16
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-11 19:16
+ * @version V1.0
  */
 public interface IPortalBusiness {
 
     /**
      * 获取所有, 包括一级分类&二级分类
+     *
      * @return
      */
     List<ConstsClassifyVO> queryAllClassify();

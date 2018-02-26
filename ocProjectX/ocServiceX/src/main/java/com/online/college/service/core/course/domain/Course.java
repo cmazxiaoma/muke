@@ -6,10 +6,10 @@ import com.online.college.common.orm.BaseEntity;
 
 /**
  *
-* @Description: 课程
-* @author cmazxiaoma
-* @date 2018-02-09 10:32
-* @version V1.0
+ * @Description: 课程
+ * @author cmazxiaoma
+ * @date 2018-02-09 10:32
+ * @version V1.0
  */
 public class Course extends BaseEntity {
 
@@ -29,7 +29,6 @@ public class Course extends BaseEntity {
      * 课程分类
      */
     private String classify;
-
 
     /**
      * 课程分类名称
@@ -57,12 +56,12 @@ public class Course extends BaseEntity {
     private String username;
 
     /**
-     * 课程级别: 1-初级  2-中级 3-高级
+     * 课程级别: 1-初级 2-中级 3-高级
      */
     private Integer level;
 
     /**
-     * 是否免费  0-否  1-是
+     * 是否免费 0-否 1-是
      */
     private Integer free;
 

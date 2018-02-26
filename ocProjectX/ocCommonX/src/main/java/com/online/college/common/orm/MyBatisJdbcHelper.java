@@ -9,10 +9,10 @@ import com.online.college.common.util.BeanUtil;
 
 /**
  *
-* @Description: 为mybatis准备动态sql
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: 为mybatis准备动态sql
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class MyBatisJdbcHelper {
 
@@ -54,7 +54,7 @@ public class MyBatisJdbcHelper {
     }
 
     public static <T, E> String queryByIdsSql(Class<T> entityClass, E[] ids, String... fieldNames) {
-        StringBuilder where =  new StringBuilder();
+        StringBuilder where = new StringBuilder();
 
         for (E e : ids) {
             where.append(e + ",");
@@ -107,9 +107,7 @@ public class MyBatisJdbcHelper {
         return rstMap;
     }
 
-
-    public static <T> String updateSql(Class<T> entityClass, boolean byId, QueryFilter filter,
-            String... fieldNames) {
+    public static <T> String updateSql(Class<T> entityClass, boolean byId, QueryFilter filter, String... fieldNames) {
         Map<String, String> map = BeanUtil.getAllFieldColumns(entityClass);
         String tableName = BeanUtil.getTableName(entityClass).toUpperCase();
         StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
@@ -121,8 +119,7 @@ public class MyBatisJdbcHelper {
             }
         } else {
             for (String s : map.keySet()) {
-                if (!"id".equals(s) && !"createUser".equals(s)
-                        && !"createTime".equals(s) && !"del".equals(s)) {
+                if (!"id".equals(s) && !"createUser".equals(s) && !"createTime".equals(s) && !"del".equals(s)) {
                     sql.append(" " + map.get(s).toString().toUpperCase() + " = #{param2." + s + "},");
                 }
             }
@@ -146,11 +143,11 @@ public class MyBatisJdbcHelper {
         String tableName = BeanUtil.getTableName(entityClass).toUpperCase();
         StringBuilder sql = new StringBuilder("DELETE FROM " + tableName);
 
-        //根据id更新对象
+        // 根据id更新对象
         if (byId) {
             sql.append(" WHERE id = #{param2.id}");
         } else {
-            //更新所有，或者根据条件来更新对象
+            // 更新所有，或者根据条件来更新对象
             if (filter != null) {
                 if (!StringUtils.isEmpty(filter.getWhere())) {
                     sql.append(" WHERE " + filter.getWhere());
@@ -171,7 +168,7 @@ public class MyBatisJdbcHelper {
 
     public static <T> String deleteByIdSqls(Class<T> entityClass) {
         String tableName = BeanUtil.getTableName(entityClass).toUpperCase();
-        StringBuilder sql = new StringBuilder("DELETE FROM " + tableName +  "WHERE id IN ");
+        StringBuilder sql = new StringBuilder("DELETE FROM " + tableName + "WHERE id IN ");
 
         return sql.toString();
     }

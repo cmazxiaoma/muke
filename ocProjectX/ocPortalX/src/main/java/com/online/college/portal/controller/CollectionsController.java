@@ -17,10 +17,10 @@ import com.online.college.service.core.user.service.IUserCollectionsService;
 
 /**
  *
-* @Description: 用户收藏
-* @author cmazxiaoma
-* @date 2018-02-09 15:48
-* @version V1.0
+ * @Description: 用户收藏
+ * @author cmazxiaoma
+ * @date 2018-02-09 15:48
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/collections")
@@ -31,36 +31,38 @@ public class CollectionsController {
 
     /**
      * 收藏
+     *
      * @param courseId
      * @return
      */
     @RequestMapping(value = "/doCollection")
     @ResponseBody
     public String doCollection(Long courseId) {
-        //获得当前用户
-       Long curUserId = SessionContext.getUserId();
-       UserCollections userCollections = new UserCollections();
+        // 获得当前用户
+        Long curUserId = SessionContext.getUserId();
+        UserCollections userCollections = new UserCollections();
 
-       userCollections.setUserId(curUserId);
-       userCollections.setClassify(CourseEnum.COLLECTION_CLASSIFY_COURSE.value());
-       userCollections.setObjectId(courseId);
+        userCollections.setUserId(curUserId);
+        userCollections.setClassify(CourseEnum.COLLECTION_CLASSIFY_COURSE.value());
+        userCollections.setObjectId(courseId);
 
-       List<UserCollections> list = userCollectionsService.queryAll(userCollections);
+        List<UserCollections> list = userCollectionsService.queryAll(userCollections);
 
-       if (CollectionUtils.isNotEmpty(list)) {
-           //取消收藏
-           userCollectionsService.delete(list.get(0));
-           return new JsonView(0).toString();
-       } else {
-           userCollections.setCreateTime(new Date());
-           userCollectionsService.createSelectivity(userCollections);
-           //收藏成功
-           return new JsonView(1).toString();
-       }
+        if (CollectionUtils.isNotEmpty(list)) {
+            // 取消收藏
+            userCollectionsService.delete(list.get(0));
+            return new JsonView(0).toString();
+        } else {
+            userCollections.setCreateTime(new Date());
+            userCollectionsService.createSelectivity(userCollections);
+            // 收藏成功
+            return new JsonView(1).toString();
+        }
     }
 
     /**
      * 是否已经收藏
+     *
      * @param courseId
      * @return
      */
@@ -76,7 +78,7 @@ public class CollectionsController {
 
         List<UserCollections> list = userCollectionsService.queryAll(userCollections);
 
-        //是否已经收藏
+        // 是否已经收藏
         if (CollectionUtils.isNotEmpty(list)) {
             return new JsonView(1).toString();
         } else {

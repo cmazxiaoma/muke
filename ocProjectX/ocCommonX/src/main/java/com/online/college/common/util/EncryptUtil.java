@@ -10,10 +10,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
-* @Description: 加密工具类
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: 加密工具类
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class EncryptUtil {
     public static String encodedByMD5(String source) {
@@ -46,10 +46,9 @@ public class EncryptUtil {
         return stringBuilder.toString().toUpperCase();
     }
 
-    public static String encryptSHA1(String content){
+    public static String encryptSHA1(String content) {
         try {
-            MessageDigest digest = MessageDigest
-                    .getInstance("SHA-1");
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(content.getBytes());
             byte messageDigest[] = digest.digest();
             // Create Hex String
@@ -71,18 +70,21 @@ public class EncryptUtil {
 
     /**
      * 使用AES的CBC模式加密
-     * @param key 加密的秘钥
-     * @param text 待加密的内容
+     *
+     * @param key
+     *            加密的秘钥
+     * @param text
+     *            待加密的内容
      * @return 经过Base64编码的密文
      */
-    public static String encryptByAESWithCBC(byte[] key,byte[] text){
+    public static String encryptByAESWithCBC(byte[] key, byte[] text) {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
             SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
             IvParameterSpec iv = new IvParameterSpec(key, 0, 16);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
             byte[] encrypted = cipher.doFinal(text);
-            String base64Encrypted =  new org.apache.commons.codec.binary.Base64().encodeToString(encrypted);
+            String base64Encrypted = new org.apache.commons.codec.binary.Base64().encodeToString(encrypted);
             return base64Encrypted;
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,12 +94,14 @@ public class EncryptUtil {
 
     /**
      *
-     * @param key 经Base64编码的AES秘钥
-     * @param text 经Base64编码的加密串
+     * @param key
+     *            经Base64编码的AES秘钥
+     * @param text
+     *            经Base64编码的加密串
      * @return
      */
-    public static byte[] decryptByAESWithCBC(byte[] key,byte[] text){
-        byte[] original=null;
+    public static byte[] decryptByAESWithCBC(byte[] key, byte[] text) {
+        byte[] original = null;
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
             SecretKeySpec key_spec = new SecretKeySpec(key, "AES");
@@ -110,7 +114,7 @@ public class EncryptUtil {
         return original;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println(EncryptUtil.encodedByMD5("111111"));
     }
 

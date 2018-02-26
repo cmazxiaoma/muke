@@ -12,10 +12,10 @@ import com.online.college.service.core.consts.service.IConstsCollegeService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 15:35
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 15:35
+ * @version V1.0
  */
 @Service
 public class ConstCollegeServiceImpl implements IConstsCollegeService {

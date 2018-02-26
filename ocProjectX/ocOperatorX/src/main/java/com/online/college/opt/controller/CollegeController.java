@@ -14,10 +14,10 @@ import com.online.college.service.core.consts.service.IConstsCollegeService;
 
 /**
  *
-* @Description: 网校管理
-* @author cmazxiaoma
-* @date 2018-02-11 21:16
-* @version V1.0
+ * @Description: 网校管理
+ * @author cmazxiaoma
+ * @date 2018-02-11 21:16
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/college")
@@ -28,6 +28,7 @@ public class CollegeController {
 
     /**
      * 分页
+     *
      * @param queryEntity
      * @param page
      * @return
@@ -80,7 +81,7 @@ public class CollegeController {
 
     @RequestMapping(value = "/deleteLogic")
     @ResponseBody
-    public String deleteLogic(ConstsCollege entity){
+    public String deleteLogic(ConstsCollege entity) {
         this.collegeService.deleteLogic(entity);
         return new JsonView().toString();
     }

@@ -8,10 +8,10 @@ import com.online.college.service.core.course.domain.Course;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-11 19:10
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-11 19:10
+ * @version V1.0
  */
 public class ConstsClassifyVO extends ConstsClassify {
 
@@ -25,7 +25,7 @@ public class ConstsClassifyVO extends ConstsClassify {
     /**
      * 课程推荐列表
      */
-    private List<Course> recomdCourseList ;
+    private List<Course> recomdCourseList;
 
     public List<ConstsClassify> getSubClassifyList() {
         return subClassifyList;

@@ -15,12 +15,12 @@ import com.online.college.common.web.HttpHelper;
 import com.online.college.common.web.JsonView;
 
 /**
-*
-* @Description: shiro对用户是否登录的filter
-* @author cmazxiaoma
-* @date 2018-02-08 10:40
-* @version V1.0
-*/
+ *
+ * @Description: shiro对用户是否登录的filter
+ * @author cmazxiaoma
+ * @date 2018-02-08 10:40
+ * @version V1.0
+ */
 public class AuthFilter extends FormAuthenticationFilter {
 
     private static final Integer SHIRO_TIME_OUT = 1001;
@@ -34,23 +34,23 @@ public class AuthFilter extends FormAuthenticationFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-        //获取请求路径
+        // 获取请求路径
         String login = httpServletRequest.getServletPath();
 
-        //判断请求路径是否为登录页，如果为登录页则放行
+        // 判断请求路径是否为登录页，如果为登录页则放行
         if (login.equals("/index.html")) {
             return true;
         }
 
-        //获取当前登录用户
+        // 获取当前登录用户
         Subject subject = getSubject(request, response);
 
-        //判断是否授权
+        // 判断是否授权
         if (subject.isAuthenticated()) {
             return true;
         }
 
-        //判断是否为ajax请求
+        // 判断是否为ajax请求
         if (HttpHelper.isAjaxRequest(httpServletRequest)) {
             JsonView jsonView = new JsonView();
             jsonView.setMessage("SHIRO登录超时");
@@ -66,7 +66,7 @@ public class AuthFilter extends FormAuthenticationFilter {
             saveRequestAndRedirectToLogin(request, response);
         }
 
-        //如果没有授权则跳转到登录界面
+        // 如果没有授权则跳转到登录界面
         return false;
     }
 }

@@ -21,10 +21,10 @@ import com.qiniu.util.Auth;
 
 /**
  *
-* @Description: 七牛云SDK的二次封装
-* @author cmazxiaoma
-* @date 2018-02-07 15:07
-* @version V1.0
+ * @Description: 七牛云SDK的二次封装
+ * @author cmazxiaoma
+ * @date 2018-02-07 15:07
+ * @version V1.0
  */
 public class QiniuWrapper {
 
@@ -46,16 +46,14 @@ public class QiniuWrapper {
 
     private static final List<String> cdns;
 
-
     /**
      * 从外部文件中初始化七牛存储的相关的配置信息
      *
      */
     static {
         Properties properties = PropertiesUtil.getDefaultProperties();
-        auth = Auth.create(properties.getProperty(CONFIG_AK),
-                properties.getProperty(CONFIG_SK));
-        //设置空间上传域名
+        auth = Auth.create(properties.getProperty(CONFIG_AK), properties.getProperty(CONFIG_SK));
+        // 设置空间上传域名
         Configuration cfg = new Configuration(Zone.zone2());
         uploadManager = new UploadManager(cfg);
         bucketName = properties.getProperty(CONFIG_BUCKET);
@@ -65,6 +63,7 @@ public class QiniuWrapper {
 
     /**
      * 获取上传资源的token
+     *
      * @return
      */
     public static String getUploadToken() {
@@ -73,7 +72,9 @@ public class QiniuWrapper {
 
     /**
      * 获取更新资源的token，只能用于更新参数key所代表的资源
-     * @param key 存储空间中已经存在的资源key
+     *
+     * @param key
+     *            存储空间中已经存在的资源key
      * @return
      */
     public static String getUploadToken(String key) {
@@ -82,17 +83,19 @@ public class QiniuWrapper {
 
     /**
      * 上传文件
-     * @param data 二进制格式的文件内容
-     * @param key 文件在七牛中的key
-     * @param update 是否是更新
+     *
+     * @param data
+     *            二进制格式的文件内容
+     * @param key
+     *            文件在七牛中的key
+     * @param update
+     *            是否是更新
      * @return
      */
     public static String upload(byte[] data, String key, boolean update) {
         try {
-            String token = update ? auth.uploadToken(bucketName, key) :
-                auth.uploadToken(bucketName);
-            Response response = uploadManager.put(data, getFullyKey(data, key)
-                    , token);
+            String token = update ? auth.uploadToken(bucketName, key) : auth.uploadToken(bucketName);
+            Response response = uploadManager.put(data, getFullyKey(data, key), token);
             DefaultPutRet ret = response.jsonToObject(DefaultPutRet.class);
 
             return ret.key;
@@ -102,7 +105,6 @@ public class QiniuWrapper {
 
         return null;
     }
-
 
     public static String getFullyKey(byte[] data, String key) {
         FileType type = FileTypeHelper.getType(data);
@@ -120,7 +122,9 @@ public class QiniuWrapper {
 
     /**
      * 获取多个key图片
-     * @param keys 逗号隔开的多个key
+     *
+     * @param keys
+     *            逗号隔开的多个key
      * @param model
      * @return
      */
@@ -149,15 +153,15 @@ public class QiniuWrapper {
     /**
      *
      * @param key
-     * @param expires 单位：秒
+     * @param expires
+     *            单位：秒
      * @return
      */
     public static String getUrl(String key, long expires) {
         if (!StringUtils.isEmpty(key)) {
             long time = System.currentTimeMillis() / 1000 + expires;
 
-            return auth.privateDownloadUrl("http://" + getCDN() + "/@"
-                    + key, time);
+            return auth.privateDownloadUrl("http://" + getCDN() + "/@" + key, time);
         }
 
         return null;
@@ -165,16 +169,15 @@ public class QiniuWrapper {
 
     public static String getUrl(String key, String model, long expires) {
         if (StringUtils.hasText(model)) {
-            return auth.privateDownloadUrl("http://" + getCDN() + "/@" + key
-                    + "?" + model);
+            return auth.privateDownloadUrl("http://" + getCDN() + "/@" + key + "?" + model);
         } else {
-            return auth.privateDownloadUrl("http://" + getCDN() + "/@"
-                    + key, expires);
+            return auth.privateDownloadUrl("http://" + getCDN() + "/@" + key, expires);
         }
     }
 
     /**
      * 从多条CDN路径中随机选择一条
+     *
      * @return
      */
     private static String getCDN() {

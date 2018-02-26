@@ -12,10 +12,10 @@ import com.online.college.service.core.user.service.IUserCollectionsService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-09 09:50
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-09 09:50
+ * @version V1.0
  */
 @Service
 public class UserCollectionsServiceImpl implements IUserCollectionsService {

@@ -1,15 +1,13 @@
 package com.online.college.service.core.user.domain;
 
-import com.online.college.common.orm.BaseEntity;
-
 /**
  *
-* @Description: 用户学习课程DTO
-* @author cmazxiaoma
-* @date 2018-02-08 17:01
-* @version V1.0
+ * @Description: 用户学习课程DTO
+ * @author cmazxiaoma
+ * @date 2018-02-08 17:01
+ * @version V1.0
  */
-public class UserCourseSectionDto extends BaseEntity {
+public class UserCourseSectionDto extends UserCourseSection {
 
     private static final long serialVersionUID = -3378797759981873499L;
 

@@ -2,10 +2,10 @@ package com.online.college.common.storage;
 
 /**
  *
-* @Description: 文件类型枚举类
-* @author cmazxiaoma
-* @date 2018-02-07 14:48
-* @version V1.0
+ * @Description: 文件类型枚举类
+ * @author cmazxiaoma
+ * @date 2018-02-07 14:48
+ * @version V1.0
  */
 public enum FileType {
     JPEG("FFD8FF"),

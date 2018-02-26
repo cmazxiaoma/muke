@@ -10,14 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ *
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-26 13:41
+ * @version V1.0
+ */
 public class PropertiesUtil {
 
-    private static Map<String,Properties> propMap = new HashMap<String,Properties>();
+    private static Map<String, Properties> propMap = new HashMap<String, Properties>();
 
-    /*设置默认的properties文件，方便操作*/
-    public static final String DEFAULT_PROPERTIES_FILE="application.properties";
+    /* 设置默认的properties文件，方便操作 */
+    public static final String DEFAULT_PROPERTIES_FILE = "application.properties";
 
-    public static Object getProperty(String file,String key){
+    public static Object getProperty(String file, String key) {
         Properties prop = getProperties(file);
 
         if (prop != null && prop.get(key) != null) {
@@ -26,12 +33,12 @@ public class PropertiesUtil {
         return null;
     }
 
-    public static Properties getProperties(String file){
+    public static Properties getProperties(String file) {
         try {
             if (propMap.get(file) == null) {
                 Properties prop = new Properties();
                 prop.load(PropertiesUtil.class.getClassLoader().getResourceAsStream(file));
-                propMap.put(file,prop);
+                propMap.put(file, prop);
                 return prop;
             } else {
                 return propMap.get(file);
@@ -42,7 +49,7 @@ public class PropertiesUtil {
         return null;
     }
 
-    public static void updateProperties(Properties prop,String filePath){
+    public static void updateProperties(Properties prop, String filePath) {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
 
@@ -57,8 +64,8 @@ public class PropertiesUtil {
 
             FileOutputStream fos = new FileOutputStream(file);
 
-            for(Object key : prop.keySet()){
-                tmpProp.setProperty(String.valueOf(key),String.valueOf(prop.get(key)));
+            for (Object key : prop.keySet()) {
+                tmpProp.setProperty(String.valueOf(key), String.valueOf(prop.get(key)));
             }
             tmpProp.store(fos, null);
             fis.close();
@@ -70,21 +77,23 @@ public class PropertiesUtil {
 
     /**
      * 从默认配置文件中获取properties
+     *
      * @return
      */
-    public static Properties getDefaultProperties(){
+    public static Properties getDefaultProperties() {
         return getProperties(DEFAULT_PROPERTIES_FILE);
     }
 
     /**
      * 从默认配置文件中获取配置项
+     *
      * @param key
      * @return
      */
-    public static String getProperty(String key){
+    public static String getProperty(String key) {
         Properties prop = getDefaultProperties();
 
-        if(prop != null && prop.get(key) != null){
+        if (prop != null && prop.get(key) != null) {
             return prop.getProperty(key);
         }
         return null;

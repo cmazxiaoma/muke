@@ -8,10 +8,10 @@ import com.online.college.service.core.consts.domain.ConstsCollege;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 14:46
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 14:46
+ * @version V1.0
  */
 public interface ConstsClassifyDao {
 

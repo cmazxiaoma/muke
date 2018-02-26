@@ -4,10 +4,10 @@ import net.sf.json.JSONObject;
 
 /**
  *
-* @Description: JsonView
-* @author cmazxiaoma
-* @date 2018-02-07 16:54
-* @version V1.0
+ * @Description: JsonView
+ * @author cmazxiaoma
+ * @date 2018-02-07 16:54
+ * @version V1.0
  */
 public class JsonView {
 
@@ -26,22 +26,22 @@ public class JsonView {
      */
     private Object data;
 
-    public static String render(Object data){
-        JsonView tmp = new JsonView(0, "success",data);
+    public static String render(Object data) {
+        JsonView tmp = new JsonView(0, "success", data);
         return JSONObject.fromObject(tmp).toString();
     }
 
-    public static String render(Integer errcode){
+    public static String render(Integer errcode) {
         JsonView tmp = new JsonView(errcode, "");
         return JSONObject.fromObject(tmp).toString();
     }
 
-    public static String render(Integer errcode, String message){
+    public static String render(Integer errcode, String message) {
         JsonView tmp = new JsonView(errcode, message);
         return JSONObject.fromObject(tmp).toString();
     }
 
-    public static String render(Integer errcode, String message, Object data){
+    public static String render(Integer errcode, String message, Object data) {
         JsonView tmp = new JsonView(errcode, message, data);
         return JSONObject.fromObject(tmp).toString();
     }
@@ -89,7 +89,7 @@ public class JsonView {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return JSONObject.fromObject(this).toString();
     }
 

@@ -18,10 +18,10 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 
 /**
  *
-* @Description: 课程业务层
-* @author cmazxiaoma
-* @date 2018-02-11 19:22
-* @version V1.0
+ * @Description: 课程业务层
+ * @author cmazxiaoma
+ * @date 2018-02-11 19:22
+ * @version V1.0
  */
 @Service
 public class CourseBusinessImpl implements ICourseBusiness {
@@ -50,7 +50,7 @@ public class CourseBusinessImpl implements ICourseBusiness {
                 BeanUtils.copyProperties(item, vo);
                 tmpMap.put(vo.getId(), vo);
             } else {
-                //小节添加到大章中
+                // 小节添加到大章中
                 tmpMap.get(item.getParentId()).getSections().add(item);
             }
         }

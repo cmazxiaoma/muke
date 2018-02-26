@@ -20,10 +20,10 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 
 /**
  *
-* @Description: 用户登录 & 注册
-* @author cmazxiaoma
-* @date 2018-02-09 15:04
-* @version V1.0
+ * @Description: 用户登录 & 注册
+ * @author cmazxiaoma
+ * @date 2018-02-09 15:04
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/auth")
@@ -34,6 +34,7 @@ public class AuthController {
 
     /**
      * 注册
+     *
      * @return
      */
     @RequestMapping(value = "/register")
@@ -47,6 +48,7 @@ public class AuthController {
 
     /**
      * 实现注册
+     *
      * @param authUser
      * @param identiryCode
      * @param request
@@ -55,7 +57,7 @@ public class AuthController {
     @RequestMapping(value = "/doRegister")
     @ResponseBody
     public String doRegister(AuthUser authUser, String identiryCode, HttpServletRequest request) {
-        //验证码判断
+        // 验证码判断
         if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             return JsonView.render(2);
         }
@@ -74,6 +76,7 @@ public class AuthController {
 
     /**
      * 登录界面
+     *
      * @return
      */
     @RequestMapping(value = "/login")
@@ -88,20 +91,18 @@ public class AuthController {
     @RequestMapping(value = "/ajaxlogin")
     @ResponseBody
     public String ajaxLogin(AuthUser user, String identiryCode, Integer rememberMe, HttpServletRequest request) {
-        if (identiryCode != null &&
-                !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
+        if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             return JsonView.render(2, "验证码不正确!");
         }
         Subject currentUser = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(
-                user.getUsername(),
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),
                 EncryptUtil.encodedByMD5(user.getPassword()));
 
         try {
             if (rememberMe != null && rememberMe == 1) {
                 token.setRememberMe(true);
             }
-            //shiro: 不抛出异常，登录成功
+            // shiro: 不抛出异常，登录成功
             currentUser.login(token);
             return new JsonView().toString();
         } catch (AuthenticationException e) {
@@ -111,6 +112,7 @@ public class AuthController {
 
     /**
      * 实现登录
+     *
      * @param user
      * @param identiryCode
      * @param request
@@ -118,21 +120,19 @@ public class AuthController {
      */
     @RequestMapping(value = "/doLogin")
     public ModelAndView doLogin(AuthUser user, String identiryCode, HttpServletRequest request) {
-        //如果已经登录过
+        // 如果已经登录过
         if (SessionContext.getAuthUser() != null) {
             return new ModelAndView("redirect:/user/home.html");
         }
 
-        //验证码判断
-        if (identiryCode != null &&
-                !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
+        // 验证码判断
+        if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             ModelAndView modelAndView = new ModelAndView("auth/login");
             modelAndView.addObject("errcode", 1);
 
             return modelAndView;
         }
-        UsernamePasswordToken token = new UsernamePasswordToken(
-                user.getUsername(),
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),
                 EncryptUtil.encodedByMD5(user.getPassword()));
 
         try {
@@ -149,6 +149,7 @@ public class AuthController {
 
     /**
      * 登出
+     *
      * @param request
      * @return
      */

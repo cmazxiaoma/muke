@@ -6,17 +6,17 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
-* @Description: JsonUtil
-* @author cmazxiaoma
-* @date 2018-02-08 10:50
-* @version V1.0
+ * @Description: JsonUtil
+ * @author cmazxiaoma
+ * @date 2018-02-08 10:50
+ * @version V1.0
  */
 public class JsonUtil {
 
-    private static  ObjectMapper mapper;
+    private static ObjectMapper mapper;
 
     static {
-        mapper=new ObjectMapper();
+        mapper = new ObjectMapper();
     }
 
     public static String toJson(Object obj) throws IOException {

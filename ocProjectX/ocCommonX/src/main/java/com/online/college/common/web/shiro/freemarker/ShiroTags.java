@@ -4,10 +4,10 @@ import freemarker.template.SimpleHash;
 
 /**
  *
-* @Description: 将shiro标签注入到FreeMarker
-* @author cmazxiaoma
-* @date 2018-02-07 20:02
-* @version V1.0
+ * @Description: 将shiro标签注入到FreeMarker
+ * @author cmazxiaoma
+ * @date 2018-02-07 20:02
+ * @version V1.0
  */
 public class ShiroTags extends SimpleHash {
 

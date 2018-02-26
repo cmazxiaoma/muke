@@ -20,10 +20,10 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 
 /**
  *
-* @Description: 课程章节管理
-* @author cmazxiaoma
-* @date 2018-02-11 21:30
-* @version V1.0
+ * @Description: 课程章节管理
+ * @author cmazxiaoma
+ * @date 2018-02-11 21:30
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/courseSection")
@@ -50,6 +50,7 @@ public class CourseSectionController {
 
     /**
      * 交换排序位置
+     *
      * @param entity
      * @param sortType
      * @return
@@ -62,13 +63,13 @@ public class CourseSectionController {
         if (null != curCourseSection) {
             CourseSection tmpCourseSection = null;
 
-            //如果是降序,DESC
-            //比当前sort大的, 正序排序的第一个
+            // 如果是降序,DESC
+            // 比当前sort大的, 正序排序的第一个
             if (Integer.valueOf(1).equals(sortType)) {
                 tmpCourseSection = courseSectionService.getSortSectionMax(curCourseSection);
             } else {
-                //如果是正序,ASC
-                //比当前sort小的，倒序排序的第一个
+                // 如果是正序,ASC
+                // 比当前sort小的，倒序排序的第一个
                 tmpCourseSection = courseSectionService.getSortSectionMin(curCourseSection);
             }
 
@@ -100,6 +101,7 @@ public class CourseSectionController {
 
     /**
      * 批量添加章节
+     *
      * @param batchSections
      * @return
      */
@@ -112,13 +114,15 @@ public class CourseSectionController {
 
     /**
      * 导入excel
+     *
      * @param courseId
      * @param excelFile
      * @return
      */
     @RequestMapping("/doImport")
     @ResponseBody
-    public String doImport(Long courseId, @RequestParam(value = "courseSectionExcel",required = true) MultipartFile excelFile) {
+    public String doImport(Long courseId,
+            @RequestParam(value = "courseSectionExcel", required = true) MultipartFile excelFile) {
         InputStream is = null;
 
         try {

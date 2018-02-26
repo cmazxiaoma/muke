@@ -30,10 +30,10 @@ import net.sf.json.JSONObject;
 
 /**
  *
-* @Description: 课程详情信息
-* @author cmazxiaoma
-* @date 2018-02-09 17:09
-* @version V1.0
+ * @Description: 课程详情信息
+ * @author cmazxiaoma
+ * @date 2018-02-09 17:09
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/course")
@@ -56,6 +56,7 @@ public class CourseController {
 
     /**
      * 课程章节界面
+     *
      * @param courseId
      * @return
      */
@@ -64,20 +65,20 @@ public class CourseController {
         if (null == courseId) {
             return new ModelAndView("error/404");
         }
-        //获取课程
+        // 获取课程
         Course course = this.courseService.getById(courseId);
 
         if (null == course) {
             return new ModelAndView("error/404");
         }
 
-        //获取课程章节
+        // 获取课程章节
         ModelAndView mv = new ModelAndView("learn");
         List<CourseSectionVO> chaptSections = this.courseBusiness.queryCourseSection(courseId);
         mv.addObject("course", course);
         mv.addObject("chaptSections", chaptSections);
 
-        //获取讲师
+        // 获取讲师
         AuthUser courseTeacher = this.authUserService.getByUsername(course.getUsername());
 
         if (null != courseTeacher && StringUtils.isNotEmpty(courseTeacher.getHeader())) {
@@ -85,7 +86,7 @@ public class CourseController {
         }
         mv.addObject("courseTeacher", courseTeacher);
 
-        //获取推荐课程
+        // 获取推荐课程
         CourseQueryDto queryEntity = new CourseQueryDto();
         queryEntity.descSortField("weight");
         queryEntity.setCount(5);
@@ -93,7 +94,7 @@ public class CourseController {
         List<Course> recomdCourseList = this.courseService.queryList(queryEntity);
         mv.addObject("recomdCourseList", recomdCourseList);
 
-        //当前学习的章节
+        // 当前学习的章节
         UserCourseSection userCourseSection = new UserCourseSection();
         userCourseSection.setCourseId(course.getId());
         userCourseSection.setUserId(SessionContext.getUserId());
@@ -110,6 +111,7 @@ public class CourseController {
 
     /**
      * 视频学习界面
+     *
      * @param sectionId
      * @return
      */
@@ -125,21 +127,21 @@ public class CourseController {
             return new ModelAndView("error/404");
         }
 
-        //课程章节
+        // 课程章节
         ModelAndView mv = new ModelAndView("video");
         List<CourseSectionVO> chaptSections = this.courseBusiness.queryCourseSection(courseSection.getCourseId());
 
         mv.addObject("courseSection", courseSection);
         mv.addObject("chaptSections", chaptSections);
 
-        //学习记录
+        // 学习记录
         UserCourseSection userCourseSection = new UserCourseSection();
         userCourseSection.setUserId(SessionContext.getUserId());
         userCourseSection.setCourseId(courseSection.getCourseId());
         userCourseSection.setSectionId(courseSection.getId());
         UserCourseSection result = userCourseSectionService.queryLatest(userCourseSection);
 
-        //如果没有，则插入
+        // 如果没有，则插入
         if (null == result) {
             userCourseSection.setCreateTime(new Date());
             userCourseSection.setUpdateTime(new Date());
@@ -148,7 +150,7 @@ public class CourseController {
 
             userCourseSectionService.createSelectivity(userCourseSection);
         } else {
-            //更新
+            // 更新
             result.setUpdateTime(new Date());
             userCourseSectionService.update(result);
         }
@@ -158,6 +160,7 @@ public class CourseController {
 
     /**
      * 加载当前用户学习最新课程
+     *
      * @return
      */
     @RequestMapping(value = "/getCurLeanInfo")

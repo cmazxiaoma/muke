@@ -14,10 +14,10 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 
 /**
  *
-* @Description: 用户管理
-* @author cmazxiaoma
-* @date 2018-02-11 20:50
-* @version V1.0
+ * @Description: 用户管理
+ * @author cmazxiaoma
+ * @date 2018-02-11 20:50
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/user")
@@ -35,6 +35,7 @@ public class AuthUserController {
 
     /**
      * 分页显示用户信息
+     *
      * @param queryEntity
      * @param page
      * @return

@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
-* @Description:过滤掉URL中的jsessionId
-* @author cmazxiaoma
-* @date 2018年2月3日
-* @version V1.0
+ * @Description:过滤掉URL中的jsessionId
+ * @author cmazxiaoma
+ * @date 2018年2月3日
+ * @version V1.0
  */
 public class DisableUrlSessionFilter implements Filter {
 
@@ -33,7 +33,7 @@ public class DisableUrlSessionFilter implements Filter {
             throws IOException, ServletException {
         if (!(request instanceof HttpServletRequest)) {
             chain.doFilter(request, response);
-            return ;
+            return;
         }
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -47,7 +47,7 @@ public class DisableUrlSessionFilter implements Filter {
             }
         }
 
-        //wrap response to remove URL encoding
+        // wrap response to remove URL encoding
         HttpServletResponseWrapper wrappedResponse = new HttpServletResponseWrapper(httpResponse) {
 
             @Override

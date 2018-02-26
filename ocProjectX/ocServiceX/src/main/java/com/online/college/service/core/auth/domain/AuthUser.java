@@ -8,10 +8,10 @@ import com.online.college.common.web.auth.SessionUser;
 
 /**
  *
-* @Description: 系统用户
-* @author cmazxiaoma
-* @date 2018-02-08 11:04
-* @version V1.0
+ * @Description: 系统用户
+ * @author cmazxiaoma
+ * @date 2018-02-08 11:04
+ * @version V1.0
  */
 public class AuthUser extends BaseEntity implements SessionUser {
 
@@ -136,7 +136,6 @@ public class AuthUser extends BaseEntity implements SessionUser {
      * 扩展字段： 微信昵称
      */
     private String nickname;
-
 
     @Override
     public String getUsername() {

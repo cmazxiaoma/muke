@@ -4,10 +4,10 @@ import com.online.college.common.orm.BaseEntity;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 14:54
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 14:54
+ * @version V1.0
  */
 public class ConstsCollege extends BaseEntity {
 

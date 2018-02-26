@@ -7,10 +7,10 @@ import com.online.college.service.core.consts.domain.ConstsClassify;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 15:23
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 15:23
+ * @version V1.0
  */
 public interface IConstsClassifyService {
 

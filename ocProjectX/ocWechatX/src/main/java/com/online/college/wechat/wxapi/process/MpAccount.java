@@ -4,24 +4,23 @@ import java.io.Serializable;
 
 /**
  *
-* @Description: 微信公众号信息
-* @author cmazxiaoma
-* @date 2018-02-12 15:33
-* @version V1.0
+ * @Description: 微信公众号信息
+ * @author cmazxiaoma
+ * @date 2018-02-12 15:33
+ * @version V1.0
  */
 public class MpAccount implements Serializable {
 
     private static final long serialVersionUID = -6315146640254918207L;
 
-    private String account;//账号
-    private String appid;//appid
-    private String appsecret;//appsecret
-    private String url;//验证时用的url
-    private String token;//token
+    private String account; // 账号
+    private String appid; // appid
+    private String appsecret; // appsecret
+    private String url; // 验证时用的url
+    private String token; // token
 
-    //ext
-    private Integer msgcount;//自动回复消息条数;默认是5条
-
+    // ext
+    private Integer msgcount;// 自动回复消息条数;默认是5条
 
     public String getAccount() {
         return account;
@@ -30,6 +29,7 @@ public class MpAccount implements Serializable {
     public void setAccount(String account) {
         this.account = account;
     }
+
     public String getAppid() {
         return appid;
     }
@@ -45,6 +45,7 @@ public class MpAccount implements Serializable {
     public void setAppsecret(String appsecret) {
         this.appsecret = appsecret;
     }
+
     public String getUrl() {
         return url;
     }
@@ -56,13 +57,14 @@ public class MpAccount implements Serializable {
     public String getToken() {
         return token;
     }
+
     public void setToken(String token) {
         this.token = token;
     }
 
     public Integer getMsgcount() {
-        if(msgcount == null) {
-            //默认5条
+        if (msgcount == null) {
+            // 默认5条
             msgcount = 5;
         }
         return msgcount;

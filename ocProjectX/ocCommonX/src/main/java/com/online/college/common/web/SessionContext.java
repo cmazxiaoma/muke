@@ -1,6 +1,5 @@
 package com.online.college.common.web;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,10 +10,10 @@ import com.online.college.common.web.auth.SessionUser;
 
 /**
  *
-* @Description: session工具类
-* @author cmazxiaoma
-* @date 2018年2月5日
-* @version V1.0
+ * @Description: session工具类
+ * @author cmazxiaoma
+ * @date 2018年2月5日
+ * @version V1.0
  */
 public class SessionContext {
     public static final String IDENTIFY_CODE_kEY = "_consts_identify_code_key_";
@@ -22,6 +21,7 @@ public class SessionContext {
 
     /**
      * 获取当前用户的userId
+     *
      * @return
      */
     public static Long getUserId() {
@@ -33,6 +33,7 @@ public class SessionContext {
 
     /**
      * 获取当前用户的userName
+     *
      * @return
      */
     public static String getUsername() {
@@ -44,6 +45,7 @@ public class SessionContext {
 
     /**
      * 如果是微信登录，获取当前用户userId
+     *
      * @param request
      * @return
      */
@@ -56,6 +58,7 @@ public class SessionContext {
 
     /**
      * 如果是微信登录，获取当前用户userName
+     *
      * @param request
      * @return
      */
@@ -68,15 +71,17 @@ public class SessionContext {
 
     /**
      * 判断是否微信登录
+     *
      * @param request
      * @return
      */
     public static boolean isWxLogin(HttpServletRequest request) {
-       return getWxAuthUser(request) != null;
+        return getWxAuthUser(request) != null;
     }
 
     /**
      * 如果是微信登录，获取当前用户信息
+     *
      * @param request
      * @return
      */
@@ -92,6 +97,7 @@ public class SessionContext {
 
     /**
      * 获取当前用户信息
+     *
      * @return
      */
     public static SessionUser getAuthUser() {
@@ -103,6 +109,7 @@ public class SessionContext {
 
     /**
      * 获取验证码
+     *
      * @param request
      * @return
      */
@@ -116,6 +123,7 @@ public class SessionContext {
 
     /**
      * 获得属性
+     *
      * @param request
      * @param key
      * @return
@@ -126,6 +134,7 @@ public class SessionContext {
 
     /**
      * 设置属性
+     *
      * @param request
      * @param key
      * @param value
@@ -136,6 +145,7 @@ public class SessionContext {
 
     /**
      * 移除属性
+     *
      * @param request
      * @param key
      */
@@ -145,6 +155,7 @@ public class SessionContext {
 
     /**
      * 判断是否登录
+     *
      * @return
      */
     public static boolean isLogin() {

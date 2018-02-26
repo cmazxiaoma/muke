@@ -4,10 +4,10 @@ import java.util.Date;
 
 /**
  *
-* @Description: 课程学习统计
-* @author cmazxiaoma
-* @date 2018-02-08 16:13
-* @version V1.0
+ * @Description: 课程学习统计
+ * @author cmazxiaoma
+ * @date 2018-02-08 16:13
+ * @version V1.0
  */
 public class CourseStudyStaticsDto {
 

@@ -4,10 +4,10 @@ import com.online.college.common.orm.BaseEntity;
 
 /**
  *
-* @Description: 课程章节
-* @author cmazxiaoma
-* @date 2018-02-09 11:00
-* @version V1.0
+ * @Description: 课程章节
+ * @author cmazxiaoma
+ * @date 2018-02-09 11:00
+ * @version V1.0
  */
 public class CourseSection extends BaseEntity {
 
@@ -18,7 +18,7 @@ public class CourseSection extends BaseEntity {
      */
     private Long courseId;
     /**
-
+     *
      * 父章节id, 只有2级
      */
     private Long parentId;

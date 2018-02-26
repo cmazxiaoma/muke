@@ -20,10 +20,10 @@ import com.online.college.service.core.consts.service.IConstsSiteCarouselService
 
 /**
  *
-* @Description: 轮播图配置
-* @author cmazxiaoma
-* @date 2018-02-11 21:31
-* @version V1.0
+ * @Description: 轮播图配置
+ * @author cmazxiaoma
+ * @date 2018-02-11 21:31
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/carousel")

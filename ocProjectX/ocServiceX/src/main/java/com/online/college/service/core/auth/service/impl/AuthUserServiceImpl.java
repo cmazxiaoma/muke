@@ -15,10 +15,10 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 13:58
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 13:58
+ * @version V1.0
  */
 @Service
 public class AuthUserServiceImpl implements IAuthUserService {
@@ -55,7 +55,6 @@ public class AuthUserServiceImpl implements IAuthUserService {
 
         return recomdList;
     }
-
 
     @Override
     public TailPage<AuthUser> queryPage(AuthUser queryEntity, TailPage<AuthUser> page) {

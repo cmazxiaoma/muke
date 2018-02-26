@@ -20,10 +20,10 @@ import com.online.college.service.core.course.service.ICourseService;
 
 /**
  *
-* @Description: 课程分类页
-* @author cmazxiaoma
-* @date 2018-02-11 09:04
-* @version V1.0
+ * @Description: 课程分类页
+ * @author cmazxiaoma
+ * @date 2018-02-11 09:04
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/course")
@@ -40,9 +40,13 @@ public class CourseListController {
 
     /**
      * 课程分类页
-     * @param c 分类code
-     * @param sort 排序
-     * @param page 分页
+     *
+     * @param c
+     *            分类code
+     * @param sort
+     *            排序
+     * @param page
+     *            分页
      * @return
      */
     @RequestMapping(value = "/list")
@@ -51,10 +55,10 @@ public class CourseListController {
         String curCode = "-1";
         String curSubCode = "-2";
 
-        //加载所有课程分类
+        // 加载所有课程分类
         Map<String, ConstsClassifyVO> classifyMap = portalBusiness.queryAllClassifyMap();
 
-        //所有一级分类
+        // 所有一级分类
         List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
 
         for (ConstsClassifyVO vo : classifyMap.values()) {
@@ -62,10 +66,10 @@ public class CourseListController {
         }
         mv.addObject("classifys", classifysList);
 
-        //当前分类
+        // 当前分类
         ConstsClassify curClassify = constsClassifyService.getByCode(c);
 
-        //没有此分类，则加载所有二级分类
+        // 没有此分类，则加载所有二级分类
         if (null == curClassify) {
             List<ConstsClassify> subClassifys = new ArrayList<ConstsClassify>();
 
@@ -73,28 +77,26 @@ public class CourseListController {
                 subClassifys.addAll(vo.getSubClassifyList());
             }
         } else {
-            //如果是二级分类
+            // 如果是二级分类
             if (!"0".endsWith(curClassify.getParentCode())) {
                 curSubCode = curClassify.getCode();
                 curCode = curClassify.getParentCode();
-                //此分类平级的二级分类
-                mv.addObject("subClassifys",
-                        classifyMap.get(curClassify.getParentCode()).getSubClassifyList());
+                // 此分类平级的二级分类
+                mv.addObject("subClassifys", classifyMap.get(curClassify.getParentCode()).getSubClassifyList());
             } else {
-                //如果是一级分类
+                // 如果是一级分类
                 curCode = curClassify.getCode();
-                //此分类下的二级分类
-                mv.addObject("subClassifys",
-                        classifyMap.get(curClassify.getCode()).getSubClassifyList());
+                // 此分类下的二级分类
+                mv.addObject("subClassifys", classifyMap.get(curClassify.getCode()).getSubClassifyList());
             }
         }
         mv.addObject("curCode", curCode);
         mv.addObject("curSubCode", curSubCode);
 
-        //分页排序数据
+        // 分页排序数据
         Course queryEntity = new Course();
 
-        if (!"-1".equals(curCode) ) {
+        if (!"-1".equals(curCode)) {
             queryEntity.setClassify(curCode);
         }
 
@@ -102,7 +104,7 @@ public class CourseListController {
             queryEntity.setSubClassify(curSubCode);
         }
 
-        //排序参数
+        // 排序参数
         if ("pop".equals(sort)) {
             page.descSortField("studyCount");
         } else {
@@ -112,7 +114,7 @@ public class CourseListController {
 
         mv.addObject("sort", sort);
 
-        //分页参数
+        // 分页参数
         queryEntity.setOnsale(CourseEnum.ONSALE.value());
         page = this.courseService.queryPage(queryEntity, page);
         mv.addObject("page", page);

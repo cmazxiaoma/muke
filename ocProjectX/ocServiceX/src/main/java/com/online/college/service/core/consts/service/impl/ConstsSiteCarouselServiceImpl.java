@@ -14,10 +14,10 @@ import com.online.college.service.core.consts.service.IConstsSiteCarouselService
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-08 15:35
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-08 15:35
+ * @version V1.0
  */
 @Service
 public class ConstsSiteCarouselServiceImpl implements IConstsSiteCarouselService {
@@ -33,7 +33,7 @@ public class ConstsSiteCarouselServiceImpl implements IConstsSiteCarouselService
     @Override
     public List<ConstsSiteCarousel> queryCarousels(Integer count) {
         List<ConstsSiteCarousel> resultList = constsSiteCarouselDao.queryCarousels(count);
-        //处理为七牛图片链接
+        // 处理为七牛图片链接
         for (ConstsSiteCarousel item : resultList) {
             item.setPicture(QiniuStorage.getUrl(item.getPicture()));
         }

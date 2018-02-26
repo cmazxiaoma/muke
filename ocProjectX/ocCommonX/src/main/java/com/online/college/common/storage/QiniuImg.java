@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import org.springframework.util.StringUtils;
 
+/**
+ *
+* @Description: TODO
+* @author cmazxiaoma
+* @date 2018-02-26 13:41
+* @version V1.0
+ */
 public class QiniuImg implements Serializable {
 
     private static final long serialVersionUID = 8557871005358759287L;
@@ -166,6 +173,7 @@ public class QiniuImg implements Serializable {
 
     /**
      * 七牛上传key, 然后七牛会返回一个key， 将返回的key保存到数据库
+     *
      * @return
      */
     public String getUploadKey() {

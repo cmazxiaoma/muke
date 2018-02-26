@@ -6,10 +6,10 @@ import com.online.college.common.util.BeanUtil;
 
 /**
  *
-* @Description: 课程查询实体类
-* @author cmazxiaoma
-* @date 2018-02-09 11:05
-* @version V1.0
+ * @Description: 课程查询实体类
+ * @author cmazxiaoma
+ * @date 2018-02-09 11:05
+ * @version V1.0
  */
 public class CourseQueryDto extends Course {
 
@@ -36,6 +36,7 @@ public class CourseQueryDto extends Course {
 
     /**
      * 按照sortField升序
+     *
      * @param sortField
      */
     public void ascSortField(String sortField) {
@@ -47,6 +48,7 @@ public class CourseQueryDto extends Course {
 
     /**
      * 按照sortField降序
+     *
      * @param sortField
      */
     public void descSortField(String sortField) {

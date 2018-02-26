@@ -27,6 +27,13 @@
 				<span style="color:red;">用户名密码错</span>
 			</li>
 			</#if>
+			
+			<#if errcode ?? && errcode == 3>
+			     <li style="text-align: left;">
+                    <span style="color:red;">微信授权失败</span>
+                </li>
+			</#if>
+			
 			<li class="clearfix" style="margin-top:20px;">
 				<input type="submit" value="登录"  style="width:100px;">
 			</li>

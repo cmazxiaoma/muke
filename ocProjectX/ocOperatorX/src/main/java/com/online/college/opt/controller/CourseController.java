@@ -35,10 +35,10 @@ import com.online.college.service.core.statics.service.IStaticsService;
 
 /**
  *
-* @Description: 课程管理
-* @author cmazxiaoma
-* @date 2018-02-11 21:28
-* @version V1.0
+ * @Description: 课程管理
+ * @author cmazxiaoma
+ * @date 2018-02-11 21:28
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/course")
@@ -61,6 +61,7 @@ public class CourseController {
 
     /**
      * 课程管理
+     *
      * @param queryEntity
      * @param page
      * @return
@@ -86,6 +87,7 @@ public class CourseController {
 
     /**
      * 课程上下架
+     *
      * @param entity
      * @return
      */
@@ -98,6 +100,7 @@ public class CourseController {
 
     /**
      * 课程删除
+     *
      * @param entity
      * @return
      */
@@ -110,6 +113,7 @@ public class CourseController {
 
     /**
      * 根据id获取
+     *
      * @param id
      * @return
      */
@@ -121,6 +125,7 @@ public class CourseController {
 
     /**
      * 课程详情
+     *
      * @param id
      * @return
      */
@@ -129,20 +134,20 @@ public class CourseController {
         Course course = courseService.getById(id);
 
         if (null == course) {
-           return new ModelAndView("error/404");
+            return new ModelAndView("error/404");
         }
         ModelAndView mv = new ModelAndView("cms/course/read");
         mv.addObject("curNav", "course");
         mv.addObject("course", course);
 
-        //课程章节
+        // 课程章节
         List<CourseSectionVO> chaptSections = this.portalBusiness.queryCourseSection(id);
         mv.addObject("chaptSections", chaptSections);
 
-        //课程分类
+        // 课程分类
         Map<String, ConstsClassifyVO> classifyMap = this.portalBusiness.queryAllClassifyMap();
 
-        //所有一级分类
+        // 所有一级分类
         List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
 
         for (ConstsClassifyVO vo : classifyMap.values()) {
@@ -155,10 +160,10 @@ public class CourseController {
         for (ConstsClassifyVO vo : classifyMap.values()) {
             subClassifys.addAll(vo.getSubClassifyList());
         }
-        //所有二级分类
+        // 所有二级分类
         mv.addObject("subClassifys", subClassifys);
 
-        //获得报表统计信息
+        // 获得报表统计信息
         CourseStudyStaticsDto staticsDto = new CourseStudyStaticsDto();
         staticsDto.setCourseId(course.getId());
         staticsDto.setEndDate(new Date());
@@ -176,9 +181,9 @@ public class CourseController {
         return mv;
     }
 
-
     /**
      * 添加, 修改课程
+     *
      * @param entity
      * @param pictureImg
      * @return
@@ -197,7 +202,7 @@ public class CourseController {
             e.printStackTrace();
         }
 
-        //判断教师
+        // 判断教师
         if (StringUtils.isNotEmpty(entity.getUsername())) {
             AuthUser user = authUserService.getByUsername(entity.getUsername());
 
@@ -212,7 +217,7 @@ public class CourseController {
             courseService.updateSelectivity(entity);
         } else {
 
-            //判断获取分类
+            // 判断获取分类
             if (StringUtils.isNotEmpty(entity.getClassify())) {
                 ConstsClassify classify = this.constsClassifyService.getByCode(entity.getClassify());
 
@@ -235,6 +240,7 @@ public class CourseController {
 
     /**
      * 添加课程
+     *
      * @return
      */
     @RequestMapping("/add")
@@ -243,7 +249,7 @@ public class CourseController {
         mv.addObject("curNav", "course");
         Map<String, ConstsClassifyVO> classifyMap = portalBusiness.queryAllClassifyMap();
 
-        //所有一级分类
+        // 所有一级分类
         List<ConstsClassifyVO> classifysList = new ArrayList<ConstsClassifyVO>();
 
         for (ConstsClassifyVO vo : classifyMap.values()) {
@@ -253,7 +259,7 @@ public class CourseController {
 
         List<ConstsClassify> subClassifys = new ArrayList<ConstsClassify>();
 
-        //所有二级分类
+        // 所有二级分类
         for (ConstsClassifyVO vo : classifyMap.values()) {
             subClassifys.addAll(vo.getSubClassifyList());
         }
@@ -263,6 +269,7 @@ public class CourseController {
 
     /**
      * 继续添加章节
+     *
      * @param courseId
      * @return
      */

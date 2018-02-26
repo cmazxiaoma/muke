@@ -13,10 +13,10 @@ import com.online.college.service.core.user.service.IUserCourseSectionService;
 
 /**
  *
-* @Description: TODO
-* @author cmazxiaoma
-* @date 2018-02-09 09:54
-* @version V1.0
+ * @Description: TODO
+ * @author cmazxiaoma
+ * @date 2018-02-09 09:54
+ * @version V1.0
  */
 @Service
 public class UserCourseSectionServiceImpl implements IUserCourseSectionService {
@@ -40,7 +40,8 @@ public class UserCourseSectionServiceImpl implements IUserCourseSectionService {
     }
 
     @Override
-    public TailPage<UserCourseSectionDto> queryPage(UserCourseSection queryEntity, TailPage<UserCourseSectionDto> page) {
+    public TailPage<UserCourseSectionDto> queryPage(UserCourseSection queryEntity,
+            TailPage<UserCourseSectionDto> page) {
         Integer itemsTotalCount = userCourseSectionDao.getTotalItemsCount(queryEntity);
         List<UserCourseSectionDto> items = userCourseSectionDao.queryPage(queryEntity, page);
         page.setItemsTotalCount(itemsTotalCount);

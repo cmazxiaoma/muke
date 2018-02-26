@@ -16,10 +16,10 @@ import org.springframework.util.StreamUtils;
 
 /**
  *
-* @Description: 用于SpirngMVC ResponseBody对象转码
-* @author cmazxiaoma
-* @date 2018年2月3日
-* @version V1.0
+ * @Description: 用于SpirngMVC ResponseBody对象转码
+ * @author cmazxiaoma
+ * @date 2018年2月3日
+ * @version V1.0
  */
 public class UTF8HttpMessageConverter extends AbstractHttpMessageConverter<String> {
 
@@ -34,7 +34,7 @@ public class UTF8HttpMessageConverter extends AbstractHttpMessageConverter<Strin
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public UTF8HttpMessageConverter(Charset defaultCharset) {
-        super(new MediaType[] {new MediaType("text", "plain", defaultCharset), MediaType.ALL});
+        super(new MediaType[] { new MediaType("text", "plain", defaultCharset), MediaType.ALL });
         this.writeAcceptCharset = true;
         this.defaultCharset = defaultCharset;
         this.availableCharsets = new ArrayList(Charset.availableCharsets().values());

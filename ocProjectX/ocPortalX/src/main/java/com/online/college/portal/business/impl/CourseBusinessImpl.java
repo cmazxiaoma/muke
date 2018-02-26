@@ -18,10 +18,10 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 
 /**
  *
-* @Description: 课程业务层
-* @author cmazxiaoma
-* @date 2018-02-09 14:22
-* @version V1.0
+ * @Description: 课程业务层
+ * @author cmazxiaoma
+ * @date 2018-02-09 14:22
+ * @version V1.0
  */
 @Service
 public class CourseBusinessImpl implements ICourseBusiness {
@@ -34,7 +34,7 @@ public class CourseBusinessImpl implements ICourseBusiness {
         List<CourseSectionVO> resultList = new ArrayList<CourseSectionVO>();
         CourseSection courseSection = new CourseSection();
         courseSection.setCourseId(courseId);
-        //设置上架
+        // 设置上架
         courseSection.setOnsale(CourseEnum.ONSALE.value());
 
         Map<Long, CourseSectionVO> tmpMap = new LinkedHashMap<Long, CourseSectionVO>();
@@ -48,7 +48,7 @@ public class CourseBusinessImpl implements ICourseBusiness {
                 BeanUtils.copyProperties(item, vo);
                 tmpMap.put(vo.getId(), vo);
             } else {
-                //小节加入到大章节里面
+                // 小节加入到大章节里面
                 tmpMap.get(item.getParentId()).getSections().add(item);
             }
         }

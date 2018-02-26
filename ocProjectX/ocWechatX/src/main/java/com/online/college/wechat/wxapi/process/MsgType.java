@@ -2,38 +2,38 @@ package com.online.college.wechat.wxapi.process;
 
 /**
  *
-* @Description: 消息类型：所有微信涉及到的消息类型统一管理
-* @author cmazxiaoma
-* @date 2018-02-12 15:33
-* @version V1.0
+ * @Description: 消息类型：所有微信涉及到的消息类型统一管理
+ * @author cmazxiaoma
+ * @date 2018-02-12 15:33
+ * @version V1.0
  */
 public enum MsgType {
 
-	Text("text"),//文本消息
-	News("news"),//图文消息
-	Location("location"),//地理位置消息
-	Image("image"),//图片消息
-	Voice("voice"),//语音消息
-	Video("video"),//视频消息
-	Event("event"),//事件消息
+    Text("text"), // 文本消息
+    News("news"), // 图文消息
+    Location("location"), // 地理位置消息
+    Image("image"), // 图片消息
+    Voice("voice"), // 语音消息
+    Video("video"), // 视频消息
+    Event("event"), // 事件消息
 
-	MPNEWS("mpnews"),//群发图文消息
+    MPNEWS("mpnews"), // 群发图文消息
 
-	SUBSCRIBE("subscribe"),//订阅消息
-	UNSUBSCRIBE("unsubscribe");//取消订阅
+    SUBSCRIBE("subscribe"), // 订阅消息
+    UNSUBSCRIBE("unsubscribe");// 取消订阅
 
-	private String name;
+    private String name;
 
-	private MsgType(String name) {
-	     this.name = name;
-	}
+    private MsgType(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String toString(){
-		return this.name;
-	}
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
-	public static void main(String[] args){
-		System.out.println(MsgType.Text);
-	}
+    public static void main(String[] args) {
+        System.out.println(MsgType.Text);
+    }
 }
