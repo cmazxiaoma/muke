@@ -33,7 +33,6 @@ public class CourseCommentController {
     @RequestMapping("/pagelist")
     public ModelAndView commentSegment(CourseComment queryEntity, TailPage<CourseComment> page) {
         ModelAndView mv = new ModelAndView("cms/course/readComment");
-        queryEntity.setCourseId(1L);
         TailPage<CourseComment> commentPage = this.courseCommentService.queryPage(queryEntity, page);
 
         // 处理用户头像

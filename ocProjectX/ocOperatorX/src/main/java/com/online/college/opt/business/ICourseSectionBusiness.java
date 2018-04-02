@@ -1,6 +1,5 @@
 package com.online.college.opt.business;
 
-import java.io.InputStream;
 import java.util.List;
 
 import com.online.college.opt.vo.CourseSectionVO;
@@ -27,5 +26,5 @@ public interface ICourseSectionBusiness {
      * @param courseId
      * @param is
      */
-    void batchImport(Long courseId, InputStream is);
+    void batchImport(Long courseId, List<List<Object>> dataList);
 }

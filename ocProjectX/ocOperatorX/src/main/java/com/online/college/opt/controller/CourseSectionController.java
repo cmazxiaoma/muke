@@ -1,9 +1,8 @@
 package com.online.college.opt.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Lists;
+import com.online.college.common.util.ImportExcelUtil;
 import com.online.college.common.web.JsonView;
 import com.online.college.opt.business.ICourseSectionBusiness;
 import com.online.college.opt.vo.CourseSectionVO;
@@ -63,12 +64,12 @@ public class CourseSectionController {
         if (null != curCourseSection) {
             CourseSection tmpCourseSection = null;
 
-            // 如果是降序,DESC
+            // 如果是降序
             // 比当前sort大的, 正序排序的第一个
             if (Integer.valueOf(1).equals(sortType)) {
                 tmpCourseSection = courseSectionService.getSortSectionMax(curCourseSection);
             } else {
-                // 如果是正序,ASC
+                // 如果是升序
                 // 比当前sort小的，倒序排序的第一个
                 tmpCourseSection = courseSectionService.getSortSectionMin(curCourseSection);
             }
@@ -118,28 +119,32 @@ public class CourseSectionController {
      * @param courseId
      * @param excelFile
      * @return
+     * @throws Exception
      */
     @RequestMapping("/doImport")
     @ResponseBody
     public String doImport(Long courseId,
-            @RequestParam(value = "courseSectionExcel", required = true) MultipartFile excelFile) {
-        InputStream is = null;
+            @RequestParam(value = "courseSectionExcel", required = true) MultipartFile excelFile) throws Exception {
 
-        try {
-            if (null != excelFile && excelFile.getBytes().length > 0) {
-                is = excelFile.getInputStream();
-                courseSectionBusiness.batchImport(courseId, is);
+        if (excelFile.isEmpty() || excelFile.getSize() < 0) {
+            return new JsonView().render(1, "请提供需要导入的文件");
+        }
+
+        List<List<Object>> parentList = new ImportExcelUtil()
+                .getBankListByExcel(excelFile.getInputStream(),
+                excelFile.getOriginalFilename());
+
+        List<Object> objectList = Lists.newArrayList();
+
+        for (List<Object> item : parentList) {
+            if (item.size() == 0 || CollectionUtils.isEmpty(item)) {
+                objectList.add(item);
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (is != null) {
-                    is.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+        }
+        parentList.removeAll(objectList);
+
+        if (!parentList.isEmpty() && !CollectionUtils.isEmpty(parentList)) {
+            courseSectionBusiness.batchImport(courseId, parentList);
         }
 
         return new JsonView().toString();

@@ -1,26 +1,24 @@
 package com.online.college.opt.business.impl;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Maps;
 import com.online.college.common.web.SessionContext;
 import com.online.college.opt.business.ICourseSectionBusiness;
 import com.online.college.opt.vo.CourseSectionVO;
 import com.online.college.service.core.consts.CourseEnum;
+import com.online.college.service.core.course.domain.Course;
 import com.online.college.service.core.course.domain.CourseSection;
 import com.online.college.service.core.course.service.ICourseSectionService;
+import com.online.college.service.core.course.service.ICourseService;
 
 /**
  *
@@ -35,6 +33,9 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
     @Autowired
     private ICourseSectionService courseSectionService;
 
+    @Autowired
+    private ICourseService courseService;
+
     private static Pattern pattern =  Pattern.compile("^([0-5][0-9]):([0-5][0-9])$");
 
     /**
@@ -42,9 +43,11 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
      */
     @Override
     public void batchAdd(List<CourseSectionVO> courseSections) {
+        String courseTotalTime = "00:00";
         if (CollectionUtils.isNotEmpty(courseSections)) {
             // 先获取最大的排序id
-            Integer maxSort = courseSectionService.getMaxSort(courseSections.get(0).getCourseId());
+            Integer maxSort = courseSectionService
+                    .getMaxSort(courseSections.get(0).getCourseId());
 
             for (int i = 0; i < courseSections.size(); i++) {
                 CourseSectionVO tmpVO = courseSections.get(i);
@@ -57,6 +60,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                 CourseSection courseSection = new CourseSection();
                 courseSection.setCourseId(tmpVO.getCourseId());
                 courseSection.setName(tmpVO.getName());
+
                 // 大章的parentId默认为0
                 courseSection.setParentId(0L);
                 courseSection.setSort(maxSort);
@@ -72,7 +76,7 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                 List<CourseSection> subCourseSections = tmpVO.getSections();
 
                 if (CollectionUtils.isNotEmpty(subCourseSections)) {
-                    String totalTime = "00:00";
+                    String mainCourseSectiontotalTime = "00:00";
 
                     for (int j = 0; j < subCourseSections.size(); j++) {
                         CourseSection courseSectionTmp = subCourseSections.get(j);
@@ -96,17 +100,53 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
                         }
 
                         // 计算上传 一个大章下所有的小节 总时间
-                        totalTime = appendCourseSectionTime(totalTime, courseSectionTmp.getTime());
+                        mainCourseSectiontotalTime = appendCourseSectionTime(mainCourseSectiontotalTime,
+                                        courseSectionTmp.getTime());
                     }
                     // 创建小节
                     courseSectionService.createList(subCourseSections);
 
                     // 更新大章的时间
-                    courseSection.setTime(totalTime);
+                    courseSection.setTime(mainCourseSectiontotalTime);
                     courseSectionService.updateSelectivity(courseSection);
+
+                    //更新课程的时间
+                    courseTotalTime = appendCourseSectionTime(courseTotalTime,
+                            mainCourseSectiontotalTime);
                 }
             }
+
+            courseTotalTime = getCourseDuration(courseTotalTime);
+            Course course = new Course();
+            course.setUpdateUser(SessionContext.getUsername());
+            course.setUpdateTime(new Date());
+            course.setTime(courseTotalTime);
+            course.setId(courseSections.get(0).getCourseId());
+
+            //更新course
+            courseService.updateSelectivity(course);
         }
+    }
+
+    private String getCourseDuration(String courseTotalTime) {
+        String result;
+        String[] timeArr = courseTotalTime.split(":");
+
+        Integer second = Integer.parseInt(timeArr[0]) * 60
+                + Integer.parseInt(timeArr[1]);
+
+        Integer minute = second / 60;
+
+        Integer hour = minute / 60;
+
+        if (hour > 0) {
+            minute = minute % 60;
+            result = hour + "小时" + minute + "分钟";
+        } else {
+            result = minute + "分钟";
+        }
+
+        return result;
     }
 
     private String appendCourseSectionTime(String time1, String time2) {
@@ -138,73 +178,55 @@ public class CourseSectionBusinessImpl implements ICourseSectionBusiness {
      * 批量导入
      */
     @Override
-    public void batchImport(Long courseId, InputStream is) {
+    public void batchImport(Long courseId, List<List<Object>> dataList) {
         // TODO Auto-generated method stub
-        try {
-            Workbook wb = WorkbookFactory.create(is);
-            // 得到总行数
-            Sheet sheet = wb.getSheetAt(0);
-            // 第一行(title移除掉)
-            sheet.removeRow(sheet.getRow(0));
+        int count = dataList.size();
 
-            List<CourseSectionVO> courseSections = new ArrayList<CourseSectionVO>();
-            // 遍历行
-            for (Row row : sheet) {
-                // 章标题
-                Cell title = row.getCell(0, Row.CREATE_NULL_AS_BLANK);
+        List<CourseSectionVO> courseSections = new ArrayList<CourseSectionVO>();
 
-                // 节标题
-                Cell subTitle = row.getCell(1, Row.CREATE_NULL_AS_BLANK);
+        Map<String, CourseSectionVO> mainCourseSectionMap = Maps.newLinkedHashMap();
 
-                // 节视频url
-                Cell url = row.getCell(2, Row.CREATE_NULL_AS_BLANK);
+        for (int i = 0; i < count; i++) {
+            List<Object> childList = dataList.get(i);
+            // 章标题
+            String title = childList.get(0) == null ? null : String.valueOf(childList.get(0));
 
-                // 节时长
-                Cell time = row.getCell(3, Row.CREATE_NULL_AS_BLANK);
+            // 节标题
+            String subTitle = childList.get(1) == null ? null : String.valueOf(childList.get(1));
 
-                // 如果有数据, 新建一章
-                if (title.getCellType() == Cell.CELL_TYPE_STRING) {
+            // 节视频url
+            String url = childList.get(2) == null ? null : String.valueOf(childList.get(2));
 
-                    if ("end".equals(title.getStringCellValue())) {
-                        break;
-                    }
-                    // 大章
-                    CourseSectionVO courseSectionVO = new CourseSectionVO();
-                    courseSectionVO.setCourseId(courseId);
-                    courseSectionVO.setName(title.getStringCellValue().trim());
+            //节时长
+            String time = childList.get(3) == null ? "00:00": String.valueOf(childList.get(3));
 
-                    // 小节
-                    CourseSectionVO subCourseSectionVO = new CourseSectionVO();
-                    subCourseSectionVO.setCourseId(courseId);
-                    subCourseSectionVO.setName(subTitle.getStringCellValue().trim());
-                    subCourseSectionVO.setVideoUrl(url.getStringCellValue().trim());
-                    subCourseSectionVO.setTime(time.getStringCellValue().trim());
+            //先判断大章是否在mainCourseSection存在
+            CourseSectionVO courseSectionVO = new CourseSectionVO();
 
-                    // 大章添加小节
-                    courseSectionVO.getSections().add(subCourseSectionVO);
-                    courseSections.add(courseSectionVO);
-
-                } else if (title.getCellType() == Cell.CELL_TYPE_BLANK) {
-                    if (courseSections.size() > 0) {
-                        CourseSectionVO lastCourseSectionVO = courseSections.get(0);
-
-                        CourseSection subCourseSection = new CourseSection();
-                        subCourseSection.setCourseId(courseId);
-                        subCourseSection.setName(subTitle.getStringCellValue().trim());
-                        subCourseSection.setVideoUrl(url.getStringCellValue().trim());
-                        subCourseSection.setTime(time.getStringCellValue().trim());
-
-                        lastCourseSectionVO.getSections().add(subCourseSection);
-                    }
-                }
+            if (mainCourseSectionMap.containsKey(title)) {
+                courseSectionVO = mainCourseSectionMap.get(title);
+            } else {
+                courseSectionVO.setCourseId(courseId);
+                courseSectionVO.setName(title);
             }
 
-            // 批量插入
-            if (courseSections.size() > 0) {
-                this.batchAdd(courseSections);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            mainCourseSectionMap.put(title, courseSectionVO);
+
+            // 小节
+            CourseSection subCourseSection = new CourseSection();
+            subCourseSection.setCourseId(courseId);
+            subCourseSection.setName(subTitle);
+            subCourseSection.setVideoUrl(url);
+            subCourseSection.setTime(time);
+
+            // 大章添加小节
+            courseSectionVO.getSections().add(subCourseSection);
+            courseSections.add(courseSectionVO);
+        }
+
+        // 批量插入
+        if (courseSections.size() > 0) {
+            this.batchAdd(courseSections);
         }
     }
 

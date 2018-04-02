@@ -66,7 +66,7 @@
             </if>
         </trim>
         <if test="sortField != null">
-        ORDER BY ${sortField}  ${sortDirection}
+        ORDER BY ${sortField} ${sortDirection}
         </if>
         <if test="start != null and end != null">
         LIMIT #{start, jdbcType=INTEGER} , #{end, jdbcType=INTEGER}

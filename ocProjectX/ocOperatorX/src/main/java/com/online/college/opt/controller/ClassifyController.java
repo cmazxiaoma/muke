@@ -74,9 +74,9 @@ public class ClassifyController {
             if (tmpEntity != null) {
                 return JsonView.render(1, "此编码已存在");
             }
-            this.constsClassifyService.create(entity);
+            this.constsClassifyService.createSelectivity(entity);
         } else {
-            this.constsClassifyService.update(entity);
+            this.constsClassifyService.updateSelectivity(entity);
         }
 
         return new JsonView().toString();
