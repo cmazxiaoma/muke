@@ -19,7 +19,7 @@ import com.online.college.wechat.wxapi.vo.OAuthUserInfo;
 /**
  *
  * @Description: 用户登录
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 10:21
  * @version V1.0
  */

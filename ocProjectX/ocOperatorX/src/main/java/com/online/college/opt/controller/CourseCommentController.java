@@ -16,7 +16,7 @@ import com.online.college.service.core.course.service.ICourseCommentService;
 /**
  *
  * @Description: 课程评论管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 21:26
  * @version V1.0
  */

@@ -9,7 +9,7 @@ import com.online.college.service.core.course.domain.CourseQueryDto;
 /**
  *
  * @Description: 课程服务层
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 13:42
  * @version V1.0
  */

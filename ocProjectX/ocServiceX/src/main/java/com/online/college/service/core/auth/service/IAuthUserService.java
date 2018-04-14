@@ -8,7 +8,7 @@ import com.online.college.service.core.auth.domain.AuthUser;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 13:54
  * @version V1.0
  */

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 13:21
  * @version V1.0
  */

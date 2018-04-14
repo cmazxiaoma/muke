@@ -20,7 +20,7 @@ import com.online.college.common.web.SessionContext;
 /**
  *
  * @Description: 验证码生成器
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 10:24
  * @version V1.0
  */

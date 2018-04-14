@@ -13,7 +13,7 @@ import com.online.college.service.core.user.service.IUserCollectionsService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 09:50
  * @version V1.0
  */

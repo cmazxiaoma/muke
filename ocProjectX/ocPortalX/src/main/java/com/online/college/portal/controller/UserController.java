@@ -31,7 +31,7 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 /**
  *
  * @Description: 个人中心
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 10:05
  * @version V1.0
  */

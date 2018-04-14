@@ -9,7 +9,7 @@ import com.online.college.service.core.user.domain.UserCourseSectionDto;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 18:23
  * @version V1.0
  */

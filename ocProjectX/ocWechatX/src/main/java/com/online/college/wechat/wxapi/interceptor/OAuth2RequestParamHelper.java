@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  *
  * @Description: 微信oauth interceptor 处理参数转换 对于interceptor的url如果有参数，业务中请用此类获取参数
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 11:04
  * @version V1.0
  */

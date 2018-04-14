@@ -21,7 +21,7 @@ import com.online.college.service.core.course.service.ICourseService;
 /**
  *
  * @Description: 课程分类页
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 09:04
  * @version V1.0
  */

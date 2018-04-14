@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  *
  * @Description: 关注的用户学习记录DTO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 17:08
  * @version V1.0
  */

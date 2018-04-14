@@ -5,7 +5,7 @@ import org.apache.shiro.subject.Subject;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 19:55
  * @version V1.0
  */

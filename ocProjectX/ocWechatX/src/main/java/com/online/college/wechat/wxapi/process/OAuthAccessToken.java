@@ -3,7 +3,7 @@ package com.online.college.wechat.wxapi.process;
 /**
  *
  * @Description: OAuth token
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:33
  * @version V1.0
  */

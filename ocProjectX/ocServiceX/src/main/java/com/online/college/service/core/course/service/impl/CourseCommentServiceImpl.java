@@ -13,7 +13,7 @@ import com.online.college.service.core.course.service.ICourseCommentService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 13:37
  * @version V1.0
  */

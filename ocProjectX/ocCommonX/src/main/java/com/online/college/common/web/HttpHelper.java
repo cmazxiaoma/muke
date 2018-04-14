@@ -11,14 +11,14 @@ import org.springframework.web.util.WebUtils;
 /**
  *
  * @Description: http工具类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月3日
  * @version V1.0
  */
 public class HttpHelper extends WebUtils {
 
     /**
-     * 获得网站域名, 比如cmazxiaoma.com
+     * 获得网站域名, 比如majinlan.com
      *
      * @param request
      * @return
@@ -28,7 +28,7 @@ public class HttpHelper extends WebUtils {
     }
 
     /**
-     * 获取协议+域名, 比如http://cmazxiaoma.com
+     * 获取协议+域名, 比如http://majinlan.com
      *
      * @param request
      * @return
@@ -38,7 +38,7 @@ public class HttpHelper extends WebUtils {
     }
 
     /**
-     * 获得类似 http://cmazxiaoma.com:8080/ocPortal的url
+     * 获得类似 http://majinlan.com:8080/ocPortal的url
      *
      * @param request
      * @return

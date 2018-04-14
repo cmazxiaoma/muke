@@ -21,7 +21,7 @@ import org.springframework.util.Assert;
 /**
  *
  * @Description: Bean转换工具
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

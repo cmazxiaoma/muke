@@ -5,7 +5,7 @@ import java.util.List;
 /**
  *
  * @Description: 分页接口
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 14:45
  * @version V1.0
  */

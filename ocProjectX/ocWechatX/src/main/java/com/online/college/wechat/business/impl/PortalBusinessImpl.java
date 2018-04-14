@@ -19,7 +19,7 @@ import com.online.college.wechat.vo.CourseSectionVO;
 /**
  *
  * @Description: 业务层
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 14:58
  * @version V1.0
  */

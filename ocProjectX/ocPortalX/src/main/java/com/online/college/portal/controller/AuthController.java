@@ -21,7 +21,7 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 /**
  *
  * @Description: 用户登录 & 注册
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 15:04
  * @version V1.0
  */

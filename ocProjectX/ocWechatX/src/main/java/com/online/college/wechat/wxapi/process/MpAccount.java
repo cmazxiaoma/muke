@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  * @Description: 微信公众号信息
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:33
  * @version V1.0
  */

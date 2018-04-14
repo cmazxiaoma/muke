@@ -23,7 +23,7 @@ import com.online.college.wechat.wxapi.vo.MsgRequest;
 /**
  *
  * @Description: 微信与开发者服务器交互接口
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:30
  * @version V1.0
  */

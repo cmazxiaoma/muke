@@ -22,7 +22,7 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 /**
  *
  * @Description: 课程章节管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 21:30
  * @version V1.0
  */

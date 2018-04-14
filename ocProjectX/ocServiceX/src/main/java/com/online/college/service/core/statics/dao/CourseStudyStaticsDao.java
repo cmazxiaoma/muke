@@ -7,7 +7,7 @@ import com.online.college.service.core.statics.domain.CourseStudyStaticsDto;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 16:17
  * @version V1.0
  */

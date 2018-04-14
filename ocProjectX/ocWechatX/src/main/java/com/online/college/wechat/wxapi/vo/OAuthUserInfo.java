@@ -3,7 +3,7 @@ package com.online.college.wechat.wxapi.vo;
 /**
  *
  * @Description: 微信用户基础信息
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 13:29
  * @version V1.0
  */

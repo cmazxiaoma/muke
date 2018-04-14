@@ -11,7 +11,7 @@ import com.online.college.wechat.wxapi.vo.OAuthUserInfo;
 /**
  *
  * @Description: 缓存工具类 目前使用 服务器内存的方式; 1、开发者可以根据自己的需求使用不同的缓存方式,比如memcached
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 11:22
  * @version V1.0
  */

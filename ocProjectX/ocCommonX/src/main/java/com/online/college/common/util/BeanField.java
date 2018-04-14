@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 /**
  *
  * @Description: BeanField对应着数据表列名，model类字段属性
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

@@ -3,7 +3,7 @@ package com.online.college.common.web;
 /**
  *
  * @Description: Session中setAttribute的对象，加入超时属性 时间从创建对象开始
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

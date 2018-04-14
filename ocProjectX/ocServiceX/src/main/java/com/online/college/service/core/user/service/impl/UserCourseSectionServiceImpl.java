@@ -14,7 +14,7 @@ import com.online.college.service.core.user.service.IUserCourseSectionService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 09:54
  * @version V1.0
  */

@@ -22,7 +22,7 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 /**
  *
  * @Description: shiro实现用户登录，各个模块表不一样，各自处理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 10:54
  * @version V1.0
  */

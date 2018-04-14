@@ -3,7 +3,7 @@ package com.online.college.wechat.wxapi.process;
 /**
  *
 * @Description: 消息类型
-* @author cmazxiaoma
+* @author majinlan
 * @date 2018-02-12 15:34
 * @version V1.0
  */

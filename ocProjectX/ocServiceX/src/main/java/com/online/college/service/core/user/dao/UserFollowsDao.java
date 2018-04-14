@@ -9,7 +9,7 @@ import com.online.college.service.core.user.domain.UserFollows;
 /**
  *
  * @Description: 用户关注
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 17:27
  * @version V1.0
  */

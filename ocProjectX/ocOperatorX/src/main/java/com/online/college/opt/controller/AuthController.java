@@ -21,7 +21,7 @@ import com.online.college.service.core.auth.service.IAuthUserService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 20:41
  * @version V1.0
  */

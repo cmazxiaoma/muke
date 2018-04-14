@@ -3,7 +3,7 @@ package com.online.college.service.core.consts;
 /**
  *
  * @Description: 课程使用的枚举
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 14:36
  * @version V1.0
  */

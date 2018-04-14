@@ -12,7 +12,7 @@ import net.sf.json.JSONObject;
 /**
  *
  * @Description: 微信 客户端，统一处理微信相关接口
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:35
  * @version V1.0
  */

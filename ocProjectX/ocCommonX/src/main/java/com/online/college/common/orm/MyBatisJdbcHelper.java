@@ -10,7 +10,7 @@ import com.online.college.common.util.BeanUtil;
 /**
  *
  * @Description: 为mybatis准备动态sql
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

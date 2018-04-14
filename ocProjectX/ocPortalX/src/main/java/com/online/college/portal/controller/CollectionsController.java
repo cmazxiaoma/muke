@@ -18,7 +18,7 @@ import com.online.college.service.core.user.service.IUserCollectionsService;
 /**
  *
  * @Description: 用户收藏
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 15:48
  * @version V1.0
  */

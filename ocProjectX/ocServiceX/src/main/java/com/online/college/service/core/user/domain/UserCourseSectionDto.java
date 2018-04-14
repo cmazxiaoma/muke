@@ -3,7 +3,7 @@ package com.online.college.service.core.user.domain;
 /**
  *
  * @Description: 用户学习课程DTO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 17:01
  * @version V1.0
  */

@@ -6,7 +6,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 /**
  *
  * @Description: SpringBeanFactory
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

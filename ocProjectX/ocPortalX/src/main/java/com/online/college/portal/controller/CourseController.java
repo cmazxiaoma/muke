@@ -31,7 +31,7 @@ import net.sf.json.JSONObject;
 /**
  *
  * @Description: 课程详情信息
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 17:09
  * @version V1.0
  */

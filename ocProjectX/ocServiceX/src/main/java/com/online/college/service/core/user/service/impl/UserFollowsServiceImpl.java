@@ -14,7 +14,7 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 10:01
  * @version V1.0
  */

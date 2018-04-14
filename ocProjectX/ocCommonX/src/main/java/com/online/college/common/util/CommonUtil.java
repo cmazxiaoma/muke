@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-26 13:41
  * @version V1.0
  */

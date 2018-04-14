@@ -11,7 +11,7 @@ import freemarker.template.TemplateException;
 /**
  *
  * @Description: freemarker集成shiro标签
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 17:12
  * @version V1.0
  */

@@ -8,7 +8,7 @@ import com.online.college.service.core.course.domain.CourseComment;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 13:38
  * @version V1.0
  */

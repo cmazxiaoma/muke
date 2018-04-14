@@ -21,7 +21,7 @@ import com.online.college.service.core.course.service.ICourseService;
 /**
  *
  * @Description: 网站主页
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 09:46
  * @version V1.0
  */
@@ -68,6 +68,7 @@ public class PortalController {
         queryEntity.setFree(CourseEnum.FREE_NOT.value());
         queryEntity.descSortField("weight");
         List<Course> actionCourseList = this.courseService.queryList(queryEntity);
+        mv.addObject("actionCourseList", actionCourseList);
 
         // 获取5门免费课推荐，根据权重(weight)进行排序
         // 免费课

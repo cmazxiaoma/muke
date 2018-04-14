@@ -3,7 +3,7 @@ package com.online.college.common.storage;
 /**
  *
  * @Description: 文件类型枚举类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 14:48
  * @version V1.0
  */

@@ -11,7 +11,7 @@ import com.online.college.common.web.auth.SessionUser;
 /**
  *
  * @Description: session工具类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月5日
  * @version V1.0
  */

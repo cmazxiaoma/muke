@@ -17,7 +17,7 @@ import com.online.college.common.web.JsonView;
 /**
  *
  * @Description: shiro对用户是否登录的filter
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 10:40
  * @version V1.0
  */

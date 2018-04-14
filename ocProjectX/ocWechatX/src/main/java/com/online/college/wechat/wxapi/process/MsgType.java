@@ -3,7 +3,7 @@ package com.online.college.wechat.wxapi.process;
 /**
  *
  * @Description: 消息类型：所有微信涉及到的消息类型统一管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:33
  * @version V1.0
  */

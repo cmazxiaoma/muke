@@ -8,7 +8,7 @@ import com.online.college.service.core.course.domain.CourseComment;
 /**
  *
  * @Description: 课程评论
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 11:48
  * @version V1.0
  */

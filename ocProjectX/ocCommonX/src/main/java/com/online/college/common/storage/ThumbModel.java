@@ -3,7 +3,7 @@ package com.online.college.common.storage;
 /**
  *
 * @Description: 文件的缩略图及其模式字符串定义
-* @author cmazxiaoma
+* @author majinlan
 * @date 2018-02-07 16:04
 * @version V1.0
  */

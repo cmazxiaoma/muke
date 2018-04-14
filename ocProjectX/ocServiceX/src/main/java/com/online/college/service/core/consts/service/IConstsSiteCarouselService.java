@@ -8,7 +8,7 @@ import com.online.college.service.core.consts.domain.ConstsSiteCarousel;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 15:24
  * @version V1.0
  */

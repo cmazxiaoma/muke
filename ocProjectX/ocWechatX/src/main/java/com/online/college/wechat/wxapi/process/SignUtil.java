@@ -8,7 +8,7 @@ import java.util.SortedMap;
 /**
  *
  * @Description: 微信验证
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:34
  * @version V1.0
  */

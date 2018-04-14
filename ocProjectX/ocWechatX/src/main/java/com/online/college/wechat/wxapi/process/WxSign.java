@@ -8,7 +8,7 @@ import com.online.college.common.util.SecurityUtil;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:36
  * @version V1.0
  */

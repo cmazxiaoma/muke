@@ -19,7 +19,7 @@ import com.online.college.service.core.course.service.ICourseSectionService;
 /**
  *
  * @Description: 课程业务层
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 19:22
  * @version V1.0
  */

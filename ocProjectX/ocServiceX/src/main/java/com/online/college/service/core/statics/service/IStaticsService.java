@@ -6,7 +6,7 @@ import com.online.college.service.core.statics.domain.StaticsVO;
 /**
  *
  * @Description: 课程报表统计
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 16:24
  * @version V1.0
  */

@@ -36,7 +36,7 @@ import com.online.college.service.core.statics.service.IStaticsService;
 /**
  *
  * @Description: 课程管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 21:28
  * @version V1.0
  */

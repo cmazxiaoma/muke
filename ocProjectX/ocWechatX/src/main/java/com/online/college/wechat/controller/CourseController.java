@@ -26,7 +26,7 @@ import com.online.college.wechat.vo.CourseSectionVO;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 10:22
  * @version V1.0
  */

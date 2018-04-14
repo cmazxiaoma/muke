@@ -5,7 +5,7 @@ import com.online.college.common.orm.BaseEntity;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 14:54
  * @version V1.0
  */

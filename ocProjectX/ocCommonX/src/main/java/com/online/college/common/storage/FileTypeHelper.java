@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 /**
  *
  * @Description: FileType工具类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 14:49
  * @version V1.0
  */

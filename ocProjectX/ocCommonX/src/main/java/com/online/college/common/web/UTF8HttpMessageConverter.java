@@ -17,7 +17,7 @@ import org.springframework.util.StreamUtils;
 /**
  *
  * @Description: 用于SpirngMVC ResponseBody对象转码
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月3日
  * @version V1.0
  */

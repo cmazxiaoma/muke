@@ -22,7 +22,7 @@ import com.qiniu.util.Auth;
 /**
  *
  * @Description: 七牛云SDK的二次封装
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 15:07
  * @version V1.0
  */

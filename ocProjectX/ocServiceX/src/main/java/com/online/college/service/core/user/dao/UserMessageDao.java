@@ -8,7 +8,7 @@ import com.online.college.service.core.user.domain.UserMessage;
 /**
  *
 * @Description: 用户消息
-* @author cmazxiaoma
+* @author majinlan
 * @date 2018-02-08 17:29
 * @version V1.0
  */

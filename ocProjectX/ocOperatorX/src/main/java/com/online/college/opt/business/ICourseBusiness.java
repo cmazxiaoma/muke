@@ -7,7 +7,7 @@ import com.online.college.opt.vo.CourseSectionVO;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 19:08
  * @version V1.0
  */

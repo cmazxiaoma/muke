@@ -8,7 +8,7 @@ import com.online.college.portal.vo.ConstsClassifyVO;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 14:18
  * @version V1.0
  */

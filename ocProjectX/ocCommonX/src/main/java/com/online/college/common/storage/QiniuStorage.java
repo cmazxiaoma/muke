@@ -3,7 +3,7 @@ package com.online.college.common.storage;
 /**
  *
  * @Description: 七牛云存储管理器，用来上传图像和查看图像
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 16:30
  * @version V1.0
  */

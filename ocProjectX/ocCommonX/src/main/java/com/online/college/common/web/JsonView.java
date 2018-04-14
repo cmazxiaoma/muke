@@ -5,7 +5,7 @@ import net.sf.json.JSONObject;
 /**
  *
  * @Description: JsonView
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 16:54
  * @version V1.0
  */

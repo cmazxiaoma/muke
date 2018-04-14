@@ -18,7 +18,7 @@ import com.online.college.service.core.course.service.ICourseService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 13:45
  * @version V1.0
  */

@@ -9,7 +9,7 @@ import com.online.college.common.web.SessionContext;
 /**
  *
  * @Description: 内容管理首页
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 21:12
  * @version V1.0
  */

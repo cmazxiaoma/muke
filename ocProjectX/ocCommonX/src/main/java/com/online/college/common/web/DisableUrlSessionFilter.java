@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @Description:过滤掉URL中的jsessionId
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018年2月3日
  * @version V1.0
  */

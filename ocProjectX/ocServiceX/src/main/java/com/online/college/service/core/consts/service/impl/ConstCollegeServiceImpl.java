@@ -13,7 +13,7 @@ import com.online.college.service.core.consts.service.IConstsCollegeService;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 15:35
  * @version V1.0
  */

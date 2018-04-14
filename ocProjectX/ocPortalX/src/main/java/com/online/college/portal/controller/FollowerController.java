@@ -17,7 +17,7 @@ import com.online.college.service.core.user.service.IUserFollowsService;
 /**
  *
  * @Description: 用户关注
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 09:37
  * @version V1.0
  */

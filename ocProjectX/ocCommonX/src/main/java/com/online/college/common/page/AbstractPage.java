@@ -13,7 +13,7 @@ import com.online.college.common.util.BeanUtil;
 /**
  *
  * @Description: 抽象page类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 14:45
  * @version V1.0
  */

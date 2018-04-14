@@ -20,7 +20,7 @@ import com.online.college.service.core.consts.service.IConstsClassifyService;
 /**
  *
  * @Description: 课程分类管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 20:59
  * @version V1.0
  */

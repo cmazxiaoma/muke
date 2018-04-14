@@ -15,7 +15,7 @@ import com.online.college.service.core.statics.service.IStaticsService;
 /**
  *
  * @Description: 统计分析
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 16:25
  * @version V1.0
  */

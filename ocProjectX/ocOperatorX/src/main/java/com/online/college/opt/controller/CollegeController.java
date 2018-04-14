@@ -15,7 +15,7 @@ import com.online.college.service.core.consts.service.IConstsCollegeService;
 /**
  *
  * @Description: 网校管理
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-11 21:16
  * @version V1.0
  */

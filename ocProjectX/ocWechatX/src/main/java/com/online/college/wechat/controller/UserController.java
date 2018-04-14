@@ -16,7 +16,7 @@ import com.online.college.service.core.user.service.IUserCourseSectionService;
 /**
  *
  * @Description: 用户
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 10:22
  * @version V1.0
  */

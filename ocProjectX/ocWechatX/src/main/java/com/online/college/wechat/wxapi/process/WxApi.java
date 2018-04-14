@@ -22,7 +22,7 @@ import net.sf.json.JSONObject;
 /**
  *
  * @Description: 微信 API、微信基本接口
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:34
  * @version V1.0
  */

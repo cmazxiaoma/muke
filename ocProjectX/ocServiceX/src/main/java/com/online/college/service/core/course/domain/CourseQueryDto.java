@@ -7,7 +7,7 @@ import com.online.college.common.util.BeanUtil;
 /**
  *
  * @Description: 课程查询实体类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 11:05
  * @version V1.0
  */

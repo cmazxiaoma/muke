@@ -5,7 +5,7 @@ import freemarker.template.SimpleHash;
 /**
  *
  * @Description: 将shiro标签注入到FreeMarker
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 20:02
  * @version V1.0
  */

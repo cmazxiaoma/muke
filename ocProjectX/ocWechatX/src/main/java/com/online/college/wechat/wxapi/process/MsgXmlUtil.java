@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  *
  * @Description: xml 消息处理工具类
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:33
  * @version V1.0
  */

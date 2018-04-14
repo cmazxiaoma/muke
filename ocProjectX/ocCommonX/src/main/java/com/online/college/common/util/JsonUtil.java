@@ -7,7 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 /**
  *
  * @Description: JsonUtil
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 10:50
  * @version V1.0
  */

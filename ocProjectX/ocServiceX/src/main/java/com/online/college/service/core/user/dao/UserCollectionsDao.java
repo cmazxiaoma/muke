@@ -8,7 +8,7 @@ import com.online.college.service.core.user.domain.UserCollections;
 /**
  *
  * @Description: 用户收藏
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 17:21
  * @version V1.0
  */

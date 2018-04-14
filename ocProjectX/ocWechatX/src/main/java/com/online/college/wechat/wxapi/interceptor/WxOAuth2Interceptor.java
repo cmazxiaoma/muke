@@ -17,7 +17,7 @@ import com.online.college.wechat.wxapi.vo.OAuthUserInfo;
 /**
  *
  * @Description: 微信客户端用户请求验证拦截器
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 11:04
  * @version V1.0
  */

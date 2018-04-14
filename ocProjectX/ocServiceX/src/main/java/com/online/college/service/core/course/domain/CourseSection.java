@@ -5,7 +5,7 @@ import com.online.college.common.orm.BaseEntity;
 /**
  *
  * @Description: 课程章节
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-09 11:00
  * @version V1.0
  */

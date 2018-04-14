@@ -9,7 +9,7 @@ import com.online.college.common.web.auth.SessionUser;
 /**
  *
  * @Description: 系统用户
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 11:04
  * @version V1.0
  */

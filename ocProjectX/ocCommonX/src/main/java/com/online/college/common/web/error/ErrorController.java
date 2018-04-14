@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  *
  * @Description: ErrorController
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 17:00
  * @version V1.0
  */

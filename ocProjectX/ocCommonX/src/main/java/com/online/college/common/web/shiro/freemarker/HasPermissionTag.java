@@ -3,7 +3,7 @@ package com.online.college.common.web.shiro.freemarker;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 19:53
  * @version V1.0
  */

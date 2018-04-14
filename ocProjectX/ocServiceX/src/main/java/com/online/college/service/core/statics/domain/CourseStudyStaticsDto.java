@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  *
  * @Description: 课程学习统计
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 16:13
  * @version V1.0
  */

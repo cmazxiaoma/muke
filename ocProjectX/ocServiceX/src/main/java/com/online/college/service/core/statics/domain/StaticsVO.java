@@ -5,7 +5,7 @@ import java.util.List;
 /**
  *
  * @Description: 报表分析VO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-08 16:10
  * @version V1.0
  */

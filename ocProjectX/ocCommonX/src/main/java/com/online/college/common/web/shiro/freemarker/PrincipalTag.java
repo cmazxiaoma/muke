@@ -15,7 +15,7 @@ import freemarker.template.TemplateModelException;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 19:02
  * @version V1.0
  */

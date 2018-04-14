@@ -13,7 +13,7 @@ import com.online.college.service.core.course.service.ICourseService;
 /**
  *
  * @Description: M站
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-24 10:22
  * @version V1.0
  */

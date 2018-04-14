@@ -11,7 +11,7 @@ import freemarker.template.TemplateException;
 /**
  *
  * @Description: TODO
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-07 19:42
  * @version V1.0
  */

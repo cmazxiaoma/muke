@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  *
  * @Description: 微信公众平台全局返回码说明
- * @author cmazxiaoma
+ * @author majinlan
  * @date 2018-02-12 15:31
  * @version V1.0
  */
