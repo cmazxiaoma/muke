@@ -1,0 +1,23 @@
+            <h3><strong>学习记录</strong></h3>
+            
+            <#if (page.items)??>
+                <#list page.items as item>
+                <div class="study-record  clearfix">
+                    <a href="${s.base}/course/read.html?id=${item.courseId!}">
+                        <div class="course-name">
+                        ${item.courseName!}
+                        </div>
+                    </a>
+                    <div class="section-name">
+                        <a href="${s.base}/course/video.html?id=${(item.sectionId)!}">${item.sectionName!}</a>
+                    </div>
+                    <div class="study-footer">时间：
+                    <#if item.createTime??>
+                    ${item.createTime?string('yyyy-MM-dd')}
+                    </#if>
+                    </div>
+                </div>
+                </#list>
+                
+                <#include "./common/tailPage.html">
+            </#if>

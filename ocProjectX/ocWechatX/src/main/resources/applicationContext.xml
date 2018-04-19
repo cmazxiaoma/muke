@@ -108,10 +108,8 @@
                     <property name="includes">
                         <list> 
                             <value>/wxapi/oauthTest.html</value>
-                            
                             <value>/course/video.html</value>
                             <value>/user/index.html</value>
-                            
                         </list>
                     </property>
                 </bean>

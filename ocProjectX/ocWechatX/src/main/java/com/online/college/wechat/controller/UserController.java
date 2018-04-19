@@ -50,7 +50,19 @@ public class UserController {
         // 当前用户
         mv.addObject("curUser", SessionContext.getWxAuthUser(request));
         return mv;
+    }
 
+    /**
+     * 加载评论
+     * @param request
+     * @param page
+     * @return
+     */
+    @RequestMapping("/userCourseSection")
+    public ModelAndView userCourseSection (HttpServletRequest request, TailPage<UserCourseSectionDto> page) {
+        ModelAndView modelAndView = index(request, page);
+        modelAndView.setViewName("userCourseSection");
+        return modelAndView;
     }
 
 }

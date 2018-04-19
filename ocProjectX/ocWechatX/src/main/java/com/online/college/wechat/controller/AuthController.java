@@ -34,11 +34,11 @@ public class AuthController {
      * 登录页面
      */
     @RequestMapping(value = "/login")
-    public ModelAndView login() {
-        /*
-         * if(SessionContext.isWxLogin()){ return new
-         * ModelAndView("redirect:/index.html"); }
-         */
+    public ModelAndView login(HttpServletRequest request) {
+
+        if (SessionContext.isWxLogin(request)) {
+            return new ModelAndView("redirect:/user/index.html");
+        }
 
         return new ModelAndView("login");
     }
@@ -47,10 +47,9 @@ public class AuthController {
     @RequestMapping(value = "/doLogin")
     public ModelAndView doLogin(AuthUser user, String toUrl, HttpServletRequest request) {
         // 如果已经登录过
-        /*
-         * if(SessionContext.getWxAuthUser(request) != null){ return new
-         * ModelAndView("redirect:/index.html"); }
-         */
+        if (SessionContext.getWxAuthUser(request) != null) {
+            return new ModelAndView("redirect:/user/index.html");
+        }
 
         // 判断用户名密码是否正确
         AuthUser tmpAuthUser = new AuthUser();
