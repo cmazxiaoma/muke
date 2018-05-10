@@ -5,8 +5,10 @@
 			<a href="${s.base}" class="header-nav-item">首 页</a>
 			<a href="${s.base}/course/list.html" class="header-nav-item">课 程</a>
 			<a href="${s.base}/user/home.html" class="header-nav-item">我的</a>
+			
 			<a href="http://majinlan.tunnel.echomod.cn/ocOperatorX" target="_blank" class="header-nav-item" style="width:100px;">运营CMS</a>
 			<a href="http://majinlan.tunnel.echomod.cn/ocWechatX" target="_blank" class="header-nav-item" style="width:100px;">M站</a>
+			
 		</nav>
 		
 		<nav class="header-nav" style="float:right">
@@ -203,6 +205,7 @@
 		$('#registeForm').show();
 	}
 	
+	//获取验证码图片
 	function reloadIndityImg(eleId){
 		document.getElementById(eleId).src = CONTEXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
 	}
