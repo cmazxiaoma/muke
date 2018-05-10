@@ -29,6 +29,7 @@ $(function(){
         type: "POST",  
         complete:function(xhr,status){
         	if (typeof(xhr.responseJSON) != "undefined") {
+        		console.log(xhr);
         		if (xhr.responseJSON.errcode == 1001) {//登录超时 
                     window.location.href = CONTEXT_PATH + "/auth/login.html";
                 } 
