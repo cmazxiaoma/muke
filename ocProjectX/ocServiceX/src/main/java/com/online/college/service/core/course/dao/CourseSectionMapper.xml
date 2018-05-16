@@ -62,6 +62,16 @@
         WHERE id = #{id, jdbcType=INTEGER}
     </select>
     
+    <select id="queryByParentId" parameterType="com.online.college.service.core.course.domain.CourseSection" 
+        resultType="com.online.college.service.core.course.domain.CourseSection">
+        SELECT 
+        <include refid="All_Columns"/>
+        FROM t_course_section
+        WHERE parent_id = #{parentId, jdbcType=INTEGER} 
+        AND del = 0 
+        AND course_id=#{courseId, jdbcType=INTEGER}
+    </select>
+    
     <select id="getMaxSort" parameterType="java.lang.Long" resultType="java.lang.Integer">
         SELECT MAX(sort) 
         FROM t_course_section 

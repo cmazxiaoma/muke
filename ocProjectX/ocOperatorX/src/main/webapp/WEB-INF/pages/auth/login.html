@@ -97,8 +97,8 @@
     }
     
 	    //注册重新获取验证码
-		function reloadIndityImg(){
-			document.getElementById("indeityImg").src = CONETXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
+		function reloadIndityImg(eleId){
+			document.getElementById(eleId).src = CONTEXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
 		}
 	</script>
 </html>

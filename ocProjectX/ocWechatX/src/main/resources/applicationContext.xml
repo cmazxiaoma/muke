@@ -107,11 +107,9 @@
                 <bean class="com.online.college.wechat.wxapi.interceptor.WxOAuth2Interceptor">
                     <property name="includes">
                         <list> 
-                        
                             <value>/wxapi/oauthTest.html</value>
                             <value>/course/video.html</value>
                             <value>/user/index.html</value>
-                         
                         </list>
                     </property>
                 </bean>

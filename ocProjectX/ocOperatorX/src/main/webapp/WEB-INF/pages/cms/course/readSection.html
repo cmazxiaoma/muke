@@ -100,19 +100,24 @@
 		
 		//保存章节 
 		function doSaveSection(){
+			var courseId = '${course.id}';
+			console.log(courseId);
 			var id = $('#sectionHiddenId').val();
 			var parentId = $('#sectionHiddenParentId').val();
 			$('#sectionForm').ajaxSubmit({
 				datatype : 'json',
 				success : function(resp) {
 					var resp = $.parseJSON(resp);
+					
 					if (resp.errcode == 0) {
 						if(parentId == 0){//一级标题 
 							$('#sectionTitle_' + id).html($('#sectionName').val());
 						}else{//二级标题 
-							$('#sectionSubTitle_' + id).html($('#sectionName').val() + "(" + $('#sectionTime').val() + ")");
+							$('#sectionSubTitle_' + id).html($('#sectionName').val() 
+									+ "(" + $('#sectionTime').val() + ")");
 						}
 						Modal.hide('sectionModal');
+						window.location.href = CONTEXT_PATH + "/course/read.html?id=" + courseId; 
 					} else {
 						alert('保存失败');
 					}
@@ -124,6 +129,9 @@
 		
 		//删除章节 0-章，1-节 
 		function doDeleteSection(id,type){
+	         var courseId = '${course.id}';
+	         console.log(courseId);
+	            
 			Modal.confirm('确定删除?',function(){
 				$.ajax({
 					url:'${s.base}/courseSection/deleteLogic.html',
@@ -138,6 +146,7 @@
 				    		}else{
 				    			$('#chapter-sub-li-'+id).remove();
 				    		}
+				    		window.location.href = CONTEXT_PATH + "/course/read.html?id=" + courseId; 
 				    	}
 				    }
 				});

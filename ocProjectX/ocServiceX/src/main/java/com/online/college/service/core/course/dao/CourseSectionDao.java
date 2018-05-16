@@ -15,6 +15,8 @@ public interface CourseSectionDao {
      */
     public CourseSection getById(Long id);
 
+    public List<CourseSection> queryByParentId(CourseSection queryEntity);
+
     /**
      * 获取所有
      *

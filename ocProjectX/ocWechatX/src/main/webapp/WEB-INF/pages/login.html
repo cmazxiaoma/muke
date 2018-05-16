@@ -25,7 +25,7 @@
                         </li>
                         <li><label>验证码</label> 
                         <input id="identiryCode" name="identiryCode" maxlength="6" class="input-text" type="text" style="width: 150px;" placeholder="请输入验证码"/>
-                        <a class="vali-base"><img  onclick="reloadIndityImg('indeityImgLogin');" id="indeityImgLogin"  src="${s.base}/tools/identiry/code.html" style="width:80px;height:40px;float:left;margin-left:10px;"/></a>
+                        <a class="vali-base"><img onclick="reloadIndityImg('indeityImgLogin');" id="indeityImgLogin" src="${s.base}/tools/identiry/code.html" style="width:80px;height:40px;float:left;margin-left:10px;"/></a>
                         </li>
                         
                         <#if errcode ?? && errcode == 1>
@@ -95,8 +95,8 @@
        }
        
        //注册重新获取验证码
-       function reloadIndityImg(){
-           document.getElementById("indeityImg").src = CONETXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
+       function reloadIndityImg(eleId){
+           document.getElementById(eleId).src = CONTEXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
        }
     </script>
 </html>
