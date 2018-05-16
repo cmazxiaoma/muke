@@ -195,6 +195,10 @@ public class UserController {
             return JsonView.render(1, "新密码不能为空!");
         }
 
+        if (password.length() < 6) {
+            return JsonView.render(1, "新密码长度不能低于6位");
+        }
+
         if (!password.trim().equals(rePassword.trim())) {
             return JsonView.render(1, "新密码与重复密码不一致!");
         }

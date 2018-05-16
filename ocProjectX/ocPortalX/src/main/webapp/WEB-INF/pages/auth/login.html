@@ -18,7 +18,7 @@
 				<form class="oc-form" id="infoForm" style="text-align: center;border: 1px solid #CCC;width: 600px;margin:0 auto;padding:20px;" method="post" action="${s.base}/auth/doLogin.html">
 						<li>请用：majinlan/123456 登录</li>
 						<li><label>用户名</label> 
-							<input name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
+							<input id="username" name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
 						</li>
 						<li><label>密码</label> 
 							<input id="password" name="password" type="password" class="input-text" placeholder="请输入密码" autocomplete="off" />
@@ -39,15 +39,21 @@
 							<span style="color:red;">请输入正确的验证码</span>
 						</li>
 						</#if>
+						
 						<#if errcode ?? && errcode == 2>
 						<li style="text-align: left;">
 							<label style="background-color:#FFF;"></label>
-							<span style="color:red;">用户名密码错</span>
+							<span style="color:red;">用户名密码错误</span>
 						</li>
 						</#if>
 						
+						<li style="text-align: left;display:none;" id="loginErrorBlock">
+                            <label style="background-color:#FFF;"></label>
+                            <span style="color:red;" id="loginErrorMessage"></span>
+                        </li>
+						
 						<li class="clearfix" style="margin-top: 20px;">
-							<input type="submit" value="登录" class="btn"style="margin-right:20px;">
+							<input type="button" value="登录" class="btn"style="margin-right:20px;" onclick="login();">
 							<div class="btn" onclick="window.location.href='${s.base}/auth/register.html'">注册</div>
 						</li>
 					</form>
@@ -56,4 +62,38 @@
 		<#include "../common/footer.html">
 	</body>
 	
+	<script type="text/javascript">
+	   function login() {
+           
+	       var username = $('#username').val();
+	       var password = $('#password').val();
+	        
+	        //验证用户名 
+	        if(!oc.enNumValid(username)){
+	            $('#loginErrorBlock').show();
+	            $('#loginErrorMessage').html("用户名只能为英文或数字");
+	            return;
+	        }
+	        
+	        //验证密码
+	        if(oc.isEmpty(password) || password.length < 6){
+	        	$('#loginErrorBlock').show();
+	        	$('#loginErrorMessage').html("密码至少6位");
+	            return;
+	        }
+	        
+	        //验证码不能为空
+	        var code = $('#identiryCode').val();
+	        
+	        if (typeof(code) != "undefined") {
+	            if(oc.isEmpty(code)){
+	                $('#loginErrorBlock').show();
+	                $('#loginErrorMessage').html("请输入验证码");
+	                return;
+	            }
+	        }
+	        
+	        $('#infoForm').submit();
+	   }
+	</script>
 </html>

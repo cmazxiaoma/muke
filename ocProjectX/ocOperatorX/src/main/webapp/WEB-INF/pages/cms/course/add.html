@@ -68,7 +68,7 @@
                                     </div>
                                     <label class="control-label" >推荐权重</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="weight" class="form-control" />
+                                        <input type="text" id="weight" name="weight" class="form-control" />
                                     </div>
 							</div>
 							<div class="form-group clearfix"> 
@@ -81,7 +81,7 @@
                                     </div>
                                     <label class="control-label" >价格</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="price" class="form-control" />
+                                        <input type="text" id="price" name="price" class="form-control" />
                                     </div>
 							</div>
 							<div class="form-group clearfix"> 
@@ -99,14 +99,19 @@
 							<div class="form-group clearfix" style="height:50px;"> 
 								<label class="control-label" ></label>
                                 <div class="col-sm-4">
-                                   <input type="button" class="search-btn" onclick="doSave();" value=" 保存基本信息"  style="float:left;height:40px;"/>
+                                   <input type="button" class="search-btn" onclick="save();" value=" 保存基本信息"  style="float:left;height:40px;"/>
+                                   
                                    <div  id="successAlert"  class="alert alert-success" style="display:none;float:left;margin-left:50px;margin-top:0px;">
 										<span id="successAlert_msg" class="color-oc f-16">保存成功！</span>
 									</div>
+									
                                 </div>
 							</div>
 							<div style="margin-bottom:5px;"><span id="failureMsg" style="color:red;"></span></div>
 						</form>
+						
+                        <div id="courseAlert" class="alert alert-success f-16" style="display: none;"></div>
+            
 				</div>
 			</div>
 			
@@ -119,19 +124,21 @@
 						<input style="margin-top:5px;" type="button" onclick="addCourseSection();" class="search-btn" value="+ 添加章" >
 					</li>
 					<li>
+
 						<input style="margin-top:5px;" type="button" onclick="saveCourseSection();" class="search-btn" value="保存章节信息" >
 					</li>
 					<li>
 						<input style="margin-top:5px;" type="button" onclick="importCourseSection();" class="search-btn" value="导入章节" >
 					</li>
 					<li>
-						<div  id="sectionTipsAlert"  style="display:none;float:left;margin-left:50px;margin-top:10px;height:30px;color:red;">
+						<div id="sectionTipsAlert"  style="display:none;float:left;margin-left:50px;margin-top:10px;height:30px;color:red;">
 							<span id="sectionTipsAlert_msg" class="color-oc f-14"></span>
 						</div>
 					</li>
 				</ul>
+				
 				<div id="myTabContent" class="tab-content" style="padding: 10px;">
-							
+				    <div id="courseSectionAlert" class="alert alert-success f-16" style="display: none;"></div>
 				</div>
 			</div>
 		</div>
@@ -164,7 +171,6 @@
 					<input type="button" onclick="deleteSection(this);" class="search-btn" value="- 删除节" >
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	<!-- 添加章节 demo div  end -->
@@ -248,12 +254,15 @@
 		//添加章
 		function addCourseSection(){
 			var tmpDiv = $('#demoSection4Clone').clone().html();
+			console.log(tmpDiv);
 			tmpDiv = tmpDiv.replace('display:none','display:block');
 			$('#myTabContent').append(tmpDiv);
 		}
 		
 		//删除章
 		function deleteCourseSection(el){
+			console.log($(this));
+			console.log($(el).parent().parent().parent());
 			$(el).parent().parent().parent().remove();
 		}
 		
@@ -271,17 +280,33 @@
 		//保存章节信息
 		function saveCourseSection(){
 			var courseId = $('#courseId').val();
+			
+			var result = true;
+			
 			if(courseId == ''){
 				$("#sectionTipsAlert").show().fadeOut(3000);//显示模态框
 				$("#sectionTipsAlert_msg").html('请先保存课程基本信息');
-				return;
+				
+	            var sectionTipAlertMessage = $("#sectionTipsAlert_msg").text();
+	            console.log(sectionTipAlertMessage);
+				return false;
 			}
 			
+			var sectionTipAlertMessage = $("#sectionTipsAlert_msg").text();
+            console.log(sectionTipAlertMessage);
+		    
 			var sectionDivs = $('#myTabContent').find("div[sid='demoCourseSectionDiv']");
 			var batchSections = [];
 			//章
 			$.each(sectionDivs,function(i,item){
 				var sectionName = $(item).find("input[name='sectionName']").val();
+				
+				if (oc.isEmpty(sectionName)) {
+					$("#sectionTipsAlert").show().fadeOut(3000);
+	                $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章的名称");
+					return false;
+				}
+				
 				if(sectionName && $.trim(sectionName) != ''){
 					var obj = {};
 					obj.name = $.trim(sectionName);
@@ -289,15 +314,40 @@
 					obj.sections = [];
 					//节
 					var subSectionDivs = $(item).find("div[sid='demoSectionDiv']");
+					
 					$.each(subSectionDivs,function(j,subItem){
 						var subSectionName = $(subItem).find("input[name='subSectionName']").val();
 						var videoUrl = $(subItem).find("input[name='videoUrl']").val();
 						var time = $(subItem).find("input[name='time']").val();
+						
+						if (oc.isEmpty(subSectionName)) {
+		                    $("#sectionTipsAlert").show().fadeOut(3000);
+		                    $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的名称");
+		                    result = false;
+		                }
+						
+						if (oc.isEmpty(videoUrl)) {
+		                    $("#sectionTipsAlert").show().fadeOut(3000);
+		                    $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的视频链接");
+		                    result = false;
+		                }
+						
+						if (oc.isEmpty(time)) {
+		                    $("#sectionTipsAlert").show().fadeOut(3000);
+		                    $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的视频时长");
+		                    result = false;
+		                }
+						
 						//正则表达式验证time
 						var regTime = RegExp(/^([0-5][0-9]):([0-5][0-9])$/);
+						
 						if (!regTime.test(time)) {//如果验证不通过 
 							time = "00:00";
+							$("#sectionTipsAlert").show().fadeOut(3000);
+                            $("#sectionTipsAlert_msg").html('请正确填写第' + (i + 1) + "章-" + (j + 1) + "节的视频时长");
+                            result = false;
 						}
+						
 						if(subSectionName && $.trim(subSectionName) != ''){
 							var subObj = {};
 							subObj.name = $.trim(subSectionName);
@@ -306,14 +356,21 @@
 							obj.sections.push(subObj);
 						}
 					});
+					
 					batchSections.push(obj);
 				}
 			});
+			
 			if(batchSections.length == 0){
 				$("#sectionTipsAlert").show().fadeOut(3000);//显示模态框
 				$("#sectionTipsAlert_msg").html('请填写章节信息');
 				return;
 			}
+			
+	         if (!result) {
+	        	 return;
+	         }
+	         
 			//JSON.stringify(batchSections);
 			$.ajax({
 				url:'${s.base}/courseSection/batchAdd.html',
@@ -375,6 +432,30 @@
 			}
 		}
 		
+		function save() {
+            var pictureImg = $("#pictureImg").val();
+            var name = $("#name").val();
+            var weight = $("#weight").val();
+            var price = $("#price").val();
+            
+            if (oc.isEmpty(pictureImg)) {
+                Modal.tipFailure('图片不能为空', 'courseAlert');
+                return;
+            }
+            
+            if (oc.isEmpty(name)) {
+                Modal.tipFailure('名称不能为空', 'courseAlert');
+                return;
+            }
+            
+            if (oc.isEmpty(weight)) {
+                Modal.tipFailure('权重不能为空', 'courseAlert');
+                return;
+            }
+            
+            $("#courseAlert").hide();
+            doSave();
+        }
 	</script>
 </body>
 </html>

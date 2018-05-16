@@ -212,17 +212,27 @@
 		//保存章节信息
 		function saveCourseSection(){
 			var courseId = $('#courseId').val();
+			var result = true;
+			
 			if(courseId == ''){
 				$("#sectionTipsAlert").show().fadeOut(3000);//显示模态框
 				$("#sectionTipsAlert_msg").html('请先保存课程基本信息');
-				return;
+				return false;
 			}
 			
 			var sectionDivs = $('#myTabContent').find("div[sid='demoCourseSectionDiv']");
 			var batchSections = [];
+			
 			//章
 			$.each(sectionDivs,function(i,item){
 				var sectionName = $(item).find("input[name='sectionName']").val();
+				
+                if (oc.isEmpty(sectionName)) {
+                    $("#sectionTipsAlert").show().fadeOut(3000);
+                    $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章的名称");
+                    return false;
+                }
+                
 				if(sectionName && $.trim(sectionName) != ''){
 					var obj = {};
 					obj.name = $.trim(sectionName);
@@ -234,11 +244,36 @@
 						var subSectionName = $(subItem).find("input[name='subSectionName']").val();
 						var videoUrl = $(subItem).find("input[name='videoUrl']").val();
 						var time = $(subItem).find("input[name='time']").val();
+						
+	                      if (oc.isEmpty(subSectionName)) {
+	                            $("#sectionTipsAlert").show().fadeOut(3000);
+	                            $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的名称");
+	                            result = false;
+	                        }
+	                        
+	                        if (oc.isEmpty(videoUrl)) {
+	                            $("#sectionTipsAlert").show().fadeOut(3000);
+	                            $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的视频链接");
+	                            result = false;
+	                        }
+	                        
+	                        if (oc.isEmpty(time)) {
+	                            $("#sectionTipsAlert").show().fadeOut(3000);
+	                            $("#sectionTipsAlert_msg").html('请填写第' + (i + 1) + "章-" + (j + 1) + "节的视频时长");
+	                            result = false;
+	                        }
+	                        
 						//正则表达式验证time
 						var regTime = RegExp(/^([0-5][0-9]):([0-5][0-9])$/);
-						if (!regTime.test(time)) {//如果验证不通过 
+						
+						if (!regTime.test(time)) {
+							//如果验证不通过 
 							time = "00:00";
+	                         $("#sectionTipsAlert").show().fadeOut(3000);
+	                         $("#sectionTipsAlert_msg").html('请正确填写第' + (i + 1) + "章-" + (j + 1) + "节的视频时长");
+	                         result = false;
 						}
+						
 						if(subSectionName && $.trim(subSectionName) != ''){
 							var subObj = {};
 							subObj.name = $.trim(subSectionName);
@@ -250,11 +285,19 @@
 					batchSections.push(obj);
 				}
 			});
-			if(batchSections.length == 0){
+			
+			if (batchSections.length == 0) {
 				$("#sectionTipsAlert").show().fadeOut(3000);//显示模态框
 				$("#sectionTipsAlert_msg").html('请填写章节信息');
 				return;
 			}
+			
+			console.log(result);
+			
+			if (!result) {
+				return;
+			}
+			
 			//JSON.stringify(batchSections);
 			$.ajax({
 				url:'${s.base}/courseSection/batchAdd.html',

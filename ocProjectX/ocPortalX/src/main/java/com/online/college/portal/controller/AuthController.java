@@ -129,7 +129,6 @@ public class AuthController {
         if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
             ModelAndView modelAndView = new ModelAndView("auth/login");
             modelAndView.addObject("errcode", 1);
-
             return modelAndView;
         }
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),
@@ -138,7 +137,6 @@ public class AuthController {
         try {
             Subject currentUser = SecurityUtils.getSubject();
             currentUser.login(token);
-
             return new ModelAndView("redirect:/user/home.html");
         } catch (AuthenticationException e) {
             ModelAndView mv = new ModelAndView("auth/login");

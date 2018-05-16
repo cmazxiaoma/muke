@@ -45,10 +45,17 @@ public class AuthController {
 
     // 实现登录
     @RequestMapping(value = "/doLogin")
-    public ModelAndView doLogin(AuthUser user, String toUrl, HttpServletRequest request) {
+    public ModelAndView doLogin(AuthUser user, String toUrl, String identiryCode, HttpServletRequest request) {
         // 如果已经登录过
         if (SessionContext.getWxAuthUser(request) != null) {
             return new ModelAndView("redirect:/user/index.html");
+        }
+
+        // 验证码判断
+        if (identiryCode != null && !identiryCode.equalsIgnoreCase(SessionContext.getIdentifyCode(request))) {
+            ModelAndView modelAndView = new ModelAndView("login");
+            modelAndView.addObject("errcode", 1);
+            return modelAndView;
         }
 
         // 判断用户名密码是否正确

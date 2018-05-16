@@ -23,7 +23,7 @@
 			<div class="block span6">
 				 <a class="block-heading f-14" data-toggle="collapse">轮播配置</a>
 				<div class="block-body collapse in p-tb-20">
-					<form role="form" method="post" action="${s.base}/carousel/doMerge.html" enctype="multipart/form-data">
+					<form id="sb" role="form" method="post" action="${s.base}/carousel/doMerge.html" enctype="multipart/form-data">
 						<input type="hidden" name="id" value="${(entity.id)!}">
 						<div class="form-group">
 							<label for="name">图片 <span id="imgErrSpan" style="color:red;font-weight:normal;"></span> </label> 
@@ -59,19 +59,24 @@
 							</select>
 						</div>
 						
-						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="button" class="btn btn-primary" onclick="save();">提交</button>
 						<button type="button" class="btn btn-default" onclick="window.history.go(-1)">取消</button>
 					</form>
+					
+					<div id="_ocAlertTip" class="alert alert-success f-16" style="display: none;"></div>
+					
 				</div>
 			</div>
 			
 		</div>
 	</div>
 	
+	
 	<script type="text/javascript">
 		function doUpload(){
 			$('#pictureImg').click();
 		}
+		
 		function photoImgChange(){
 			var img = $('#pictureImg').val();
 			if(oc.photoValid(img)){
@@ -84,6 +89,37 @@
 				$('#pictureImg').val('');
 			}
 		}
+		
+		function save() {
+			var pictureImg = $("#pictureImg").val();
+			var name = $("#name").val();
+			
+            var url = $("#url").val();
+            var weight = $("#weight").val();
+            
+            
+            if (oc.isEmpty(pictureImg)) {
+                Modal.tipFailure('图片不能为空');
+                return;
+            }
+            
+            if (oc.isEmpty(name)) {
+                Modal.tipFailure('名称不能为空');
+                return;
+            }
+            
+            if (oc.isEmpty(url)) {
+                Modal.tipFailure('地址不能为空');
+                return;
+            }
+            
+            if (oc.isEmpty(weight)) {
+                Modal.tipFailure('权重不能为空');
+                return;
+            }
+            
+            $("#sb").submit();
+        }
 	</script>
 	
 </body>

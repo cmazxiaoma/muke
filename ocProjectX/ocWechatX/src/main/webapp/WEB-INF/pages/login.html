@@ -13,34 +13,91 @@
 	
 	<#include "./common/header.html">
 	
-	<section class="course-list">
-		<h3 class="types-title">登录</h3>
-		<form class="oc-form" id="infoForm" action="${s.base}/auth/doLogin.html" method="POST" style="text-align: center;border: 1px solid #CCC;margin:0 auto;padding:20px;" >
-			<li><label>用户名</label> 
-				<input name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
-			</li>
-			<li><label>密码</label> 
-				<input id="password" name="password" type="password" class="input-text" placeholder="请输入密码" autocomplete="off" />
-			</li>
-			<#if errcode ?? && errcode == 2>
-			<li style="text-align: left;">
-				<span style="color:red;">用户名密码错</span>
-			</li>
-			</#if>
-			
-			<#if errcode ?? && errcode == 3>
-			     <li style="text-align: left;">
-                    <span style="color:red;">微信授权失败</span>
-                </li>
-			</#if>
-			
-			<li class="clearfix" style="margin-top:20px;">
-				<input type="submit" value="登录"  style="width:100px;">
-			</li>
-		</form>
-		
-	</section>
-	
+	<div class="f-main">
+            <div class="types-block clearfix" style="text-align: center;">
+                <h3 class="types-title">登录</h3>
+                <form class="oc-form" id="infoForm" style="text-align: center;border: 1px solid #CCC;width: 600px;margin:0 auto;padding:20px;" method="post" action="${s.base}/auth/doLogin.html">
+                        <li><label>用户名</label> 
+                            <input id="username" name="username"  value="" type="text"  class="input-text"  placeholder="请输入用户名" >
+                        </li>
+                        <li><label>密码</label> 
+                            <input id="password" name="password" type="password" class="input-text" placeholder="请输入密码" autocomplete="off" />
+                        </li>
+                        <li><label>验证码</label> 
+                        <input id="identiryCode" name="identiryCode" maxlength="6" class="input-text" type="text" style="width: 150px;" placeholder="请输入验证码"/>
+                        <a class="vali-base"><img  onclick="reloadIndityImg('indeityImgLogin');" id="indeityImgLogin"  src="${s.base}/tools/identiry/code.html" style="width:80px;height:40px;float:left;margin-left:10px;"/></a>
+                        </li>
+                        
+                        <#if errcode ?? && errcode == 1>
+                        <li style="text-align: left;">
+                            <label style="background-color:#FFF;"></label>
+                            <span style="color:red;">请输入正确的验证码</span>
+                        </li>
+                        </#if>
+                        
+                        <#if errcode ?? && errcode == 2>
+                        <li style="text-align: left;">
+                            <label style="background-color:#FFF;"></label>
+                            <span style="color:red;">用户名密码错误</span>
+                        </li>
+                        </#if>
+                        
+                         <#if errcode ?? && errcode == 3>
+                             <li style="text-align: left;">
+                                <span style="color:red;">微信授权失败</span>
+                            </li>
+                         </#if>
+                        
+                        <li style="text-align: left;display:none;" id="loginErrorBlock">
+                            <label style="background-color:#FFF;"></label>
+                            <span style="color:red;" id="loginErrorMessage"></span>
+                        </li>
+                        
+                        <li class="clearfix" style="margin-top: 20px;">
+                            <input type="button" value="登录" class="btn"style="margin-right:20px;" onclick="login();">
+                        </li>
+                    </form>
+             </div>
+    </div>
 </body>
+<script type="text/javascript">
+       function login() {
+           
+           var username = $('#username').val();
+           var password = $('#password').val();
+            
+            //验证用户名 
+            if(!oc.enNumValid(username)){
+                $('#loginErrorBlock').show();
+                $('#loginErrorMessage').html("用户名只能为英文或数字");
+                return;
+            }
+            
+            //验证密码
+            if(oc.isEmpty(password) || password.length < 6){
+                $('#loginErrorBlock').show();
+                $('#loginErrorMessage').html("密码至少6位");
+                return;
+            }
+            
+            //验证码不能为空
+            var code = $('#identiryCode').val();
+            
+            if (typeof(code) != "undefined") {
+                if(oc.isEmpty(code)){
+                    $('#loginErrorBlock').show();
+                    $('#loginErrorMessage').html("请输入验证码");
+                    return;
+                }
+            }
+            
+            $('#infoForm').submit();
+       }
+       
+       //注册重新获取验证码
+       function reloadIndityImg(){
+           document.getElementById("indeityImg").src = CONETXT_PATH + "/tools/identiry/code.html?ticket=" + Math.random();
+       }
+    </script>
 </html>
 
